@@ -1,0 +1,71 @@
+@font-face {
+    font-family: 'SVN-Gilroy Bold';
+    font-style: normal;
+    font-weight: bold;
+    src: local('SVN-Gilroy Bold'), url('../src/fonts/SVNGilroy Bold.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'SVN-Gilroy Light';
+    font-style: normal;
+    font-weight: 300; 
+    src: local('SVN-Gilroy Light'), url('../src/fonts/SVNGilroy-Light.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'SVN-Gilroy Medium';
+    font-style: normal;
+    font-weight: 500; 
+    src: local('SVN-Gilroy Medium'), url('../src/fonts/Gilroy-Medium.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'SVN-Gilroy Regular';
+    font-style: normal;
+    font-weight: normal;  
+    src: local('SVN-Gilroy Regular'), url('../src/fonts/Gilroy-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'SVN-Gilroy SemiBold';
+    font-style: normal;
+    font-weight: 600; 
+    src: local('SVN-Gilroy SemiBold'), url('../src/fonts/Gilroy-SemiBold.ttf') format('truetype');
+}
+
+:root {
+    --font-gilroy-bold: 'SVN-Gilroy Bold', "Poppins";
+    --font-gilroy-light: 'SVN-Gilroy Light', "Poppins";
+    --font-gilroy-medium: 'SVN-Gilroy Medium', "Poppins";
+    --font-gilroy-regular: 'SVN-Gilroy Regular', 'Poppins';
+    --font-gilroy-semibold: 'SVN-Gilroy SemiBold', 'Poppins';
+
+    /* Light primary color */
+    --color-primary-darkblue-40: #0078CD; 
+    --color-primary-darkblue-60: #00528C;       
+    --color-primary-darkblue-80: #003459;  
+    --color-primary-darkblue: #002A48; 
+
+    /* Secondary Colors  */
+    --color-secondary-MonYellow-40: #FCEED5; 
+    --color-secondary-MonYellow-60: #F7DBA7;      
+    --color-secondary-MonYellow-80: #F1D092;  
+    --color-secondary-dark: #EEC77E; 
+
+     /* Additional Colors */
+     --color-pink-red: #FF564F;        
+     --color-green-light: #34C759;     
+     --color-orange-shine: #FF912C;    
+     --color-blue-sea: #00A7E7;        
+
+     /* Natural Colors */
+     --color-swatch-100: #0F172F;       
+     --color-swatch-80: #242B33;        
+     --color-swatch-60: #647379;        
+     --color-swatch-40: #9BA2A5;        
+     --color-swatch-20: #CDD2D2;        
+     --color-swatch-10: #E6EBEF;        
+     --color-swatch-00: #FDFDFD;        
+}
+
+
