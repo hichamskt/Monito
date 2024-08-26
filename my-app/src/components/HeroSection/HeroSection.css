@@ -1,0 +1,9 @@
+.herosection{
+    display: flex;
+    margin-top: 60px;
+}
+
+
+.herosection .imgSection{
+    width: 1900px;
+}

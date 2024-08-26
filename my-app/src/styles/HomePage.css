@@ -1,0 +1,21 @@
+.container{
+    width: 80%;
+    max-width: 1400px;
+    text-align: center;
+}
+
+.colored {
+    background: linear-gradient(to right, #FCEED5 6%, #FCEED5 75%, #FFE7BA 100%);
+    display: flex;
+    justify-content: center;
+}
+
+
+
+
+@media (max-width: 1024px) {
+    .container {
+        width: 100%;
+    }
+    
+}

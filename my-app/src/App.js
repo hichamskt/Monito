@@ -1,14 +1,12 @@
 
 import './App.css';
+import HomePage from './pages/HomePage';
 
 function App() {
   return (
     <div className="App">
      
-     <p className=''>heheheheaklhzaa</p>
-     <p className='light'>heheheheaklhzaa</p>
-     <p className='mid'>heheheheaklhzaa</p>
-     <p className='bold'>heheheheaklhzaa</p>
+     <HomePage></HomePage>
     </div>
   );
 }
