@@ -1,9 +1,27 @@
 .herosection{
     display: flex;
     margin-top: 60px;
+    font-family: var(--font-gilroy-bold);
+    color: var(--color-primary-darkblue-80);
+    overflow: hidden;
+}
+
+.herosection h1{
+    font-size: 3rem;
+    word-spacing: 5px;
+}
+.herosection h2{
+    font-size: 2.5rem;
+}
+.herosection p{
+font-family: var(--font-gilroy-medium);
+margin-top: 10px;
+font-size: 1rem;
 }
 
 
+
+
 .herosection .imgSection{
-    width: 1900px;
+    width: 1900px ;
 }

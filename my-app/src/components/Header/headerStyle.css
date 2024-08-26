@@ -93,7 +93,7 @@ padding: 10px 10px;
 
 .header .sidebar {
     position: fixed;
-    left:-1000px;
+    left:-5000px;
     top: 0;
     background-color: #FCEED5;
     height: 100vh;
