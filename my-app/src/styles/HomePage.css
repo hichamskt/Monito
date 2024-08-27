@@ -2,6 +2,7 @@
     width: 80%;
     max-width: 1400px;
     text-align: center;
+    margin: 0 auto;
 }
 
 .colored {
@@ -9,6 +10,8 @@
     display: flex;
     justify-content: center;
     overflow: hidden;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
 }
 
 

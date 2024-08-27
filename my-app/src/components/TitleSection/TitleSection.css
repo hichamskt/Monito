@@ -1,0 +1,55 @@
+.TitleSection{
+    display: flex;
+    justify-content: space-between;
+    align-items:flex-end;
+}
+
+.TitleSection {
+    text-align: left;
+    margin-top: 50px;
+    margin-bottom: 30px;
+}
+
+.TitleSection h4{
+font-family: var(--font-gilroy-regular);
+}
+.TitleSection h2{
+font-family: var(--font-gilroy-bold);
+color: var(--color-primary-darkblue);
+}
+
+.TitleSection button{
+    background-color: transparent;
+    color: var(--color-primary-darkblue);
+    border: .1rem solid var(--color-primary-darkblue);
+   padding: 10px 30px;
+   font-family: var(--font-gilroy-bold);
+   border-radius: 20px;
+   cursor: pointer;
+    
+   display: flex;
+   align-items: center;
+ 
+
+}
+.TitleSection button img{
+    width: 6px;
+    margin-top: 3px;
+    
+}
+
+
+
+.TitleSection button:hover {
+    background-color: var(--color-primary-darkblue);
+    color: var(--color-secondary-dark);
+   
+}
+
+
+
+@media (max-width: 514px) {
+    .TitleSection button{
+        display: none;
+    }
+}
