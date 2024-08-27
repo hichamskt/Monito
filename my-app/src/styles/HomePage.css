@@ -8,6 +8,7 @@
     background: linear-gradient(to right, #FCEED5 6%, #FCEED5 75%, #FFE7BA 100%);
     display: flex;
     justify-content: center;
+    overflow: hidden;
 }
 
 

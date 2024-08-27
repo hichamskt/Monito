@@ -1,27 +1,293 @@
 .herosection{
     display: flex;
-    margin-top: 60px;
+    
     font-family: var(--font-gilroy-bold);
     color: var(--color-primary-darkblue-80);
-    overflow: hidden;
+    position: relative;    
+     
+}
+.herosection .bo{
+    border-radius: 5px;
+    background-color: var(--color-secondary-MonYellow-80);
+    width: 15px;
+    height: 15px;
+    position: fixed;
+    top: 14%;
+    left: 48%;
+    
+}
+.herosection::before{
+    content: "";
+    background-color: var(--color-secondary-MonYellow-80);
+    width: 24px;
+    height: 27px;
+    border-radius: 7px;
+    position: absolute;
+    top: 17%;
+    right: 55%;
+    transform: rotate(11deg);
+
+}
+.herosection::after{
+    content: "";
+    background-color: var(--color-primary-darkblue-80);
+    width: 21px;
+    height: 21px;
+    border-radius: 4px;
+    position: absolute;
+    top: 19%;
+    right: 56%;
+    transform: rotate(45deg);
+
 }
 
 .herosection h1{
     font-size: 3rem;
     word-spacing: 5px;
+    position: relative;
+    z-index: 100;
+    margin-top: 60px;
+}
+.herosection h1 .o{
+    position: relative;
+     
+}
+.herosection h1 .o::before {
+    content: "";
+    width: 55px;
+    height: 55px;
+    background-color: var(--color-secondary-MonYellow-80);
+    position: absolute;
+    top: 7px;
+    left: -6px;
+    border-radius: 10px;
+    transform: rotate(45deg);
+    z-index: -1;
 }
 .herosection h2{
-    font-size: 2.5rem;
+    font-size: 2.3rem;
+    word-spacing: .2rem;
+    position: relative;
+    z-index: 100;
 }
 .herosection p{
 font-family: var(--font-gilroy-medium);
 margin-top: 10px;
-font-size: 1rem;
+font-size: .8rem;
+text-align: left;
+position: relative;
+z-index: 100;
+}
+.herosection .hero-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 25px;
+    z-index: 100;
+    position: relative;
+}
+.herosection .hero-btn button {
+    
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+    background-color: var(--color-primary-darkblue-80);
+    border-radius: 20px;
+    color: white;
+    cursor: pointer;
+    font-family: var(--font-gilroy-medium);
+    align-items: center;
+    width: 151px;
+    height: 46px;
+}
+
+.herosection .hero-btn button:first-of-type{
+    background-color: transparent;
+    border: 0.1rem solid var(--color-primary-darkblue-80);
+    color: var(--color-primary-darkblue-80);
+    
+}
+
+.herosection .hero-btn img{
+    border: 0.1rem solid var(--color-primary-darkblue-80);
+    border-radius: 50%;
+    padding: 3px;
+    filter: invert(100%) brightness(0%);
+    width: 25px;
+}
+
+
+.herosection .imgSection {
+    width: 1900px ;
+    position: relative;
+    
+}
+.herosection .imgSection img{
+    z-index: 10;
+    position: relative;
+}
+.herosection .imgSection::before{
+    border-top-left-radius: 99px;
+    border-top-right-radius: 100PX;
+    content: "";
+    background-color: var(--color-primary-darkblue-80);
+    width: 400px;
+    height: 351px;
+    position: absolute;
+    left: 93px;
+    bottom: -43px;
+    transform: rotate(6deg);
+    
+}
+.herosection .imgSection::after{
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+    content: "";
+    background-color: var(--color-secondary-MonYellow-80);
+    width: 500px;
+    height: 420px;
+    position: absolute;
+    left: 141px;
+    bottom: -124px;
+    transform: rotate(24deg);
+    
+}
+
+.secleft::after{
+    content: "";
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    bottom: -120px;
+    left:10% ;
+    background-color: var(--color-secondary-MonYellow-80);
+    transform: rotate(45deg);
+    border-radius: 50px;
 }
 
 
 
+@media (max-width: 1414px) {
+    .herosection h1 {
+        
+        font-size: 2.9rem;
+    }
+    .herosection h2 {
+        
+        font-size: 2rem;
+    }
+    .herosection .imgSection {
+        width: 1600px ;
+         
+        
+    }
 
-.herosection .imgSection{
-    width: 1900px ;
+}
+
+@media (max-width: 1228px){
+    .herosection h1 {
+        
+        font-size: 2.5rem;
+    }
+    .herosection h2 {
+        
+        font-size: 2rem;
+    }
+    .herosection .imgSection {
+        width: 1500px ;
+         
+        
+    }
+}
+
+@media (max-width: 1032px) {
+    
+    .herosection .imgSection {
+        width: 1300px ;
+         
+        
+    }
+    .herosection p{
+        padding-left: 15px;
+    }
+
+    .herosection h1{
+        margin-top: 30px;
+    }
+}
+
+
+@media (max-width: 788px){
+    
+    .herosection h1{
+        margin-top: 20px;
+        
+        font-size: 2rem;
+    }
+    .herosection h2 {
+        
+        font-size: 1.5rem;
+    }
+
+}
+@media (max-width: 750px){
+    .herosection{
+        display: flex;
+        flex-direction: column;   
+         
+    }
+    .herosection .imgSection img {
+         
+        width: 600px;
+}
+.herosection h1 .o::before{
+    display: none;
+}
+
+
+.herosection h1{
+    
+    font-size: 2.5rem;
+    text-align: left;
+    margin-left: 10px;
+}
+.herosection h2 {
+    
+    font-size: 2rem;
+    text-align: left;
+    margin-left: 10px;
+}
+.herosection p{
+    padding-left: 15px;
+}
+.herosection::before{
+    right: 12%;
+    top:15%;
+}
+.herosection::after {
+    top: 16%;
+    right: 13%;
+}
+.herosection .bo {
+    top: 14%;
+    left: 77%;
+}
+
+}
+
+@media (max-width: 540px){
+    .herosection{
+        display: flex;
+        flex-direction: column;   
+         
+    }
+    .herosection .imgSection img {
+         
+        width: 500px;
+}
+.herosection h1 .o::before{
+    display: none;
+}
+
 }

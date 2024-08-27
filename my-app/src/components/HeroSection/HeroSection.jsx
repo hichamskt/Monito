@@ -5,11 +5,12 @@ import secimag from '../../assets/sectionimg.png'
 function HeroSection() {
   return (
     <div className='herosection'>
-        <div>
-            <h1><span>O</span>ne More Friend</h1>
+      <div className='bo'></div>
+        <div className='secleft'>
+            <h1><span className='o'>O</span><span className='ne'>ne</span> More Friend</h1>
             <h2>Thousands More Fun!</h2>
             <p>Having a pet means you have more joy, a new friend, a happy person who will always be with you to have fun, we have 200+ diffrent pets that can meet your needs!</p>
-            <div>
+            <div className='hero-btn'>
                 <button>View Intro <img src={vid} alt='vid'></img></button>
                 <button>Explore Now</button>
             </div>

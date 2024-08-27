@@ -57,3 +57,6 @@ my-app/
 │   ├── index.js          # Entry point for the server
 │   └── ...               # Other server-related files
 
+
+npm install react-responsive
+

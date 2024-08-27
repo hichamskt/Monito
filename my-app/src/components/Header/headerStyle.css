@@ -13,14 +13,14 @@
 
 .header::before{
     content: '';
-    width: 300px;
-    height: 400px;
-    top: -270px;
+    width: 271px;
+    height: 145px;
+    top: -78px;
     left: 10px;
     background-color: var(--color-secondary-MonYellow-80);
     position: absolute;
-    border-radius: 60px;
-    transform: rotate(45deg);
+    border-bottom-right-radius: 70px;
+    transform: rotate(30deg);
      
 }
 
@@ -61,6 +61,8 @@ color: var(--color-primary-darkblue-80);
     border: none;
     cursor: pointer;
     background-color: #FCEED5;
+    z-index: 100;
+    POSITION: relative;
 }
 
 .header  .opt:focus{
