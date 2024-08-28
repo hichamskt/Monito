@@ -1,0 +1,29 @@
+.Button {
+    display: none;
+     
+}
+
+.Button button{
+    width: 80%;
+    display: flex;
+    background-color: transparent;
+    border: 0.1rem solid var(--color-primary-darkblue-80);
+    color: var(--color-primary-darkblue-80);
+    border-radius: 20px;
+    padding: 10px 0;
+    justify-content: center;
+    gap: 20px;
+    cursor: pointer;
+    font-family: var( --font-gilroy-semibold);
+
+}
+
+
+@media (max-width: 514px) {
+    .Button {
+        display: block;
+        display: flex;
+        justify-content: center;
+         
+    }
+}

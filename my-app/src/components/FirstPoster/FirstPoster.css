@@ -1,0 +1,263 @@
+.FirstPoster{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    background-color: var(--color-primary-darkblue-80);
+    margin-top: 20px;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px;
+}
+.FirstPoster::before{
+    content: "";
+    width: 800px;
+    height: 450px;
+    background-color: var(--color-primary-darkblue);
+    position: absolute;
+    left: -20px;
+    bottom: -80%;
+    transform: rotate(30deg);
+    z-index: 0;
+    border-top-left-radius: 80PX;
+}
+.FirstPoster::after{
+    content: "";
+    width: 500px;
+    height: 650px;
+    background-color: var( --color-secondary-MonYellow-40);
+    position: absolute;
+    right: -20px;
+    top: -65%;
+    transform: rotate(-60deg);
+    z-index: 0;
+    border-top-left-radius: 80PX;
+}
+.FirstPoster img{
+    position: relative;
+    z-index: 100;
+}
+.FirstPoster .Fpostertext{
+    max-width: 50%;
+    position: relative;
+    z-index: 100;
+    padding-right: 30px;
+}
+.FirstPoster .Fpostertext h1{
+font-family: var(--font-gilroy-bold);
+color: var(--color-primary-darkblue);
+font-size: 3rem;
+text-align: right;
+}
+.FirstPoster .Fpostertext h2{
+    font-family: var(--font-gilroy-bold);
+    color: var(--color-primary-darkblue);
+    font-size: 2rem;
+    text-align: right;
+}
+.FirstPoster .Fpostertext p {
+    text-align: right;
+    max-width: 400px;
+    font-size: .8rem;
+    font-family: var( --font-gilroy-semibold);
+}
+
+.FirstPoster  .poster-btn{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 25px;
+    z-index: 100;
+    position: relative;
+}
+
+
+.FirstPoster  .poster-btn button {
+    
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+    background-color: var(--color-primary-darkblue-80);
+    border-radius: 20px;
+    color: white;
+    cursor: pointer;
+    font-family: var(--font-gilroy-medium);
+    align-items: center;
+    width: 151px;
+    height: 46px;
+}
+
+.FirstPoster  .poster-btn button:first-of-type{
+    background-color: transparent;
+    border: 0.1rem solid var(--color-primary-darkblue-80);
+    color: var(--color-primary-darkblue-80);
+    
+}
+
+.FirstPoster  .poster-btn img{
+    border: 0.1rem solid var(--color-primary-darkblue-80);
+    border-radius: 50%;
+    padding: 3px;
+    filter: invert(100%) brightness(0%);
+    width: 25px;
+}
+
+@media (max-width: 1400px){
+   .FirstPoster::after{ top: -73%;}
+}
+@media (max-width: 1300px){
+   .FirstPoster::after{ top: -74%;}
+   .FirstPoster::before{bottom: -100%;}
+}
+@media (max-width: 1172px){
+   .FirstPoster::after{ top: -87%;}
+   .FirstPoster::before{bottom: -117%;}
+}
+@media (max-width: 1100px){
+    .FirstPoster .Fpostertext h1{
+        font-size: 2.8rem;
+    }
+   .FirstPoster::after{ top: -79%;}
+   
+}
+@media (max-width: 1024px){
+    .FirstPoster::after {
+        top: -69%;
+    }
+   
+}
+@media (max-width: 980px){
+    
+   .FirstPoster::after{ top: -79%;
+    height: 695px;
+}
+}
+   
+@media (max-width: 900px){
+    
+    .FirstPoster::after{ top: -91%;
+        
+    }
+   .FirstPoster::before{ bottom: -145%;
+    
+}
+}
+
+@media (max-width: 829px){
+    .FirstPoster .Fpostertext h1{
+        font-size: 2rem;
+    }
+    .FirstPoster .Fpostertext h2{
+        font-size: 1rem;
+    }
+    .FirstPoster::before{ bottom: -127%;
+    
+    }
+    .FirstPoster::after {
+        top: -109%;
+         
+    }
+}
+@media (max-width: 828px){
+    .FirstPoster::after {
+
+        top: -111%;
+    }
+    .FirstPoster::before{
+         
+        bottom: -159%;
+    }
+}
+@media (max-width: 780px){
+    
+    .FirstPoster::after{
+        top: -182%;
+        height: 734px;
+        width: 792px;
+        right: -90px;
+        transform: rotate(-161deg);
+    border-top-left-radius: 120PX;
+    }
+    .FirstPoster::before{ bottom: -193%;
+    
+    }
+}
+
+@media (max-width: 700px){
+    .FirstPoster{
+        flex-direction: column-reverse;
+        text-align: center;
+
+    }
+    .FirstPoster .Fpostertext h1 , .FirstPoster .Fpostertext h2, .FirstPoster p{
+        text-align: center;
+    }
+    .FirstPoster::before {
+        bottom: -66%;
+    }
+    .FirstPoster::after {
+        top: -75%;
+    }
+    .FirstPoster .Fpostertext h2{
+        font-size: 1.4rem;
+    }
+    .FirstPoster .Fpostertext {
+        max-width: 70%;
+        padding-right: 0;
+    }
+    .FirstPoster .Fpostertext p {
+        text-align: center;
+    }
+    .FirstPoster  .poster-btn{
+        justify-content: center;
+    }
+}
+   
+@media (max-width: 519px){
+    .FirstPoster::before {
+        bottom: -77%;
+    }
+    .FirstPoster::after {
+        top: -88%;
+    }
+}
+
+@media (max-width: 431px){
+
+    .FirstPoster::before {
+        bottom: -83%;
+    }
+    .FirstPoster::after {
+        top: -92%;
+    }
+
+}
+@media (max-width: 400px){
+
+     
+    .FirstPoster::after {
+        top: -100%;
+    }
+
+    
+}
+@media (max-width: 350px){
+
+    .FirstPoster .Fpostertext h1{
+        font-size: 1.8rem;
+    }
+    .FirstPoster .Fpostertext h2{
+        font-size: .8rem;
+    }
+    
+    .FirstPoster::before {
+        bottom: -77%;
+    }
+    .FirstPoster::after {
+        top: -111%;
+    }
+}
+
+
+ 

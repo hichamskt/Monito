@@ -3,7 +3,9 @@
     max-width: 1400px;
     text-align: center;
     margin: 0 auto;
+    position: relative;
 }
+
 
 .colored {
     background: linear-gradient(to right, #FCEED5 6%, #FCEED5 75%, #FFE7BA 100%);
@@ -14,6 +16,12 @@
     border-bottom-right-radius: 20px;
 }
 
+.dogsSection{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    
+}
 
 
 

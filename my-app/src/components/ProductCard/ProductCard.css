@@ -1,0 +1,35 @@
+.ProductCard{
+    padding: 15px;
+    max-width: 260px;
+    box-shadow: 0px 4px 28px -2px rgba(0, 0, 0, 0.08);
+    border-radius: 15px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.ProductCard h3{
+    font-family: var(--font-gilroy-bold);
+    font-size: .9rem;
+    text-align: left;
+}
+.ProductCard .productageInfo{
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-gilroy-medium);
+    font-size: .8rem;
+}
+.ProductCard .productageInfo span{
+    font-family: var(--font-gilroy-bold);
+}
+.ProductCard h3{
+    font-size: .9rem;
+}
+
+@media (max-width: 770px) {
+    .ProductCard{
+        width: 300px;
+    }
+    
+}

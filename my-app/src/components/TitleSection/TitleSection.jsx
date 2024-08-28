@@ -5,7 +5,7 @@ import arrow from "../../assets/arrow.png"
 function TitleSection({Title,Text,ButtonText}) {
   return (
     <div className='TitleSection'>
-        <div>
+        <div className='textdiv'>
         <h4>{Title}</h4>
         <h2>{Text}</h2>
         </div>

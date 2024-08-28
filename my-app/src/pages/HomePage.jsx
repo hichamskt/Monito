@@ -12,6 +12,8 @@ import dog6 from "../assets/dog6.png"
 import dog7 from "../assets/dog7.png"
 import dog8 from "../assets/dog8.png"
 import ProductCard from "../components/ProductCard/ProductCard"
+import FirstPoster from "../components/FirstPoster/FirstPoster";
+import Button from "../components/Button/Button";
 
 
 const dummyDogData  = [
@@ -72,14 +74,14 @@ function HomePage() {
     <div>
         <div className="colored">
 
-      <div className="container ">
+      <div className="container">
         <Header></Header>
         <HeroSection></HeroSection>
       </div>
         </div>
         <div className="container">
         <TitleSection Title="Whats new?" Text="Take A Look At Some Of Our Pets" ButtonText="View more"></TitleSection>
-        <div>
+        <div className="dogsSection">
 
         {
           dummyDogData.map((item,index)=>(
@@ -88,10 +90,13 @@ function HomePage() {
             gene={item.gene}
             age={item.age}
             prix ={item.prix}
+            key={index}
             ></ProductCard>
           ))
         }
         </div>
+        <Button></Button>
+        <FirstPoster></FirstPoster>
         </div>
     </div>
   );

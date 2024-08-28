@@ -17,7 +17,9 @@ font-family: var(--font-gilroy-regular);
 font-family: var(--font-gilroy-bold);
 color: var(--color-primary-darkblue);
 }
-
+.TitleSection .textdiv{
+    padding-left:12px;
+}
 .TitleSection button{
     background-color: transparent;
     color: var(--color-primary-darkblue);

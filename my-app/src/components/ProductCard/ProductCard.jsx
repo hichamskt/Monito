@@ -5,15 +5,16 @@ function ProductCard({ imag ,
     gene,
     age,
     prix}) {
+
   return (
-    <div>
+    <div className='ProductCard'>
         <img src={imag} alt='dog'></img>
         <h3>{desc}</h3>
-        <div>
-            <p>Gene: <span>{gene}</span></p>
-            <p>Age <span>{age}</span> Months</p>
+        <div className='productageInfo'>
+            <p>Gene:&nbsp; <span>{gene}</span></p>
+            <p>Age:&nbsp; <span>{age}</span> Months</p>
         </div>
-        <h3>{prix}<span>VND</span></h3>
+        <h3>{prix.toLocaleString('en-US')}<span>&nbsp;VND</span></h3>
     </div>
   )
 }
