@@ -1,0 +1,10 @@
+.giftbox{
+    display: flex;
+    background-color: var(--color-secondary-MonYellow-60);
+    padding: 5px;
+    border-radius: 5px;
+    font-family: var(--font-gilroy-semibold);
+    font-size: .8rem;
+    align-items: center;
+    gap: 1rem;
+}

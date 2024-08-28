@@ -16,6 +16,17 @@ import FirstPoster from "../components/FirstPoster/FirstPoster";
 import Button from "../components/Button/Button";
 
 
+import prd1 from "../assets/prd1.png"
+import prd2 from "../assets/prd2.png"
+import prd3 from "../assets/prd3.png"
+import prd4 from "../assets/prd4.png"
+import prd5 from "../assets/prd5.png"
+import prd6 from "../assets/prd6.png"
+import prd7 from "../assets/prd7.png"
+import prd8 from "../assets/prd8.png"
+import DogProductCard from "../components/DogProductCard/DogProductCard";
+ 
+
 const dummyDogData  = [
   {
     imag:dog1,
@@ -69,6 +80,62 @@ const dummyDogData  = [
 
 ]
 
+
+const DummyDogProducts = [
+  {
+    imag:prd1,
+    desc:"Reflex Plus Adult Dog Food Salmon",
+    product:'Dog Food',
+    size:"385gm",
+    prix:140000
+  },
+  {
+    imag:prd2,
+    desc:"Reflex Plus Adult Cat Food Salmon",
+    product:'Cat Food',
+    size:"1.5kg",
+    prix:165000
+  },
+  {
+    imag:prd3,
+    desc:"Cat Scratching Ball Toy Kitten Sisal Rope Ball",
+    product:'Toy',
+    prix:11000000
+  },
+  {
+    imag:prd4,
+    desc:"Cute Pet Cat Warm Nest",
+    product:'Toy',
+    prix:410000
+  },
+  {
+    imag:prd5,
+    desc:"NaturVet Dogs - Omega-Gold Plus Salmon Oil",
+    product:'Dog Food',
+    size:"385gm",
+    prix:350000
+  },
+  {
+    imag:prd6,
+    desc:"Costumes Fashion Pet Clother Cowboy Rider",
+    product:'Costume',
+    size:"1.5kg",
+    prix:500000
+  },
+  {
+    imag:prd7,
+    desc:"Costumes Chicken  Drumstick Headband",
+    product:'Costume',
+    prix:400000
+  },
+  {
+    imag:prd8,
+    desc:"Plush Pet Toy",
+    product:'Toy',
+    prix:250000
+  },
+
+]
 function HomePage() {
   return (
     <div>
@@ -97,6 +164,27 @@ function HomePage() {
         </div>
         <Button></Button>
         <FirstPoster></FirstPoster>
+        <TitleSection Title="Hard to choose right products for your pets?" Text="Our Products" ButtonText="View more"></TitleSection>
+
+
+        <div className="dogsSection">
+
+        {
+          DummyDogProducts.map((item,index)=>(
+            <DogProductCard imag={item.imag}
+            desc = {item.desc} 
+            prix ={item.prix}
+            product={item.product}
+            size={item.size}
+            key={index}
+            >
+
+            </DogProductCard>
+            
+          ))
+        }
+        </div>
+
         </div>
     </div>
   );

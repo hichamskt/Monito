@@ -13,6 +13,7 @@
     font-family: var(--font-gilroy-bold);
     font-size: .9rem;
     text-align: left;
+    white-space: normal;
 }
 .ProductCard .productageInfo{
     display: flex;
@@ -22,6 +23,7 @@
 }
 .ProductCard .productageInfo span{
     font-family: var(--font-gilroy-bold);
+    color: var(--color-swatch-60);
 }
 .ProductCard h3{
     font-size: .9rem;
