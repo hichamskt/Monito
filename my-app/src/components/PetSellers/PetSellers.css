@@ -1,0 +1,50 @@
+.petseller{
+    padding: 20px;
+}
+
+.petseller .petsellertext  {
+    display: flex;
+    justify-content: space-between;
+    padding: 1.2rem;
+}
+
+.petseller .petsellertext h4{
+    font-family: var(--font-gilroy-regular);
+}
+
+.petseller .petsellertext h4 span
+{
+     color: var( --color-primary-darkblue-80);
+    font-family: var(--font-gilroy-bold);
+    font-size: 1.4rem;
+}
+
+.petseller .petsellertext .btnn button{
+    background-color: transparent;
+    color: var(--color-primary-darkblue);
+    border: .1rem solid var(--color-primary-darkblue);
+   padding: 10px 30px;
+   font-family: var(--font-gilroy-bold);
+   border-radius: 20px;
+   cursor: pointer;
+    
+   display: flex;
+   align-items: center;
+}
+.petseller .petsellertext .btnn img{
+    width: 6px;
+    margin-top: 3px;
+}
+
+.petseller .petsellerImags{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+@media (max-width: 514px) {
+    .petseller .petsellertext .btnn {
+        display: none;
+    }
+}
