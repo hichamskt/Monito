@@ -1,0 +1,41 @@
+.dogknowledgecard{
+     
+    flex-basis:350px ;
+    flex-grow: 2;
+    padding: 0.5rem;
+    box-shadow: 0px 4px 28px -2px rgba(0, 0, 0, 0.08);
+    border-radius: 15px;
+    cursor: pointer;
+    max-width: 400px;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    text-align: left;
+    gap: 1rem;
+}
+.dogknowledgecard img {
+    border-radius: 15px;
+}
+
+.dogknowledgesection .petknow {
+    align-self: flex-start;
+    color: var(--color-swatch-00);
+    background-color: var(--color-blue-sea);
+    padding: .4rem 0.6rem;
+    border-radius: 15px;
+    font-size: 0.7rem;
+    font-weight:bold;
+}
+.dogknowledgesection  h2{
+font-family: var(--font-gilroy-bold);
+font-size: 1rem;
+white-space: normal;
+align-self: flex-start;
+
+}
+
+.dogknowledgesection p:last-of-type{
+    font-family: var(--font-gilroy-regular);
+    font-size: .8rem;
+}

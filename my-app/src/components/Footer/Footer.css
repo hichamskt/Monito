@@ -1,0 +1,175 @@
+.footer{
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+    padding-top: 40px;
+}
+
+.footer .subscribesection{
+display: flex;
+background-color: var(--color-primary-darkblue-80);
+color: var( --color-swatch-00);
+justify-content: space-between;
+border-radius: 20px;
+padding: 20px;
+text-align: left;
+white-space: normal;
+}
+
+
+
+.footer .subscribesection h2{
+    white-space: normal;
+    font-family: var( --font-gilroy-semibold);
+    font-size: 1.6rem;
+    line-height: normal;
+}
+
+.footer .subscribesection .inputsub{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--color-swatch-00);
+    min-width: 60%;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.footer .subscribesection .inputsub input {
+    width: 70%;
+    height: 45px;
+    border-radius: 6px;
+    border: 1px solid var(--color-swatch-60);
+    padding-left: 10px;
+}
+
+
+.footer .subscribesection .inputsub button {
+    background-color: var(--color-primary-darkblue-80);
+    height: 45px;
+    padding: 0 25px;
+    border-radius: 10px;
+    font-family: var(--font-gilroy-regular);
+    cursor: pointer;
+}
+
+@media (max-width: 1024px) {
+    .footer .subscribesection .inputsub input {
+        width: 50%;}
+
+        .footer .subscribesection h2{
+            font-size: 1.3rem;
+        }
+    
+}
+
+@media (max-width: 714px){
+    .footer .subscribesection{
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2rem;
+    }
+    .footer .subscribesection .inputsub{
+        min-width:100%;
+    }
+    .footer .subscribesection .inputsub input {
+        width: 60%;}
+
+        .footer .subscribesection h2{
+            font-size: 1.5rem;
+        }
+}
+
+@media (max-width: 450px){
+    .footer .subscribesection .inputsub{
+        flex-direction: column;
+        gap: 1rem;
+    }
+    .footer .subscribesection .inputsub input {
+        width: 100%;}
+        .footer .subscribesection .inputsub button{
+            width: 100%;
+        }
+}
+
+
+.footer .menuendsocials{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2rem;
+}
+.footer .menuendsocials ul{
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+}
+.footer .menuendsocials ul li {
+    cursor: pointer;
+}
+
+.footer .menuendsocials .socials{
+    display: flex;
+    gap: 2rem;
+}
+
+.footer .menuendsocials .socials a {
+    cursor: pointer;
+}
+
+
+@media (max-width: 1024px) {
+    .footer .menuendsocials{
+        padding: 2rem;
+    }   
+
+}
+@media (max-width: 714px) {
+    .footer .menuendsocials{
+        flex-direction: column;
+        gap: 2rem;
+    }   
+    .footer .rightndterms{
+        flex-direction: column;
+        gap: 2rem;
+    }
+}
+
+.footer hr{
+    color: var(--color-swatch-60);
+    margin-top: 2.5rem;
+     
+    height: 2px;
+    
+}
+
+@media (max-width: 1020px) {
+    .footer hr{
+        width:90%;
+        margin: 0 auto;
+    }
+    .footer .rightndterms{
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+
+}
+
+.footer .rightndterms{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    color: var(--color-swatch-60);
+}
+.footer .rightndterms a{
+    cursor: pointer;
+}
+.footer .rightndterms .terms{
+    display: flex;
+    gap:2rem;
+    align-items: center;
+}

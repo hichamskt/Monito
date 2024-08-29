@@ -1,0 +1,206 @@
+.AdoptionPoster{
+    display: flex;
+    background-color: #FFB775;
+    border-radius: 20px;
+    overflow: hidden;
+    justify-content: space-evenly;
+    align-items: center;
+    position: relative;
+}
+
+.AdoptionPoster::before{
+    content: '';
+    width: 780px;
+    height: 635px;
+    background-color: var(--color-secondary-MonYellow-40);
+    position: absolute;
+    top: -271px;
+    left: -23%;
+    z-index: 0;
+    transform: rotate(62deg);
+    border-radius: 107px;
+}
+.AdoptionPoster::after{
+    content: '';
+    width: 780px;
+    height: 821px;
+    background-color: var(--color-secondary-MonYellow-40);
+    position: absolute;
+    bottom: -573px;
+    right: -10%;
+    z-index: 0;
+    transform: rotate(62deg);
+    border-radius: 107px;
+    opacity: 0.4;
+}
+
+.AdoptionPoster .adoptiontextside {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    text-align: left;
+    position: relative;
+    z-index: 2;
+    
+}
+.AdoptionPoster .adoptiontextside span{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.AdoptionPoster .adoptiontextside span h1{
+    font-family: var(--font-gilroy-bold);
+    color: var(--color-primary-darkblue-80);
+    font-size: 3rem;
+}
+.AdoptionPoster .adoptiontextside h2{
+    font-family: var(--font-gilroy-bold);
+    color: var(--color-primary-darkblue-80);
+    font-size: 2rem;
+}
+.AdoptionPoster .adoptiontextside p{
+    font-family: var(--font-gilroy-semibold);
+}
+
+.AdoptionPoster .adoptiontextside .adoptionButtons{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 25px;
+    flex-direction: row-reverse;
+}
+
+.AdoptionPoster .adoptiontextside .adoptionButtons button{
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+    background-color: var(--color-primary-darkblue-80);
+    border-radius: 20px;
+    color: white;
+    cursor: pointer;
+    font-family: var(--font-gilroy-medium);
+    align-items: center;
+    width: 151px;
+    height: 46px;
+}
+
+.AdoptionPoster .adoptionButtons button:first-of-type{
+    background-color: transparent;
+    border: 0.1rem solid var(--color-primary-darkblue-80);
+    color: var(--color-primary-darkblue-80);
+    
+}
+
+.AdoptionPoster .adoptionButtons img{
+    border: 0.1rem solid var(--color-primary-darkblue-80);
+    border-radius: 50%;
+    padding: 3px;
+    filter: invert(100%) brightness(0%);
+    width: 25px;
+    
+}
+.AdoptionPoster .adoptionimgside{
+
+    position: relative;
+    z-index: 100;
+}
+@media (max-width: 1458px){
+    .AdoptionPoster::after{
+
+        width: 780px;
+        height: 724px;
+        bottom: -558px;
+        right: -17%;
+    }
+}
+@media (max-width: 1316px){
+    .AdoptionPoster::after{
+
+        width: 780px;
+        height: 724px;
+        bottom: -558px;
+        right: -17%;
+    }
+}
+@media (max-width: 1240px){
+    .AdoptionPoster::after{
+        width: 639px;
+        height: 724px;
+        bottom: -544px;
+        right: -17%;
+    }
+}
+
+@media (max-width: 1250px){
+    .AdoptionPoster .adoptiontextside{
+        padding-left: 20px;
+    }
+    .AdoptionPoster::before{
+        left: -34%;
+    }
+}
+
+@media (max-width: 1124px){
+    .AdoptionPoster .adoptiontextside {
+        gap: .1rem;
+    }   
+    .AdoptionPoster .adoptiontextside span h1{
+        font-size: 2rem;
+    }
+    .AdoptionPoster .adoptiontextside h2{
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 900px){
+    .AdoptionPoster::before{
+        left: -53%;
+    }
+    .AdoptionPoster::after {
+        width: 595px;
+        height: 734px;
+        bottom: -544px;
+        right: -17%;
+    }
+}
+@media (max-width: 714px){
+    .AdoptionPoster::before{
+        left: -61%;
+    }
+}
+
+@media (max-width: 714px){
+    .AdoptionPoster{
+        flex-direction: column;
+        gap: 30px;
+    }
+    .AdoptionPoster .adoptiontextside,
+    .AdoptionPoster .adoptiontextside span {
+        text-align: center;
+        justify-content: center;
+        padding-top: 20px;
+    }
+    .AdoptionPoster::before{
+        left: -75%;
+        top: -322px;
+    }
+}
+@media (max-width: 460px){
+    .AdoptionPoster::before{
+        left: -94%;
+        top: -300px;
+    }
+}
+@media (max-width: 420px){
+    .AdoptionPoster::before{
+        left: -116%;
+        top: -375px;
+    }
+}
+@media (max-width: 376px){
+    .AdoptionPoster::before{
+        left: -150%;
+    }
+}

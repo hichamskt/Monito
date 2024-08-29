@@ -25,7 +25,30 @@ import prd7 from "../assets/prd7.png";
 import prd8 from "../assets/prd8.png";
 import DogProductCard from "../components/DogProductCard/DogProductCard";
 import PetSellers from "../components/PetSellers/PetSellers";
+import AdoptionPoster from "../components/AdoptionPoster/AdoptionPoster";
 
+import img1 from "../assets/kno1.png"
+import img2 from "../assets/kno2.png"
+import img3 from "../assets/kno3.png"
+import DogKnowledgeCard from "../components/DogKnowledgeCard/DogKnowledgeCard";
+import Footer from "../components/Footer/Footer";
+const dummyKnowledgeData = [
+  {
+    imag:img1,
+    title:"What is a Pomeranian? How to Identify Pomeranian Dogs",
+    desc:"The Pomeranian, also known as the Pomeranian (Pom dog), is always in the top of the cutest pets. Not only that, the small, lovely, smart, friendly, and skillful circus dog breed."
+  },
+  {
+    imag:img2,
+    title:"Dog Diet You Need To Know",
+    desc:"Dividing a dog's diet may seem simple at first, but there are some rules you should know so that your dog can easily absorb the nutrients in the diet. For those who are just starting to raise dogs, especially newborn puppies with relatively weak resistance."
+  },
+  {
+    imag:img3,
+    title:"Why Dogs Bite and Destroy Furniture and How to Prevent It Effectively",
+    desc:"Dog bites are common during development. However, no one wants to see their furniture or important items being bitten by a dog."
+  },
+]
 const dummyDogData = [
   {
     imag: dog1,
@@ -56,7 +79,7 @@ const dummyDogData = [
     prix: 89000000,
   },
   {
-    imag: dog5,
+    imag: dog5, 
     desc: "MO231 - Pembroke  Corgi Cream",
     gene: "Male",
     age: 2,
@@ -190,8 +213,23 @@ function HomePage() {
         <Button></Button>
 
         <PetSellers></PetSellers>
+        <Button></Button>
+          <AdoptionPoster></AdoptionPoster>
+          <TitleSection
+          Title="You Already Know?"
+          Text="Useful Pet Knowledge"
+          ButtonText="View more"
+        ></TitleSection>
 
+        <div className="dogknowledgesection">
+          {
+            dummyKnowledgeData.map((item,index)=>(
+              <DogKnowledgeCard key={index} item={item} />
+            ))
+          }
+        </div>
       </div>
+        <Footer></Footer>
     </div>
   );
 }

@@ -31,3 +31,25 @@
     }
     
 }
+
+
+.dogknowledgesection{
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.dogknowledgesection .petknow {
+    align-self: flex-start;
+    color: var(--color-swatch-00);
+    background-color: var(--color-blue-sea);
+    padding: .4rem 0.6rem;
+    border-radius: 15px;
+    font-size: 0.7rem;
+    font-weight:bold;
+}
+.dogknowledgesection  h2{
+font-family: var(--font-gilroy-semibold);
+font-size: 1rem;
+}
