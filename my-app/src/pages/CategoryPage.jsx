@@ -14,6 +14,8 @@ import img8 from "../assets/dogcat8.png"
 import CategoryDogPoster from '../components/CategoryDogPoster/CategoryDogPoster'
 import BreadCrumb from '../UI/BreadCrumb/BreadCrumb'
 import Footer from '../components/Footer/Footer'
+import CategoryCard from '../components/CategoryCard/CategoryCard'
+import CategoryCatPoster from '../components/CategoryCatPoster/CategoryCatPoster'
 
 
 const dummyDogData = [
@@ -53,18 +55,36 @@ const dummyDogData = [
 
 function CategoryPage() {
 const [showCategory,setShowCategory]=useState(false);
-
+const [showDogCategory,setShowDogCategory] = useState(false)
+const [showCatsCategory,setShowCatsCategory] = useState(true)
   return (
     <div className='container'>
 <Header></Header> 
 { showCategory &&  <Category></Category>}
-<div className='dogCategorySection'>
+{showDogCategory && <div className='dogCategorySection'>
   <BreadCrumb tring="Category Dogs"></BreadCrumb>
   <CategoryDogPoster></CategoryDogPoster>
   <div className='categoriesCardsGroup'>
-
+{dummyDogData.map((item,index)=>{
+  return(
+    <CategoryCard imag = {item.dogimg} disc={item.disc} key={index}></CategoryCard>
+  )
+})}
   </div>
-</div>
+  
+</div>}
+{showCatsCategory && <div className='dogCategorySection'>
+  <BreadCrumb tring="Category Cats"></BreadCrumb>
+  <CategoryCatPoster></CategoryCatPoster>
+  <div className='categoriesCardsGroup'>
+{dummyDogData.map((item,index)=>{
+  return(
+    <CategoryCard imag = {item.dogimg} disc={item.disc} key={index}></CategoryCard>
+  )
+})}
+  </div>
+  
+</div>}
 <Footer></Footer>
     </div>
   )
