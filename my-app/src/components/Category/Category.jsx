@@ -52,7 +52,7 @@ function Category() {
             ))
         }
         </div>
-    <Footer></Footer>
+     
     </div>
   )
 }

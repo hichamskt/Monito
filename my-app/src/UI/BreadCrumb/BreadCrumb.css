@@ -1,0 +1,21 @@
+.breadcrumberbox{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.breadcrumberbox img{
+    width: 5px;
+}
+
+.breadcrumber{
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+
+.breadcrumber p {
+    font-family: var(--font-gilroy-bald);
+    font-size: .8rem;
+    color: var( --color-swatch-60);
+}

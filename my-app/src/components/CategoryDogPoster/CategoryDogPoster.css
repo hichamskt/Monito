@@ -1,0 +1,140 @@
+.categoryDogPoster{
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    background: linear-gradient(to right, #FCEED5 6%, #FCEED5 75%, #FFE7BA 100%);
+    margin-top: 20px;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px;
+    min-height: 400px;
+    
+}
+.categoryDogPoster::before{
+    border-top-left-radius: 99px;
+    border-top-right-radius: 100PX;
+    content: "";
+    background-color: var(--color-primary-darkblue-80);
+    width: 505px;
+    height: 499px;
+    position: absolute;
+    /* left: 93px; */
+    right: -91px;
+    bottom: -53px;
+    transform: rotate(-40deg);
+    
+}
+
+.categoryDogPoster .textside{
+    max-width: 30%;
+    text-align: right;
+    position: relative;
+    z-index: 100; 
+
+}
+
+.categoryDogPoster .textside h2{
+    font-size: 3rem;
+    word-spacing: 5px;
+    position: relative;
+    z-index: 100;     
+    color: var( --color-swatch-00);
+    font-family: var(--font-gilroy-bold);
+}
+.categoryDogPoster .textside h3{
+    font-size: 2.3rem;
+    word-spacing: 5px;
+    position: relative;
+    z-index: 100;
+     
+    color: var( --color-swatch-00);
+    font-family: var(--font-gilroy-bold);
+}
+
+.categoryDogPoster .textside p {
+    word-break: normal;
+    font-family: var(--font-gilroy-regular);
+    color: var(--color-swatch-00);
+    font-size: .6rem;
+    white-space: normal;
+}
+
+.categoryDogPoster .imgside{
+    align-self: flex-end;
+    position: relative;
+    z-index: 100; 
+}
+
+
+@media (max-width: 1024px){
+ 
+    .categoryDogPoster .imgside{
+        max-width: 60%;
+    }
+    .categoryDogPoster .textside h2{
+        font-size: 2rem;
+    }
+    .categoryDogPoster .textside h3{
+        font-size: 1.6rem;
+    }
+}
+@media (max-width: 870px){
+    .categoryDogPoster{
+        min-height: 350px;
+    }
+
+   
+}
+@media (max-width: 740px){
+    .categoryDogPoster{
+        min-height: 350px;
+    }
+   
+}
+@media (max-width: 690px){
+    .categoryDogPoster{
+        
+        flex-direction: column-reverse;
+        align-items: center;
+        max-width: 100%;
+        justify-content: end;
+    }
+    .categoryDogPoster .imgside{
+        align-self: center;
+        max-width: 100%;
+    }   
+    .categoryDogPoster .textside{
+        max-width: 80%;
+        text-align: left;
+    }
+
+   .categoryDogPoster h2{
+    margin-top: 25px;
+   }
+   .categoryDogPoster .textside p{
+    width: 60%;
+   }
+   .categoryDogPoster::before {
+    content: "";
+    background-color: var(--color-primary-darkblue-80);
+    width: 734px;
+    height: 609px;
+    position: absolute;
+    right: -103px;
+    bottom: 203px;
+    transform: rotate(-40deg);
+    border-radius: 35%;
+}
+
+}
+
+@media (max-width: 390px){
+    .categoryDogPoster::before{
+        right: -194px;
+        bottom: 163px;
+    }  
+    .categoryDogPoster .textside p{
+        width: 100%;
+       }
+    }
