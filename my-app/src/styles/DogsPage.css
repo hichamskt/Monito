@@ -1,0 +1,81 @@
+.dogspage{
+    margin-top: 30px;
+}
+
+.dogspage .dogspageside{
+    display: flex;
+    margin-top: 20px;
+    gap: 20px;
+}
+
+
+.dogspage .dogspageside {
+    width: -webkit-fill-available;
+    
+}
+.dogspage .dogspageside .categorypetsTitle{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.dogspage .dogspageside .categorypetsTitle h2{
+    font-family: var(--font-gilroy-bold);
+    color: var(--color-primary-darkblue-80);
+}
+
+.dogspage .dogspageside .categorypetsTitle span p {
+    font-size: .8rem;
+    color: var(--color-swatch-60);
+}
+.dogspage .dogspageside .categorypetsTitle span{
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+}
+
+.dogspage .dogspageside .categorypetsTitle .categorypetsinput{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.dogspage .dogspageside .categorypetsTitle .categorypetsinput select{
+    padding: 5px;
+    border-radius: 15px;
+    cursor: pointer;
+    color: var(--color-swatch-60);
+    border-color: var(--color-swatch-60);
+}
+.dogspage .dogspageside .categorypetsTitle .filtericon{
+    display: flex;
+    align-items: center;
+    display: none;
+}
+
+.dogspage .cateDogCards{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+@media (max-width:600px) {
+    .dogspage .dogspageside .categorypetsTitle .filtericon{
+        
+        display: flex;
+    }   
+
+    .dogspage .dogspageside .categorypetsTitle{
+        
+        flex-direction: column-reverse;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    .dogspage .dogspageside .categorypetsTitle .categorypetsinput{
+        width: 100%;
+        padding: 10px;
+    }
+    .dogspage .dogspageside{
+        flex-direction: column;
+    }
+}

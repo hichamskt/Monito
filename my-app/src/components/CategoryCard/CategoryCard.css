@@ -14,7 +14,8 @@
 }
 
 .categorycard img:hover{
-    transform: scale(1.1)
+    transform: scale(1.1);
+    
 }
 .categorycard:hover p{
     background-color: var(--color-secondary-MonYellow-80);

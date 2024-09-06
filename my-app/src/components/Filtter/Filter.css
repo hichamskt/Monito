@@ -1,0 +1,87 @@
+.filtercontainer{
+    max-width: 30%;
+    text-align: left;
+    font-family: var(--font-gilroy-regular);
+    font-weight: bold;
+    color: var(--color-swatch-80);
+    margin-left: 10px;
+}
+
+.filtercontainer h2{
+font-family: var(--font-gilroy-bold);
+color: var(--color-primary-darkblue-80);
+margin-bottom: 10px;
+}
+
+.filtercontainer h3{
+    font-family: var(--font-gilroy-bold);
+    margin-bottom: 10px;
+}
+.filtercontainer label{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    font-size: .8rem;
+}
+.filtercontainer label p{
+    font-size: .8rem;
+}
+
+.filtercontainer hr{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border: none; 
+    height: 0.6px; 
+    
+    box-shadow: 0 1px 0px rgba(0, 0, 0, 0.1);
+}
+
+.filtercontainer .red{
+    width: 15px;
+    height: 15px;
+    background-color: red;
+    border-radius: 50%;
+}
+.filtercontainer .apricot{
+    width: 15px;
+    height: 15px;
+    background-color:#FBCEB1;
+    border-radius: 50%;
+}
+.filtercontainer .black{
+    width: 15px;
+    height: 15px;
+    background-color:black;
+    border-radius: 50%;
+}
+.filtercontainer .black_white{
+    width: 15px;
+    height: 15px;
+    background: linear-gradient(90deg, black 50%, white 50%);
+    border-radius: 50%;
+}
+.filtercontainer .silver{
+    width: 15px;
+    height: 15px;
+    background: silver;
+    border-radius: 50%;
+}
+.filtercontainer .tan{
+    width: 15px;
+    height: 15px;
+    background: tan;
+    border-radius: 50%;
+}
+.filtercontainer .pricefilter{
+    display: flex;
+    gap: 10px;
+}
+
+.filtercontainer .pricefilter input{
+width: 100px;
+height: 25px;
+padding: 10px;
+border: none;
+box-shadow: 0 1px 0px rgba(0, 0, 0, 0.1);
+}
