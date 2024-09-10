@@ -37,8 +37,27 @@ const doginfo = {
 };
 
 function DogPage() {
-  const [selectedImg, setSelectedImg] = useState(img1);
+  const [selectedImg, setSelectedImg] = useState({index:0,img:img1});
+  
 
+  const rightArrowHundler= ()=>{
+    if(doginfo.imgs.length>selectedImg.index+1){
+      setSelectedImg({ index: selectedImg.index + 1,img:doginfo.imgs[selectedImg.index+1]})
+    }else{
+      setSelectedImg({ index: 0 ,img:doginfo.imgs[0]})
+    }
+  }
+
+  const leftArrowHundler= ()=>{
+    if(0 < selectedImg.index){
+      
+      setSelectedImg({ index: selectedImg.index - 1,img:doginfo.imgs[selectedImg.index-1]})
+    }else{
+      
+      setSelectedImg({ index: doginfo.imgs.length-1 ,img:doginfo.imgs[doginfo.imgs.length - 1]})
+    }
+
+  }
 
   return (
     <div className="container">
@@ -48,16 +67,16 @@ function DogPage() {
           <div className="dpleftside">
             <div className="mainimg">
               <div className="arleft">
-                <img src={larrow} alt="larrarow"></img>
+                <img src={larrow} alt="larrarow" onClick={leftArrowHundler}></img>
               </div>
-              <img src={selectedImg} alt="dog" className="maini"></img>
+              <img src={selectedImg.img} alt="dog" className="maini"></img>
               <div className="arright">
-                <img src={rarrow} alt="raraow"></img>
+                <img src={rarrow} alt="raraow" onClick={rightArrowHundler}></img>
               </div>
             </div>
             <div className="aimgs">
               {doginfo.imgs.map((item, index) => (
-                <img src={item} key={index} alt="dog" onClick={()=>setSelectedImg(item)}></img>
+                <img src={item} key={index} alt="dog" onClick={()=>setSelectedImg({index,img:item})} className={selectedImg.img===item?"active":""}></img>
               ))}
             </div>
             <div className="healthsec">
