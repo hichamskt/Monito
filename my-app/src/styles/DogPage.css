@@ -34,7 +34,7 @@ margin-top: 20px;
 }
 
 .dogPage .dogSection .sprightside{
-    max-width: 40%;
+    
 
 }
 
@@ -55,7 +55,7 @@ margin-top: 20px;
     display: flex;
     gap: 10px;
     align-items: center;
-    font-size: 15px;
+    font-size: 12px;
     margin-top: 10px;
     background-color: var(--color-secondary-MonYellow-40);
     font-family: var(--font-gilroy-semibold);
@@ -82,11 +82,89 @@ margin-top: 20px;
     filter: grayscale(100%) opacity(60%);
 }
 
-
+/* info side */
 
 .dogPage .sprightside{
     display: flex;
     gap: 10px;
     flex-direction: column;
     align-items: flex-start;
+}
+
+.dogPage .sprightside p {
+    font-family: var(--font-gilroy-semibold);
+    font-size: 0.9rem;
+    color: var( --color-swatch-40);
+    letter-spacing: 0.6px;
+}
+
+.dogPage .sprightside h3{
+    font-family: var(--font-gilroy-bold);
+    font-size: 2rem;
+    color: var( --color-swatch-100);
+}
+.dogPage .sprightside h3:last-of-type{
+    font-family: var(--font-gilroy-bold);
+    font-size: 2rem;
+    color: var(--color-primary-darkblue-80);
+}
+
+.dogPage .sprightside .btnsgpp{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.dogPage .sprightside .btnsgpp button:first-of-type{
+    background-color: var(--color-primary-darkblue-80);
+    color: white;
+    font-family: var(--font-gilroy-semibold);
+    padding:  12px 25px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.dogPage .sprightside .btnsgpp button:last-of-type{
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding:  6px 25px;
+    border-radius: 25px;
+    font-family: var(--font-gilroy-bold);
+    gap: 10px;
+    color: var(--color-primary-darkblue-80);
+    background-color: transparent;
+    border: 2px solid var(--color-primary-darkblue-80);
+}
+
+.dogPage .sprightside table td {
+    text-align: left;
+    border-bottom: 1px solid var(--color-swatch-40);
+}
+
+.dogPage .sprightside table p{
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+@media (max-width:861px) {
+    
+    .dogPage .dogSection{
+        flex-direction: column;
+    }
+    .dogPage .dogSection .maini{
+        width: 100%;
+    }
+}
+
+
+@media (max-width:558px){
+    .dogPage .dogSection .aimgs img{
+        max-width: 60px;
+    }
+}
+
+@media (max-width:371px){
+    .dogPage .dogSection .aimgs img{
+        max-width: 50px;
+    }
 }
