@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../styles/DogsPage.css";
 import Header from "../components/Header/Header";
 import BreadCrumb from "../UI/BreadCrumb/BreadCrumb";
@@ -6,6 +6,8 @@ import CategoryDogPoster from "../components/CategoryDogPoster/CategoryDogPoster
 import Filter from "../components/Filtter/Filter";
 import filter from "../assets/filter.png";
 import ProductCard from "../components/ProductCard/ProductCard";
+import { useMediaQuery } from 'react-responsive';
+
 import dog1 from "../assets/dog1.png";
 import dog2 from "../assets/dog2.png";
 import dog3 from "../assets/dog3.png";
@@ -77,6 +79,17 @@ const dummyDogData = [
   ];
 
 function DogsPage() {
+const [showFilter,setShowFilter]=useState(true);
+const isSmallScreen = useMediaQuery({ query: '(max-width: 846px)' });
+
+
+const showFilterHundler = () =>{
+  setShowFilter(!showFilter)
+  
+
+  
+}
+
   return (
     <div className="container">
       <Header></Header>
@@ -84,7 +97,7 @@ function DogsPage() {
         <BreadCrumb tring="Category dogs small dogs"></BreadCrumb>
         <CategoryDogPoster></CategoryDogPoster>
         <div className="dogspageside">
-          <Filter></Filter>
+          {showFilter && <Filter ></Filter>}
           <div className="categorypets">
             <div className="categorypetsTitle">
               <span>
@@ -105,7 +118,7 @@ function DogsPage() {
                   <option value="price-desc">Price (High to Low)</option>
                 </select>
 
-                <div className="filtericon">
+                <div className="filtericon" onClick={showFilterHundler}>
                   <img src={filter} alt="filter"></img>
                   <h3>Filter</h3>
                 </div>

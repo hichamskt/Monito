@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useState , forwardRef } from "react";
 import "../Filtter/Filter.css";
+
+
 function Filter() {
   const [selected, setSelected] = useState({
     colors: {
