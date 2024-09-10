@@ -1,0 +1,92 @@
+.dogPage .dogSection{
+display: flex;
+gap: 2rem;
+border: 1px solid gainsboro;
+border-radius: 15px;
+padding: 10px;
+margin-top: 20px;
+}
+
+.dogPage .dogSection .mainimg{
+
+    position: relative;
+}
+
+.dogPage .dogSection .mainimg .arleft{
+    z-index: 10;
+    background-color: #ffffff38;
+    position: absolute;
+    top: 40%;
+    border-radius: 50%;
+    left: 10px;
+    cursor: pointer;
+}
+
+.dogPage .dogSection .mainimg .arright{
+    
+    cursor: pointer;
+    background-color: #ffffff38;
+    position: absolute;
+    top: 40%;
+    right: 20px;
+    border-radius: 50%;  
+    transform: rotate(180deg);
+}
+
+.dogPage .dogSection .sprightside{
+    max-width: 40%;
+
+}
+
+.dogPage .dogSection .aimgs{
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+.dogPage .dogSection .aimgs img{
+    max-width: 100px;
+    border-radius: 5px;
+    cursor: pointer;
+
+}
+
+
+.dogPage .dogSection .healthsec{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    font-size: 15px;
+    margin-top: 10px;
+    background-color: var(--color-secondary-MonYellow-40);
+    font-family: var(--font-gilroy-semibold);
+    border-radius: 10px;
+    padding: 10px;
+    margin-top: 20px;
+}
+
+.dogPage .dogSection .sharesec{
+    display: flex;
+    align-items: center;
+    font-family: var(--font-gilroy-bold);
+    gap: 15px;
+    margin-top: 25px;
+    font-size: 1rem;
+}
+.dogPage .dogSection .socials{
+    display: flex;
+    gap: 15px;
+}
+
+.dogPage .dogSection .sharesec img{
+    cursor: pointer;
+    filter: grayscale(100%) opacity(60%);
+}
+
+
+
+.dogPage .sprightside{
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    align-items: flex-start;
+}

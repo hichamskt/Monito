@@ -6,7 +6,7 @@ import img2 from "../assets/prddog2.png"
 import img3 from "../assets/prddog3.png"
 import img4 from "../assets/prddog4.png"
 import img5 from "../assets/prddog5.png"
-import rarrow from "../assets/arrowright.png"
+import rarrow from "../assets/Caret_Left_SM.png"
 import larrow from "../assets/arrowleft.png"
 import sharei from "../assets/shareicon.png"
 import iconealth from "../assets/healthicon.png"
@@ -44,28 +44,34 @@ function DogPage() {
     <div className='container'>
 <Header></Header>
 <div className='dogPage'>
-<div>
+<div className='dogSection'>
 <div className='dpleftside'>
-<div>
-    <img src={larrow}></img>
-    <img src={selectedImg} alt='dog'></img>
-    <img src={rarrow}></img>
+<div className='mainimg'>
+  <div className='arleft'>
+
+    <img src={larrow} alt='larrarow' ></img>
+  </div>
+    <img src={selectedImg} alt='dog' className='maini'></img>
+    <div className='arright'>
+
+    <img src={rarrow} alt='raraow' ></img>
+    </div>
 </div>
-<div>
+<div className='aimgs'> 
     {doginfo.imgs.map((item,index)=>(
         <img src={item} key={index} ></img>
     ))}
 </div>
-<div>
+<div className='healthsec'>
   <img src={iconealth} alt='health'></img>
   <p>100% health guarantee for pets</p>
   <img src={iconprd} alt='pro'></img>
   <p>100% guarantee of pet identification</p>
 </div>
-<div>
+<div className='sharesec'>
   <img src={sharei} alt="share"></img>
   <p>Share:</p>
-  <div>
+  <div className='socials'>
     <img src={fb} alt='socials'></img>
     <img src={twitter} alt='socials'></img>
     <img src={insta} alt='socials'></img>
