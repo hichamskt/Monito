@@ -40,7 +40,7 @@ const dummyCtegorydata = [
 function Category() {
   return (
     <div className='category'>
-    <h2>Category</h2>
+    <h2 className='catTitle'>Category</h2>
     <div className='categories'>
 
         {
@@ -52,7 +52,7 @@ function Category() {
             ))
         }
         </div>
-     
+    <Footer></Footer>
     </div>
   )
 }
