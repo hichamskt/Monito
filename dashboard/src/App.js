@@ -6,6 +6,7 @@ import {
 } from "react-router-dom";
 import Root from "./Pages/Root"
 import DashBoard from './Pages/DashBoard';
+import DogsPage from './Pages/DogsPage';
 
 
 const router = createBrowserRouter([
@@ -17,7 +18,8 @@ const router = createBrowserRouter([
       element:<DashBoard></DashBoard>
     },
   {
-    
+   path:"/dogs" ,
+   element:<DogsPage/>
   }]
   },
 ]);

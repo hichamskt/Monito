@@ -6,7 +6,6 @@ import { MdOutlineProductionQuantityLimits } from "react-icons/md";
 import { FiDollarSign } from "react-icons/fi";
 import { CgProfile } from "react-icons/cg";
 import { RiPagesLine } from "react-icons/ri";
-import { GoSidebarExpand } from "react-icons/go";
 
 import { MdMenuOpen } from "react-icons/md";
 import { useOutletContext } from "react-router-dom";
@@ -14,7 +13,7 @@ import { useOutletContext } from "react-router-dom";
 
 
 function DashBoard() {
-  const [setShowSideBar,showSideBar] = useOutletContext();
+  const [setShowSideBar] = useOutletContext();
 const data = [1,2,3,4,5]
   return (
     <div className='dashboard'>
