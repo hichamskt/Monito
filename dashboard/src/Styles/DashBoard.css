@@ -1,0 +1,104 @@
+.dashboard{
+    width: 100%;
+}
+.dashboard .dash{
+color: var(--color-primary-blueviolet);
+padding:  10px 20px;
+min-width: 100%;
+box-shadow:  0px 0px 2px hsla(218, 15%, 11%, 0.302);
+position: relative;
+
+}
+
+.dashboard .dash .icon{
+    font-size: 1.5rem;
+    position: absolute;
+    left: -3px;
+    top: 25%;
+    cursor: pointer;
+    display: none;
+}
+
+.dashboard .dash h2{
+    font-size: 1rem;
+}
+.dashboard .overviewSection{
+    padding:10px 20px;
+}
+.dashboard .overviewSection h2{
+    font-size: 1rem;
+}
+
+.dashboard .overviewSection .overview{
+    display: flex;
+    gap: 10px;
+    color: var(--color-primary-blueviolet);
+
+}
+.dashboard .overviewSection .overview svg{
+    font-size: 1rem;
+}
+
+.dashboard .overviewSection .overviewCards{
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+}
+
+.dashboard .latestOrders{
+    margin: 10px 20px;
+}
+
+.dashboard .latestOrders table{
+    width: 100% ;
+    text-align: left;
+    box-shadow:  0px 0px 2px hsla(218, 15%, 11%, 0.302);
+    border-radius: 10px;
+    border: 0px ;
+    padding: 0;
+    overflow: hidden;
+}
+.dashboard .latestOrders table{
+    border-collapse: collapse;
+}
+.dashboard .latestOrders table th{
+    background-color: rgba(144, 149, 161, 0.11);
+    font-size: 16px;           
+    text-transform: uppercase; 
+    letter-spacing: 1px;
+    border: none;
+    padding: 15px 10px;
+}
+.dashboard .latestOrders table tbody  td{
+    padding: 10px 10px;
+    text-transform:capitalize;
+    border-bottom: solid 0.1px hsla(218, 14%, 11%, 0.075);
+    
+}
+.dashboard .latestOrders table tbody  td:first-of-type{
+    font-weight: 500;
+    color: rgba(102, 100, 100, 0.772);
+}
+.dashboard .latestOrders table tbody span{
+    background-color: rgba(144, 149, 161, 0.11);
+    padding: 5px;
+    border-radius: 5px;
+    color: rgb(4, 194, 219);
+    font-weight: 500;
+    font-size: .8rem;
+}
+@media (max-width:821px) {
+    .dashboard .dash .icon{
+        border-radius: 26%;
+        display: block;
+        background-color: var(--color-secondary-MonYellow-60);
+    }
+    
+}
+@media (max-width:440px) {
+    .dashboard{
+        width: auto;
+    }
+    
+}

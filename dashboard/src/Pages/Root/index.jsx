@@ -1,16 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 import "../../Styles/Root.css"
 import SideBar from '../../Components/SideBar/SideBar'
 import { Outlet } from 'react-router'
 
 
-function index() {
+function Root() {
+  const [showSideBar,setShowSideBar]=useState(true);
+
   return (
     <div className='rootpage'>
-      <SideBar/>
-      <Outlet></Outlet>
+      <SideBar setShowSideBar={setShowSideBar} showSideBar={showSideBar} />
+      <Outlet  context={[setShowSideBar , showSideBar]}></Outlet>
     </div>
   )
 }
 
-export default index
+export default Root

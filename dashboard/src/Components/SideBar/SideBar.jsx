@@ -8,12 +8,17 @@ import { LiaCatSolid } from "react-icons/lia";
 import { AiOutlineProduct } from "react-icons/ai";
 import { BsBorderStyle } from "react-icons/bs";
 import { IoMdLogOut } from "react-icons/io";
-
+import { GoSidebarExpand } from "react-icons/go";
 import { NavLink } from "react-router-dom";
 
-function SideBar() {
+function SideBar({setShowSideBar,showSideBar}) {
+  
   return (
-    <div className="sidebar">
+    <div className="sidebar" style={showSideBar ? { left: 0 } : {}}>
+      <div className="expandSidebar" onClick={()=>setShowSideBar(false)}>
+      <GoSidebarExpand></GoSidebarExpand>
+
+      </div>
       <div>
         <img src={Logo} alt="logo"></img>
         <ul>

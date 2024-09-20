@@ -1,0 +1,38 @@
+.overviewCard{
+    background-color: var(--color-secondary-MonYellow-60);
+    padding: 10px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    min-height: 130px;
+    border-radius: 3px;
+    margin-top: 15px;
+    padding-top: 20px;
+    min-width: 32%;
+    
+}
+
+.overviewCard .text{
+
+font-size:1rem ;
+display: flex;
+flex-direction: column;
+gap: 10px;
+}
+
+.overviewCard .text h3{
+    font-size: 1.9rem;
+
+}
+
+.overviewCard svg{
+    font-size: 2rem;
+    border: 1px solid;
+    padding: 3px;
+    
+}
+@media (max-width:870px) {
+    .overviewCard{
+        flex-grow: 2;
+    }
+}

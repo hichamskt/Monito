@@ -1,4 +1,6 @@
 .sidebar{
+    position: sticky;
+    top: 0;
     height: 100vh;
     min-width: 280px;
     padding: 15px;
@@ -57,4 +59,27 @@ color:var( --color-primary-neutral-500);
 
 .sidebar .logout:hover{
     color: black;
+}
+
+.sidebar .expandSidebar{
+    color: var(--color-primary-blueviolet);
+    font-size: 1.5rem;
+    position: absolute;
+    RIGHT: 2px;
+    top: 20px;
+    cursor: pointer;
+    display: none;
+    
+}
+
+@media (max-width:821px) {
+    .sidebar{
+        position: fixed;
+        left: -500px;
+        z-index: 100;
+        height: 100%;
+    }
+    .sidebar .expandSidebar{
+        display: block;
+    }
 }
