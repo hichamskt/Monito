@@ -41,7 +41,9 @@ function DogsPage() {
             </tbody>
             </table>
         </div>
-        <div className="pagination"></div>
+        <div className="pagination">
+          <ul></ul>
+        </div>
       </div>
     </div>
   );
