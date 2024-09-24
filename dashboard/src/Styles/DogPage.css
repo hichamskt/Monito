@@ -1,5 +1,8 @@
 .dogpage{
     width: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 10px;
 }
 
 .dogpage .sectiontitle{
@@ -12,7 +15,8 @@ position: relative;
 }
 
 .dogpage .dogleftside{
-    max-width: 70%;
+    flex-grow: 2;
+    padding-right:10px;
 }
 .dogpage .search{
     padding:10px 0px 10px 20px;
@@ -86,3 +90,94 @@ position: relative;
 .dogpage .dogleftside table td img{
     max-width: 50px;
 }
+
+
+/*right side */
+
+.dogpage .rightside{
+    max-width: 30%;
+    box-shadow:  0px 0px 2px hsla(218, 15%, 11%, 0.302);
+    flex-grow: 2;
+}
+.dogpage .rightside hr{
+    margin-bottom: 10px;
+    margin-top: 10px;
+    border: 0;
+    height: 2px;
+    background-color: #bdc8d433;
+}
+.dp-rs-header{
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    padding: 20px;
+    position: relative;
+}
+.dp-img{
+display: flex;
+justify-content: center;
+}
+.dp-img img{
+    width: 90%;
+    height: 250px;
+}
+
+.dp-text {
+    margin: 15px;
+    
+}
+.dp-text h3{
+font-size: 1rem;
+font-weight: bold;
+border-bottom:5px Solid black ;
+width: fit-content;
+}
+.dp-text .dp-text-ln{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.dp-text .dp-text-ln p:first-of-type{
+    font-weight: bold;
+}
+
+.dp-points,
+.db-cross{
+    cursor: pointer;
+    color: rgb(175, 174, 174);
+    
+}
+.dp-points:hover,
+.db-cross:hover
+{
+    
+    color: rgb(61, 61, 61);
+    
+}
+
+.db-more{
+    position: absolute;
+    width: 150px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow:  0px 0px 2px hsla(218, 15%, 11%, 0.302);
+    overflow: hidden;
+    top: 40px;
+    
+
+}
+.db-more div{
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    padding: 10px;
+    border: .3px solid gainsboro;
+    cursor: pointer;
+    
+}
+.db-more div:hover{
+    background-color: rgba(128, 128, 128, 0.068);
+}
+
