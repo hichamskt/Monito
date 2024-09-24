@@ -3,6 +3,7 @@ import "../Styles/DogPage.css";
 import { useOutletContext } from "react-router-dom";
 import { FaSearch } from "react-icons/fa";
 import dog from "../assets/dog1.png"
+import Pagination from "../Components/Pagination/Pagination";
 
 function DogsPage() {
 
@@ -42,7 +43,7 @@ function DogsPage() {
             </table>
         </div>
         <div className="pagination">
-          <ul></ul>
+          <Pagination></Pagination>
         </div>
       </div>
     </div>

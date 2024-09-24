@@ -1,0 +1,41 @@
+.paginationcontainer{
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    font-size: 10PX;
+}
+.paginationli{
+    padding: 0px 4px;
+    background-color: rgba(144, 149, 161, 0.11);
+    border-radius: 5px;
+    cursor: pointer;
+}
+.paginationa{
+    padding: 0;
+    margin: 0;
+}
+.paginationactive{
+    background-color: var( --color-primary-blueviolet);
+    color: white;
+}
+.paginationprv{
+    cursor: pointer;
+    margin-right: 10px;
+    background-color: rgba(144, 149, 161, 0.274);
+    font-weight: bold;
+    padding: 3px 8px ;
+    border-radius: 10px;
+    font-size: 10px;
+    
+}
+
+.paginationnxt{
+    cursor: pointer;
+    margin-left: 10px;
+    background-color: rgba(144, 149, 161, 0.274);
+    font-weight: bold;
+    padding: 3px 16px ;
+    border-radius: 10px;
+    font-size: 10px;
+}
