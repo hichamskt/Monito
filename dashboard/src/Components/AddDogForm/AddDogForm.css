@@ -1,0 +1,77 @@
+.addDogForm{
+   width: 100%;
+}
+.addformheader{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px ;
+}
+
+.addformheader .ad-h3{
+    color: var(--color-primary-blueviolet);
+    font-family: var(--font-family);
+}
+.addformheader .ad-btg{
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+.addformheader .ad-btg button{
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.addformheader .ad-btg button:last-of-type{
+color: white;
+background-color: var(--color-primary-blueviolet);
+}
+
+.dogpage .addDogForm hr{
+    margin-bottom: 10px;
+    border: 0;
+    height: 2px;
+    background-color: #bdc8d433;
+}
+
+.addDogForm .ad-doginfo{
+    padding: 10px;
+    
+    
+}
+.ad-section {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+
+.addDogForm .ad-inputs{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    border: 1px solid rgba(54, 53, 53, 0.075);
+    
+    border-radius: 10px;
+}
+.ad-input-group {
+    flex-basis: 300px;
+    flex-grow: 2;
+    padding: 10px;
+}
+.ad-input-group span{
+    display: block;
+}
+.ad-input-group input,
+.ad-input-group select{
+    border: none ;
+    background-color: rgba(80, 78, 75, 0.094);
+    height: 2.5rem;
+    width: 100%;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.ad-input-group input:focus,
+.ad-input-group select:focus{
+    outline: none;
+}
