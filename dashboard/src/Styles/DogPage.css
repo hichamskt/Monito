@@ -91,7 +91,18 @@ position: relative;
     max-width: 50px;
 }
 
-
+.dogpage .db-status{
+    background-color: rgba(137, 43, 226, 0.091);
+    color: var(--color-primary-blueviolet);
+    padding: 2px 5px;
+    border-radius: 9px;
+}
+.dogpage .db-category{
+    background-color: rgba(10, 216, 243, 0.043);
+    color: rgb(0, 225, 255);
+    padding: 2px 5px;
+    border-radius: 9px;
+}
 /*right side */
 
 .dogpage .rightside{
@@ -181,3 +192,23 @@ width: fit-content;
     background-color: rgba(128, 128, 128, 0.068);
 }
 
+@media (max-width:1070px) {
+    .dogpage .dogleftside .searchinput input{
+        min-width: auto;
+    }
+    .dogpage .dogleftside .searchinput{
+        flex-grow: 2;
+    }
+    .dogpage .search{
+        gap: 10px;
+    }
+}
+
+@media (max-width:720px) {
+    .dogpage .rightside{
+        position: fixed;
+        background-color: white;
+        max-width: 400px;
+        z-index: 2;
+    }
+}

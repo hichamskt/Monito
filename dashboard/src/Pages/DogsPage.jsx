@@ -12,14 +12,15 @@ import { MdDelete } from "react-icons/md";
 
 function DogsPage() {
   const [showmore,setShowMore]=useState(false);
+  const [showInfoBar,setShowInfo]=useState(true);
     const data = [1, 2, 3, 4, 5,6,7,8,9];
 
   return (
     <div className="dogpage">
-      <div className="rightside">
+     {showInfoBar && <div className="rightside" >
         <div className="dp-rs-header">
           <BsThreeDotsVertical className="dp-points" onClick={()=>setShowMore(!showmore)}/>
-          <RxCross2 className="db-cross" />
+          <RxCross2 className="db-cross" onClick={()=>setShowInfo(!showInfoBar)} />
           {showmore && <div className="db-more">
             <div>
           <FiEdit  />
@@ -76,7 +77,7 @@ function DogsPage() {
           </div>
         </div>
         <h1></h1>
-      </div>
+      </div>}
       <div className="dogleftside">
         <h2 className="sectiontitle">Dogs</h2>
         <div className="search">
@@ -103,8 +104,8 @@ function DogsPage() {
                         <td><img src={dog}></img></td>
                         <td>shiba</td>
                         <td>#ki233344</td>
-                        <td>Rorwealer</td>
-                        <td>solde</td>
+                        <td ><span className="db-category">Rorwealer</span></td>
+                        <td> <span className="db-status">solde</span></td>
                     </tr>
                 ))}
             </tbody>
