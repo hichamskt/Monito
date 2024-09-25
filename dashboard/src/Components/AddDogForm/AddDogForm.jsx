@@ -144,8 +144,8 @@ function AddDogForm() {
             </div>
             <div className="ad-ad-info">
               <h3>Aditional Inforamtion</h3>
-              <div >
-              <div></div>
+              <div className="ad-ad-infobox">
+              <div className="ad-tags"></div>
               <div>
               <input type="text"></input>
               <button>add</button>
