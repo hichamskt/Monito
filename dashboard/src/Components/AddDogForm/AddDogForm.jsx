@@ -13,7 +13,7 @@ function AddDogForm() {
       </div>
       <hr />
       <div className="ad-doginfo">
-        <h3>Pets Infomrmation</h3>
+        <h3>Pets Information</h3>
         <div className="ad-section">
           <div className="ad-inputs">
             <div className="ad-input-group">
@@ -70,8 +70,12 @@ function AddDogForm() {
             </div>
           </div>
           <div className="ad-moreinfo">
-            <h3>Additional Information</h3>
+            
+            <div className="addse">
+              <div className="ad-ck-box">
+              <h3>CheckList</h3>
             <div className="ad-checkout">
+            
               <div className="ad-checkout-box">
                 <p>Gender:</p>
                 <label>
@@ -83,8 +87,8 @@ function AddDogForm() {
                   Female
                 </label>
               </div>
-            </div>
-            <div className="ad-checkout">
+            
+            
               <div className="ad-checkout-box">
                 <p>Vaccinated:</p>
                 <label>
@@ -96,8 +100,8 @@ function AddDogForm() {
                   Not Yet
                 </label>
               </div>
-            </div>
-            <div className="ad-checkout">
+            
+            
               <div className="ad-checkout-box">
                 <p>Dewormed:</p>
                 <label>
@@ -109,8 +113,8 @@ function AddDogForm() {
                   Not Yet
                 </label>
               </div>
-            </div>
-            <div className="ad-checkout">
+            
+            
               <div className="ad-checkout-box">
                 <p>Cert:</p>
                 <label>
@@ -122,8 +126,8 @@ function AddDogForm() {
                   Non
                 </label>
               </div>
-            </div>
-            <div className="ad-checkout">
+            
+            
               <div className="ad-checkout-box">
                 <p>Microchip:</p>
                 <label>
@@ -136,6 +140,20 @@ function AddDogForm() {
                 </label>
               </div>
             </div>
+            </div>
+            </div>
+            <div className="ad-ad-info">
+              <h3>Aditional Inforamtion</h3>
+              <div >
+              <div></div>
+              <div>
+              <input type="text"></input>
+              <button>add</button>
+              </div>
+              </div>
+
+            </div>
+
           </div>
         </div>
       </div>

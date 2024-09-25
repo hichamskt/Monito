@@ -75,3 +75,33 @@ background-color: var(--color-primary-blueviolet);
 .ad-input-group select:focus{
     outline: none;
 }
+
+.ad-ck-box{
+    padding:10px;
+    width: 100%;
+}
+.ad-moreinfo{
+    width: 100%;
+}
+.ad-moreinfo .ad-checkout{
+    border: 1px solid rgba(54, 53, 53, 0.075);
+    border-radius: 10px;
+    padding: 10px;
+}
+.ad-moreinfo .ad-checkout .ad-checkout-box{
+display: flex;
+gap: 15px;
+}
+.addse{
+    width: 50%;
+}
+
+.ad-moreinfo .ad-checkout p {
+    font-weight: bold;
+}
+
+.ad-moreinfo .ad-checkout .ad-checkout-box input,
+.ad-moreinfo .ad-checkout .ad-checkout-box label
+{
+    cursor: pointer;
+}
