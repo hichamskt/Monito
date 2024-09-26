@@ -138,8 +138,71 @@ margin-left: 10px;
 }
 
 .ad-tags{
-    width: 100%;
-    min-height: 40px;
+    width: 90%;
+    min-height: 80px;
     border-radius: 10px;
-    background-color: rgba(80, 78, 75, 0.094);
+    background-color: rgba(80, 78, 75, 0.023);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: flex-start;
+    gap: 3px;
+    flex-wrap: wrap;
+    padding: 10px;
+}
+.ad-additionItem{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: rgba(80, 78, 75, 0.162);
+}
+
+.ad-additionItem svg{
+cursor: pointer;
+color: gray;
+}
+@media (max-width:714px) {
+    .ad-moreinfo{
+        flex-wrap: wrap;
+    }
+}
+
+/* drag drop section */
+
+.ddp-card{
+    padding: 10px;
+}
+
+.ddp-top{
+    padding: 10px;
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+.drag-area{
+    height: 200px;
+    border-radius: 5px;
+    border: 2px dashed #6d31ed;
+    background-color: #6d31ed1a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+    -webkit-user-select: none;
+    flex-direction: column;
+    gap: 10px;
+
+}
+
+.ddp-card input{
+    display: none;
+}
+
+.ddp-select{
+    padding: 5px 10px;
+    color: #6d31ed;
+    border: 1px solid #6d31ed;
+    border-radius: 5px;
+    cursor: pointer;
 }
