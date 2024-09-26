@@ -167,6 +167,11 @@ color: gray;
         flex-wrap: wrap;
     }
 }
+@media (max-width:714px) {
+    .addse{
+        width: 100%;
+    }
+}
 
 /* drag drop section */
 
@@ -204,5 +209,38 @@ color: gray;
     color: #6d31ed;
     border: 1px solid #6d31ed;
     border-radius: 5px;
+    cursor: pointer;
+}
+
+.ddp-container{
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    max-height: 300px;
+    overflow: auto;
+    margin-bottom: 10px;
+    gap: 10px;
+}
+
+.ddp-container .ddp-image{
+    width: 150px;
+    height: 150px;
+    position: relative;
+    margin-bottom: 8px;
+    
+}
+.ddp-container .ddp-image img{
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+}
+.ddp-container .ddp-delete{
+    position: absolute;
+    top: -2px;
+    right: 0px;
+    font-size: 20px;
     cursor: pointer;
 }

@@ -218,7 +218,7 @@ function DragandDropSection() {
   }
 
   function deleteImage(index) {
-    setImages((prevImages) => prevImages.filter((_, i) => i != index));
+    setImages((prevImages) => prevImages.filter((_, i) => i !== index));
   }
   function onDragOver(event) {
     event.preventDefault();
@@ -281,7 +281,7 @@ function DragandDropSection() {
       <div className="ddp-container">
         {images.map((images, index) => (
           <div className="ddp-image" key={index}>
-            <span className="ddp-delete" onClick={() => deleteImage}>
+            <span className="ddp-delete" onClick={() => deleteImage(index)}>
               <RxCross2/>
             </span>
             <img src={images.url} alt={images.name}></img>
