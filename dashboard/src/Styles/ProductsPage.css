@@ -17,7 +17,6 @@ position: relative;
     align-items: center;
     justify-content: space-between;
     width: 100%;
-   
 }
 
 .pp-searchinput{
@@ -48,4 +47,54 @@ position: relative;
     padding: 10px 20px;
     cursor: pointer;
     border-radius: 5px;
+}
+
+.product-Page .ProductsTable{
+    padding: 10px 0 10px 20px;
+}
+
+.product-Page .ProductsTable table{
+    width: 100%;
+    text-align: left;
+    box-shadow:  0px 0px 2px hsla(218, 15%, 11%, 0.302);
+    border-radius: 10px;
+    border: 0px ;
+    padding: 0;
+    overflow: hidden;
+    border-collapse: collapse;
+    font-size: 10px;
+}
+
+.product-Page .ProductsTable table th{
+    background-color: rgba(144, 149, 161, 0.11);
+    text-transform: uppercase; 
+    letter-spacing: 1px;
+    border: none;
+    padding: 10px 10px;
+}
+
+.product-Page .ProductsTable table tbody  td{
+    padding: 3px 3px;
+    text-transform:capitalize;
+    border-bottom: solid 0.1px hsla(218, 14%, 11%, 0.075);
+}
+
+.product-Page .ProductsTable table tbody  tr:hover{
+    background-color:hsla(218, 14%, 11%, 0.032) ;
+}
+
+.product-Page .ProductsTable  table td img{
+    max-width: 50px;
+}
+
+.product-Page .db-status{
+    background-color: rgba(137, 43, 226, 0.091);
+    color: var(--color-primary-blueviolet);
+    padding: 2px 5px;
+    border-radius: 9px;
+}
+
+.product-Page  .pointer{
+    cursor: pointer;
+    font-size: 12px;
 }
