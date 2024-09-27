@@ -1,9 +1,9 @@
 import React, { useRef, useState } from "react";
-import "../AddDogForm/AddDogForm.css";
+import "../UpdateDogForm/UpdateDogForm.css";
 import { RxCross2 } from "react-icons/rx";
 
-function AddDogForm({setAddDogForm ,setShowInfo}) {
-  const [additionalInfo, setAdditionalInfo] = useState([]);
+function UpdateDogForm({setAddDogForm ,setShowInfo,setShowUpdateForm,setShowLeftSide}) {
+ const [additionalInfo, setAdditionalInfo] = useState([]);
   const [inputValue, setInputValue] = useState("");
 
   const handleAddionInputChange = (event) => {
@@ -13,6 +13,8 @@ function AddDogForm({setAddDogForm ,setShowInfo}) {
   function handleCancleButton(){
     setAddDogForm(false);
     setShowInfo(true);
+    setShowUpdateForm(false);
+    setShowLeftSide(true)
   }
   const handleAddClick = () => {
     if (inputValue.trim() !== "") {
@@ -193,7 +195,10 @@ function AddDogForm({setAddDogForm ,setShowInfo}) {
   );
 }
 
-export default AddDogForm;
+export default UpdateDogForm
+
+
+
 
 function DragandDropSection() {
   const [images, setImages] = useState([]);

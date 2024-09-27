@@ -8,6 +8,7 @@ import Root from "./Pages/Root"
 import DashBoard from './Pages/DashBoard';
 import DogsPage from './Pages/DogsPage';
 import AddDogForm from './Components/AddDogForm/AddDogForm';
+import ProductsPage from './Pages/ProductsPage';
 
 
 const router = createBrowserRouter([
@@ -21,7 +22,12 @@ const router = createBrowserRouter([
   {
    path:"/dogs" ,
    element:<DogsPage/>,
-  }]
+  },
+  {
+    path:"/Products" ,
+    element:<ProductsPage />
+   },
+]
   },
 ]);
 

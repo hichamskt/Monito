@@ -10,11 +10,14 @@ import imgg from "../assets/dog1.png";
 import { FiEdit } from "react-icons/fi";
 import { MdDelete } from "react-icons/md";
 import AddDogForm from "../Components/AddDogForm/AddDogForm";
+import UpdateDogForm from "../Components/UpdateDogForm/UpdateDogForm";
 
 function DogsPage() {
   const [showmore, setShowMore] = useState(false);
-  const [showInfoBar, setShowInfo] = useState(false);
-  const [showAddDogForm, setAddDogForm] = useState(true);
+  const [showInfoBar, setShowInfo] = useState(true);
+  const [showAddDogForm, setAddDogForm] = useState(false);
+  const [showUpdateForm,setShowUpdateForm]=useState(false);
+  const [ShowLeftSide,setShowLeftSide]=useState(true);
   const data = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
   return (
@@ -25,16 +28,26 @@ function DogsPage() {
           setShowInfo={setShowInfo}
           showmore={showmore}
           showInfoBar={showInfoBar}
+          setShowUpdateForm={setShowUpdateForm}
+          setShowLeftSide={setShowLeftSide}
         />
       )}
-      {showAddDogForm ? <AddDogForm /> : <LeftSide data={data} />}
+      {showAddDogForm ? <AddDogForm setAddDogForm={setAddDogForm} setShowInfo={setShowInfo} /> : ShowLeftSide && <LeftSide data={data}  setAddDogForm={setAddDogForm} setShowInfo={setShowInfo}   />}
+     { showUpdateForm && <UpdateDogForm setShowLeftSide={setShowLeftSide} setAddDogForm={setAddDogForm} setShowInfo={setShowInfo} setShowUpdateForm={setShowUpdateForm} />}
     </div>
   );
 }
 
 export default DogsPage;
 
-function Rightside({ setShowMore, showmore, showInfoBar, setShowInfo }) {
+function Rightside({ setShowMore, showmore, showInfoBar, setShowInfo, setShowUpdateForm,setShowLeftSide}) {
+ 
+  function handleUpdatebutton (){
+    setShowUpdateForm(true);
+    setShowInfo(false);
+    setShowLeftSide(false);
+  }
+ 
   return (
     <div className="rightside">
       <div className="dp-rs-header">
@@ -48,7 +61,7 @@ function Rightside({ setShowMore, showmore, showInfoBar, setShowInfo }) {
         />
         {showmore && (
           <div className="db-more">
-            <div>
+            <div role="button" onClick={handleUpdatebutton}>
               <FiEdit />
               <p>Edite</p>
             </div>
@@ -57,6 +70,7 @@ function Rightside({ setShowMore, showmore, showInfoBar, setShowInfo }) {
               <p>Delet</p>
             </div>
           </div>
+          
         )}
       </div>
       <hr />
@@ -107,12 +121,18 @@ function Rightside({ setShowMore, showmore, showInfoBar, setShowInfo }) {
           <p>12/october/2023</p>
         </div>
       </div>
-      <h1></h1>
+      
     </div>
   );
 }
 
-function LeftSide({ data }) {
+function LeftSide({ data,setAddDogForm,setShowInfo, }) {
+
+function handleAddPrdClick(){
+  setShowInfo(false);
+  setAddDogForm(true);
+}
+
   return (
     <div className="dogleftside">
       <h2 className="sectiontitle">Dogs</h2>
@@ -121,7 +141,7 @@ function LeftSide({ data }) {
           <FaSearch />
           <input type="text" placeholder="Search"></input>
         </div>
-        <button>+ Add Product</button>
+        <button onClick={handleAddPrdClick}>+ Add Product</button>
       </div>
       <div className="dogsTable">
         <table>
