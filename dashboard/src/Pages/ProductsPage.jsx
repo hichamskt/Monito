@@ -4,12 +4,14 @@ import "../Styles/ProductsPage.css"
 import dog from "../assets/dog1.png";
 import { FaPencilAlt } from "react-icons/fa";
 import Pagination from '../Components/Pagination/Pagination';
+import AddProductForm from '../Components/AddProductForm/AddProductForm';
 
 
 function ProductsPage() {
     const data =  Array(9).fill('X')
   return (
     <div className='product-Page'>
+      <AddProductForm ></AddProductForm>
         <h2 className="pp-sectiontitle">Products Listing</h2>
         <div className="pp-search">
         <div className="pp-searchinput">

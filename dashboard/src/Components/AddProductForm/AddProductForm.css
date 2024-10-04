@@ -1,0 +1,115 @@
+.addProfuctForm{
+    position: absolute;
+    top: 30px;
+    left: 30%;
+    min-width:800px ;
+    background-color: white;
+    z-index: 100;
+    padding: 10px;
+    font-size: 10px;
+}
+.addProfuctForm .adp-Header{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.addProfuctForm .adp-Header h3{
+    
+}
+.addProfuctForm .adp-Header svg{
+    cursor: pointer;
+}
+
+.addProfuctForm hr{
+    border: none;
+    background-color: rgba(220, 220, 220, 0.329);
+    height: 1PX;
+    margin-bottom: 10px;
+}
+.addProfuctForm .addp-sec-ttl{
+color: blueviolet;
+}
+.addProfuctForm .addp-sec-ttl span{
+color: gray;
+margin-left: 5px;
+}
+
+.addProfuctForm .adp-basicinfo {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.addProfuctForm .addp-input-group{
+    flex-basis: 300px;
+    flex-grow: 2;
+    padding: 10px;
+}
+
+.addProfuctForm .addp-input-group span{
+    display: block;
+}
+
+.addp-input-group input,
+.addp-input-group select{
+    border: none ;
+    background-color: rgba(80, 78, 75, 0.094);
+    height: 1.9rem;
+    width: 100%;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.addp-input-group input:focus,
+.addp-input-group select:focus{
+    outline: none;
+}
+
+.addProfuctForm .addp-img-section{
+    display: flex;
+    gap: 10px;
+}
+
+.addProfuctForm .addp-file{
+    display: none;
+}
+.addProfuctForm .addp-add-img{
+    width: 150px;
+    height: 150px;
+    border: 1px dashed gainsboro;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgba(128, 128, 128, 0.548);
+    font-size: 2rem;
+    cursor: pointer;
+}
+.addProfuctForm .addp-add-img:hover{
+    background-color: rgba(240, 248, 255, 0.404);
+}
+.addProfuctForm .addp-image{
+    width: 150px;
+    height: 150px;
+    border: 1px dashed gainsboro;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+.addProfuctForm .addp-image img{
+    width: 130px;
+    height: 130px;
+}
+.addProfuctForm .addp-cross{
+    cursor: pointer;
+    position: absolute;
+    top: 3px;
+    right: 3px;
+    font-size: 1rem;
+    color: gainsboro;
+}
+.addProfuctForm .addp-cross:hover{
+    color: black;
+}

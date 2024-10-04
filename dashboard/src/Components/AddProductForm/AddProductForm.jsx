@@ -1,8 +1,37 @@
-import React from 'react'
+import React , { useRef, useState }from 'react'
 import "../AddProductForm/AddProductForm.css"
 import { RxCross2 } from "react-icons/rx";
+import { FaPlus } from "react-icons/fa6";
 
 function AddProductForm() {
+  const [images, setImages] = useState([]);
+  const fileInputRef = useRef(null);
+
+  function selectFiles() {
+    fileInputRef.current.click();
+  }
+  function onFileSelect(event) {
+    const files = event.target.files;
+    if (files.length == 0) return;
+    for (let i = 0; i < files.length; i++) {
+      if (files[i].type.split("/")[0] !== "image") continue;
+      if (!images.some((e) => e.name == files[i].name)) {
+        setImages((prevImages) => [
+          ...prevImages,
+          {
+            name: files[i].name,
+            url: URL.createObjectURL(files[i]),
+          },
+        ]);
+      }
+    }
+  }
+
+  function deleteImage(index) {
+    setImages((prevImages) => prevImages.filter((_, i) => i !== index));
+  }
+
+
   return (
     <div className='addProfuctForm'>
         <div className='adp-Header'>
@@ -10,13 +39,50 @@ function AddProductForm() {
             <RxCross2 />
         </div>
         <hr></hr>
-        <h3>Basic Information</h3>
+        <h3 className='addp-sec-ttl'>Basic Information</h3>
         <div className='adp-basicinfo'>
-        <div className="ad-input-group">
-              <span className="ad-ig-text">Name</span>
+        <div className="addp-input-group">
+              <span className="ad-ig-text">Product Name</span>
               <input type="text" className="ad-field" placeholder="Pets Name" />
         </div>
-       
+        <div className="addp-input-group">
+              <span>Category:</span>
+              <select id="options" value="dd">
+                <option value="">--Please choose an option--</option>
+                <option value="option1">Option 1</option>
+                <option value="option2">Option 2</option>
+                <option value="option3">Option 3</option>
+              </select>
+            </div>
+  
+        <div className="addp-input-group">
+              <span className="ad-ig-text">product Sku</span>
+              <input type="text" className="ad-field" placeholder="Purchase price" />
+        </div>
+        </div>
+        <hr></hr>
+        <h3 className='addp-sec-ttl'>Media<span>(images)</span></h3>
+        <div className='addp-img-section'>
+          
+        {images.map((images, index) => (
+          <div className="addp-image" key={index}>
+            <span className="addp-delete" onClick={() => deleteImage(index)}>
+              <RxCross2 className='addp-cross'/>
+            </span>
+            <img src={images.url} alt={images.name}></img>
+          </div>
+        ))}
+{images.length<4 && <div className='addp-add-img' role='button' onClick={selectFiles}>
+            <FaPlus></FaPlus>
+          </div>}
+        <input
+          name="file"
+          ref={fileInputRef}
+          type="file"
+          className="addp-file"
+          multiple
+          onChange={onFileSelect}
+        ></input>
         </div>
     </div>
   )
