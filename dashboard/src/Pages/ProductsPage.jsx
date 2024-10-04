@@ -1,24 +1,33 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { FaSearch } from "react-icons/fa";
 import "../Styles/ProductsPage.css"
 import dog from "../assets/dog1.png";
 import { FaPencilAlt } from "react-icons/fa";
 import Pagination from '../Components/Pagination/Pagination';
 import AddProductForm from '../Components/AddProductForm/AddProductForm';
+import UpdateProduct from '../Components/UpdateProduct/UpdateProduct';
 
 
 function ProductsPage() {
+  const [showAddPrd,setShowAddPrd]=useState(true);
+  const [showUpdatePrd,setShowUpdatePrd]=useState(true);
+
+
+
     const data =  Array(9).fill('X')
   return (
     <div className='product-Page'>
-      <AddProductForm ></AddProductForm>
+      {showAddPrd && <AddProductForm  setShowAddPrd={setShowAddPrd}></AddProductForm>}
+      {showUpdatePrd && <UpdateProduct setShowUpdatePrd={setShowUpdatePrd}></UpdateProduct>}
+      {showAddPrd && <div className='darkeffect'></div>}
+      {showUpdatePrd && <div className='darkeffect'></div>}
         <h2 className="pp-sectiontitle">Products Listing</h2>
         <div className="pp-search">
         <div className="pp-searchinput">
           <FaSearch />
           <input type="text" placeholder="Search"></input>
         </div>
-        <button>+ Add Product</button>
+        <button onClick={()=>setShowAddPrd(true)}>+ Add Product</button>
       </div>
         {/* Prosuct Table*/}
         <div className="ProductsTable">
@@ -31,6 +40,7 @@ function ProductsPage() {
               <th>Category</th>
               <th>Inventory</th>
               <th>Price</th>
+              
               <th></th>
             </tr>
           </thead>
@@ -41,7 +51,12 @@ function ProductsPage() {
                   <img src={dog}></img>
                 </td>
                 <td>Cat scratching ball toy kitten sisal rope ball</td>
-                <td><span className="db-status">active</span></td>
+                <td>
+                <label class="switch">
+                <input type="checkbox" />
+                <span class="slider round"></span>
+                  </label>
+                  </td>
                 <td>
                    Dogs Food
                 </td>

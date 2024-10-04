@@ -1,21 +1,25 @@
 .addProfuctForm{
     position: absolute;
+    border-radius: 10px;
     top: 30px;
     left: 30%;
-    min-width:800px ;
+    min-width:650px ;
     background-color: white;
     z-index: 100;
-    padding: 10px;
+    padding: 20px;
     font-size: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
 }
 .addProfuctForm .adp-Header{
     display: flex;
     justify-content: space-between;
-    margin-bottom: 20px;
+    
 }
 
-.addProfuctForm .adp-Header h3{
-    
+.addProfuctForm  h3:not(:first-of-type){
+    color: blueviolet;
 }
 .addProfuctForm .adp-Header svg{
     cursor: pointer;
@@ -25,7 +29,7 @@
     border: none;
     background-color: rgba(220, 220, 220, 0.329);
     height: 1PX;
-    margin-bottom: 10px;
+   
 }
 .addProfuctForm .addp-sec-ttl{
 color: blueviolet;
@@ -38,12 +42,13 @@ margin-left: 5px;
 .addProfuctForm .adp-basicinfo {
     display: flex;
     flex-wrap: wrap;
+    gap: 10px;
 }
 
 .addProfuctForm .addp-input-group{
     flex-basis: 300px;
     flex-grow: 2;
-    padding: 10px;
+    
 }
 
 .addProfuctForm .addp-input-group span{
@@ -112,4 +117,60 @@ margin-left: 5px;
 }
 .addProfuctForm .addp-cross:hover{
     color: black;
+}
+.addProfuctForm .addp-inv{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.addProfuctForm .addp-inv span{
+    display: block;
+}
+
+.addProfuctForm .addp-inv-input-group{
+    flex-basis: 300px;
+    flex-grow: 2;
+    
+}
+
+.addProfuctForm .addp-inv-input-group input,
+.addProfuctForm .addp-inv-input-group select{
+    border: none ;
+    background-color: rgba(80, 78, 75, 0.094);
+    height: 1.9rem;
+    width: 100%;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.addProfuctForm .addp-inv-input-group input:focus,
+.addProfuctForm .addp-inv-input-group select:focus{
+    outline: none;
+}
+
+.addProfuctForm .lastgrp{
+    flex-basis: 100px;
+    flex-grow: 1;
+}
+
+.addProfuctForm .addp-button-sec{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.addProfuctForm .addp-button-sec button{
+    padding: 4px;
+    background-color: blueviolet;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.addProfuctForm .addp-button-sec .delet{
+    background-color: rgba(255, 0, 0, 0.815);
+    
 }

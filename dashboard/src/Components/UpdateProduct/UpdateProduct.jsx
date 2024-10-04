@@ -1,42 +1,43 @@
 import React , { useRef, useState }from 'react'
-import "../AddProductForm/AddProductForm.css"
 import { RxCross2 } from "react-icons/rx";
 import { FaPlus } from "react-icons/fa6";
 
-function AddProductForm({setShowAddPrd}) {
-  const [images, setImages] = useState([]);
-  const fileInputRef = useRef(null);
+function UpdateProduct({setShowUpdatePrd}) {
+    const [images, setImages] = useState([]);
+    const fileInputRef = useRef(null);
 
-  function selectFiles() {
-    fileInputRef.current.click();
-  }
-  function onFileSelect(event) {
-    const files = event.target.files;
-    if (files.length == 0) return;
-    for (let i = 0; i < files.length; i++) {
-      if (files[i].type.split("/")[0] !== "image") continue;
-      if (!images.some((e) => e.name == files[i].name)) {
-        setImages((prevImages) => [
-          ...prevImages,
-          {
-            name: files[i].name,
-            url: URL.createObjectURL(files[i]),
-          },
-        ]);
+    function selectFiles() {
+      fileInputRef.current.click();
+    }
+    function onFileSelect(event) {
+      const files = event.target.files;
+      if (files.length == 0) return;
+      for (let i = 0; i < files.length; i++) {
+        if (files[i].type.split("/")[0] !== "image") continue;
+        if (!images.some((e) => e.name == files[i].name)) {
+          setImages((prevImages) => [
+            ...prevImages,
+            {
+              name: files[i].name,
+              url: URL.createObjectURL(files[i]),
+            },
+          ]);
+        }
       }
     }
-  }
+  
+    function deleteImage(index) {
+      setImages((prevImages) => prevImages.filter((_, i) => i !== index));
+    }
+  
 
-  function deleteImage(index) {
-    setImages((prevImages) => prevImages.filter((_, i) => i !== index));
-  }
 
 
-  return (
-    <div className='addProfuctForm'>
+return(
+<div className='addProfuctForm'>
         <div className='adp-Header'>
             <h3>Create New Product</h3>
-            <RxCross2 onClick={()=>setShowAddPrd(false)} />
+            <RxCross2 onClick={()=>setShowUpdatePrd(false)} />
         </div>
         <hr></hr>
         <h3 className='addp-sec-ttl'>Basic Information</h3>
@@ -119,10 +120,14 @@ function AddProductForm({setShowAddPrd}) {
         </div>
         <hr />
         <div className='addp-button-sec'>
+          <button className='delet'>Delet </button>
           <button>Save</button>
+
         </div>
     </div>
-  )
+)
+
+
 }
 
-export default AddProductForm
+export default UpdateProduct

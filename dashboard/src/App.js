@@ -9,6 +9,7 @@ import DashBoard from './Pages/DashBoard';
 import DogsPage from './Pages/DogsPage';
 import AddDogForm from './Components/AddDogForm/AddDogForm';
 import ProductsPage from './Pages/ProductsPage';
+import Orders from './Pages/Orders';
 
 
 const router = createBrowserRouter([
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
   {
     path:"/Products" ,
     element:<ProductsPage />
+   },
+  {
+    path:"/orders" ,
+    element:<Orders></Orders>
    },
 ]
   },
