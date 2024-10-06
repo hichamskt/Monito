@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../Styles/orders.css";
 import { FaSearch } from "react-icons/fa";
 import { IoFilterSharp } from "react-icons/io5";
 import { CiExport } from "react-icons/ci";
 import { HiDotsVertical } from "react-icons/hi";
+import Pagination from "../Components/Pagination/Pagination";
 
 function Orders() {
 const [showFiltter,setShowFiltter]=useState(false);
-const data = [1,2,3,4,5,6,7,8,9];
+const data = [1,2,3,4,5,6,7,8,96,7,8,9];
 
   return (
     <div className="ordersPage">
@@ -25,9 +26,9 @@ const data = [1,2,3,4,5,6,7,8,9];
             <option value="option3">Option 3</option>
           </select>
 {/*fillter*/}
-          <div className="ord-filter" role="button" onClick={()=>setShowFiltter(!showFiltter)}>
-            <p className="ord-clc">Fillter</p>
-            <IoFilterSharp className="ord-clc" />
+          <div className="ord-filter" role="button" >
+            <p className="ord-clc" onClick={()=>setShowFiltter(!showFiltter)}>Fillter</p>
+            <IoFilterSharp className="ord-clc" onClick={()=>setShowFiltter(!showFiltter)} />
             {showFiltter && <div className="ord-f-drop">
               <div className="ord-date">
                 <h4>Date</h4>
@@ -105,6 +106,10 @@ const data = [1,2,3,4,5,6,7,8,9];
         </div>
       </div>
             <OrdersTable data={data} />
+      <div className="orderpage-footer">
+        <h5 className="ord-rslt">106 Results</h5>
+        <Pagination></Pagination>
+      </div>
     </div>
   );
 }
@@ -154,18 +159,27 @@ function OrdersTable({data}){
 function MoreDrop(){
   const [showMore,setShowMore]= useState(false);
 
-  const listener=(e)=>{
-    if(e.target.classList.contains!="ordmore"){
-      setShowMore(false)
+  const handleClickOutside = (e) =>{
+    console.log(showMore)
+    if(!e.target.classList.contains("ordmore")){
+      
       console.log(e.target.classList)
-      console.log(e.target.classList.contains==="ordmore")
+      setShowMore(false);
+      console.log(showMore)
     }
   }
-  
-
-  if(showMore === true){document.addEventListener('click', listener)
+  useEffect (()=>{
+    if(showMore){document.addEventListener('click', handleClickOutside)
     
-  } ;
+    }else{
+      document.removeEventListener('click', handleClickOutside);
+    } ;
+      return () => {
+        document.removeEventListener('click', handleClickOutside);
+      };
+  },[showMore])
+
+  
 
 
   return(<td className="ord-box-more">
@@ -182,3 +196,4 @@ function MoreDrop(){
     
   </td>)
 }
+

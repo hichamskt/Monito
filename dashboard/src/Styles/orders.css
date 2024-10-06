@@ -248,3 +248,14 @@
 .ord-box-more .ordmore-drop li:nth-last-of-type(4){
     color: Green;
 }
+
+.orderpage-footer{
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  align-items: center;
+}
+.orderpage-footer h5{
+  
+  font-size: 10px;
+}
