@@ -304,7 +304,65 @@
 text-align: left;
 font-size: 14px;
 padding: 10px;
+min-width:400px ;
+box-shadow: 0px 0px 2px hsla(218, 14%, 11%, 0.084);
+
 }
 .ord-details .ord-Items table th{
-  font-weight: normal;
+  padding: 5px;
+}
+.ord-details .ord-Items table td{
+  padding: 5px;
+  
+  
+}
+
+
+.ord-details .ord-Items table tr input{
+  border: none;
+  outline: none;
+  max-width: 30px;
+}
+
+
+.ord-details .ord-Items table tr .ord-btn-cnl{
+color: rgba(255, 0, 0, 0.486);
+cursor: pointer;
+}
+
+.ord-details .ord-Items table tr .ord-btn-cnl:hover{
+  color: red;
+}
+
+.ord-details .ord-Items table tr:last-of-type{
+  font-weight: bold;
+}
+
+.ord-details .ord-Info{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-bottom: 10px;
+}
+
+
+.ord-details .ord-Info p {
+  color: gray;
+  font-size: 13px;
+}
+.ord-details .ord-info-btn{
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 10px;
+  gap:1rem;
+}
+.ord-details .ord-info-btn button{
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 5%;
+  
+}
+.ord-details .ord-info-btn button:last-of-type{
+  color: white;
+  background-color: var(--color-primary-blueviolet);
 }

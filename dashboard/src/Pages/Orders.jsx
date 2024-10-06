@@ -9,6 +9,7 @@ import { RxCross2 } from "react-icons/rx";
 
 function Orders() {
 const [showFiltter,setShowFiltter]=useState(false);
+const [showDetais,setshowDetais]=useState(false);
 const data = [1,2,3,4,5,6,7,8,96,7,8,9];
 const data2 = [1,2,3,4]
   return (
@@ -106,12 +107,12 @@ const data2 = [1,2,3,4]
           </button>
         </div>
       </div>
-            <OrdersTable data={data} />
+            <OrdersTable data={data} setshowDetais={setshowDetais} />
       <div className="orderpage-footer">
         <h5 className="ord-rslt">106 Results</h5>
         <Pagination></Pagination>
       </div>
-      <Deails data={data2} />
+      {showDetais && <Deails data={data2}  setshowDetais={setshowDetais} />}
     </div>
   );
 }
@@ -120,7 +121,7 @@ export default Orders;
 
 
 
-function OrdersTable({data}){
+function OrdersTable({data,setshowDetais}){
   
 
   return(<div className="OrdersTable">
@@ -150,7 +151,7 @@ function OrdersTable({data}){
               
               <span className="ordt-status">Cannceled</span>
             </td>
-            <MoreDrop />
+            <MoreDrop  setshowDetais={setshowDetais}/>
           </tr>
         ))}
       </tbody>
@@ -158,7 +159,7 @@ function OrdersTable({data}){
   </div>)
 }
 
-function MoreDrop(){
+function MoreDrop({setshowDetais}){
   const [showMore,setShowMore]= useState(false);
 
   const handleClickOutside = (e) =>{
@@ -182,7 +183,10 @@ function MoreDrop(){
   },[showMore])
 
   
-
+function HundleSHowMoreDetails(){
+  setshowDetais(true)
+  setShowMore(false);
+}
 
   return(<td className="ord-box-more">
     <HiDotsVertical className="ordmore" onClick={()=> setShowMore(!showMore)}/>
@@ -192,19 +196,19 @@ function MoreDrop(){
         <li>Pending</li>
         <li>Delivred</li>
         <li>In Progress</li>
-        <li>Details</li>
+        <li role="button" onClick={HundleSHowMoreDetails}>Details</li>
         <li>Delet</li>
       </ul>}
     
   </td>)
 }
 
-function Deails ({data}){
+function Deails ({data,setshowDetais}){
 return(
   <div className="ord-details">
     <div className="ord-det-header">
       <h3>Details</h3>
-      <RxCross2></RxCross2>
+      <RxCross2  role="button" onClick={()=>setshowDetais(false)}></RxCross2>
     </div>
       <hr></hr>
       <h4>Items</h4>
@@ -228,7 +232,7 @@ return(
             <td><input type="number" value="3"></input></td>
             <td><input type="number" value="20" /></td>
             <td>60dh</td>
-            <td><span>Cancel</span></td>
+            <td><span className="ord-btn-cnl" >Cancel</span></td>
           </tr>
         ))}
         <tr>
@@ -260,7 +264,7 @@ return(
       </div>
       <hr />
       <div className="ord-info-btn">
-        <button>Cancele</button>
+        <button onClick={()=>setshowDetais(false)}>cancel</button>
         <button>Save</button>
     
       </div>
