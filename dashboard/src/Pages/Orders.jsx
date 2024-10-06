@@ -5,11 +5,12 @@ import { IoFilterSharp } from "react-icons/io5";
 import { CiExport } from "react-icons/ci";
 import { HiDotsVertical } from "react-icons/hi";
 import Pagination from "../Components/Pagination/Pagination";
+import { RxCross2 } from "react-icons/rx";
 
 function Orders() {
 const [showFiltter,setShowFiltter]=useState(false);
 const data = [1,2,3,4,5,6,7,8,96,7,8,9];
-
+const data2 = [1,2,3,4]
   return (
     <div className="ordersPage">
       <h3 className="or-title">Orders</h3>
@@ -110,6 +111,7 @@ const data = [1,2,3,4,5,6,7,8,96,7,8,9];
         <h5 className="ord-rslt">106 Results</h5>
         <Pagination></Pagination>
       </div>
+      <Deails data={data2} />
     </div>
   );
 }
@@ -197,3 +199,71 @@ function MoreDrop(){
   </td>)
 }
 
+function Deails ({data}){
+return(
+  <div className="ord-details">
+    <div className="ord-det-header">
+      <h3>Details</h3>
+      <RxCross2></RxCross2>
+    </div>
+      <hr></hr>
+      <h4>Items</h4>
+      <div className="ord-Items">
+        <table>
+
+        <thead>
+        <tr>
+          <th>ITEMS</th>
+          <th>VALUE($)</th>
+          <th>Qnt</th>
+          <th>Total</th>
+          <th></th>
+        </tr>
+      </thead>
+
+        <tbody>
+        {data.map((item, index) => (
+          <tr>
+            <td> item{index}</td>
+            <td><input type="number" value="3"></input></td>
+            <td><input type="number" value="20" /></td>
+            <td>60dh</td>
+            <td><span>Cancel</span></td>
+          </tr>
+        ))}
+        <tr>
+          <td></td>
+          <td></td>
+          <td>Totale</td>
+          <td>3446</td>
+        </tr>
+      </tbody>
+        </table>
+      </div>
+      <hr></hr>
+      <h4>Info</h4>
+      <div className="ord-Info">
+        <h5>Name:</h5>
+        <p>Name1</p>
+      </div>
+      <div className="ord-Info">
+        <h5>Adresse:</h5>
+        <p>Adresse</p>
+      </div>
+      <div className="ord-Info">
+        <h5>Email:</h5>
+        <p>example@gmail.com</p>
+      </div>
+      <div className="ord-Info">
+        <h5>Phone:</h5>
+        <p>066666666666</p>
+      </div>
+      <hr />
+      <div className="ord-info-btn">
+        <button>Cancele</button>
+        <button>Save</button>
+    
+      </div>
+  </div>
+)
+}
