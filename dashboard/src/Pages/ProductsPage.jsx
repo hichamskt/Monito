@@ -9,8 +9,8 @@ import UpdateProduct from '../Components/UpdateProduct/UpdateProduct';
 
 
 function ProductsPage() {
-  const [showAddPrd,setShowAddPrd]=useState(true);
-  const [showUpdatePrd,setShowUpdatePrd]=useState(true);
+  const [showAddPrd,setShowAddPrd]=useState(false);
+  const [showUpdatePrd,setShowUpdatePrd]=useState(false);
 
 
 

@@ -1,0 +1,98 @@
+.LoginPage{
+    width: 100%;
+    height: 100vh;
+    background-image: 
+    url("../assets/undraw_authentication_re_svpt.svg"),
+    url("../assets/undraw_fingerprint_login_re_t71l.svg");
+    background-repeat: no-repeat;
+    background-position: bottom left, bottom right;
+    background-size: 30% 30%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #e9edef86;
+}
+
+.LoginPage .logo{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+.LoginPage form{
+    min-width: 40%;
+    min-height: 65%;
+    background-color: white;
+    
+    box-shadow: 2px 5px 13px rgba(7, 8, 13, 0.1);
+    border-radius: 10px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+   padding-top: 20px;
+   padding-bottom: 20px;
+    gap: 20px;
+}
+.LoginPage .login-input-grp{
+    width: 80%;
+}
+
+.LoginPage .login-input-grp span{
+    display: block;
+    
+    font-weight: bold;
+    margin-bottom: 6px;
+}
+.LoginPage .login-input {
+    display: flex;
+    width: 100%;
+    height: 50px;
+    background-color: rgba(128, 128, 128, 0.082);
+    border-radius: 5px;
+    font-size: 2rem;
+    padding: 10px;
+}
+.LoginPage .login-input input{
+    display: flex;
+    flex-grow: 1;
+    border: none;
+    outline: none;
+    background-color: rgba(128, 128, 128, 0.021);
+}
+
+.LoginPage .login-fpw-sec{
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    font-size: 14px;
+}
+
+
+.LoginPage .login-fpw-sec a {
+    color: blueviolet;
+    cursor: pointer;
+}
+
+.LoginPage  button{
+    background-color: var(--color-primary-blueviolet);
+    color: white;
+    font-weight: bold;
+    width: 80%;
+    border-radius: 10px;
+    height: 50px;
+    cursor: pointer;
+}
+
+@media (max-width:1080PX) {
+    .LoginPage form{
+        min-width: 50%;
+    }
+}
+
+@media (max-width:870PX) {
+    .LoginPage form{
+        min-width: 70%;
+    }
+}
