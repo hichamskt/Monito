@@ -9,7 +9,7 @@ const login = async (req, res) => {
   
       if (!email || !password) {
         return res.status(400).json({
-          message: "Somthing is missing",
+          message: "Somthing went  Wrong",
           success: false,
         });
       }
@@ -18,7 +18,7 @@ const login = async (req, res) => {
   
       if (!user) {
         return res.status(400).json({
-          message: "Incorrect email or password",
+          message: "Incorrect email ",
           success: false,
         });
       }
@@ -27,7 +27,7 @@ const login = async (req, res) => {
 
     if (!isPasswordMatch) {
       return res.status(400).json({
-        message: "Incorrect email or password",
+        message: "Incorrect Password",
         success: false,
       });
     }
