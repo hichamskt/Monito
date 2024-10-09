@@ -24,4 +24,4 @@ mongoose.connect(DB, {}).then(() =>{
 
 
 const httpServer = require('http').createServer(app);
-httpServer.listen(process.env.PORT,() => console.log('it work !!!'));
+httpServer.listen(process.env.PORT,() => console.log('it work !!!',process.env.PORT ));

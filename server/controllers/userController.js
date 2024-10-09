@@ -1,5 +1,7 @@
 const User = require("../models/userModel.js");
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
+
 
 const login = async (req, res) => {
     try {
@@ -21,6 +23,15 @@ const login = async (req, res) => {
         });
       }
   
+      const isPasswordMatch = await bcrypt.compare(password, user.password);
+
+    if (!isPasswordMatch) {
+      return res.status(400).json({
+        message: "Incorrect email or password",
+        success: false,
+      });
+    }
+
       const tokenData = {
         userId: user._id,
       };
@@ -58,4 +69,38 @@ const login = async (req, res) => {
     }
   };
 
-  module.exports = {  login,  logout };
+  
+  
+  const register = async (req, res) => {
+    try {
+      const { email, password } = req.body;
+      
+      if ( !email || !password) {
+        return res.status(400).json({
+          message: "Something is missing",
+          success: false,
+        });
+      }
+      
+      
+      const hashedPassword = await bcrypt.hash(password, 10);
+      
+      const newUser = await User.create({
+        email,
+        password: hashedPassword,
+      });
+      
+      
+      
+      
+      
+      return res.status(201).json({
+        message:
+          "Account has been created.",
+          success: true,
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    module.exports = {  login,  logout ,register};
