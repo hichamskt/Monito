@@ -5,20 +5,48 @@ import { NavLink } from "react-router-dom";
 import logo from "../assets/Logo.png";
 import { MdOutlineMailOutline } from "react-icons/md";
 import { MdOutlineLock } from "react-icons/md";
-
+import axios from 'axios';
 
 function Login() {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  const handleLogin = () => {
-    if (username === "admin" && password === "password") {
-      localStorage.setItem("isAuthenticated", "true");
-      navigate("/");
-    } else {
+  const handleLogin = async (e) => {
+    e.preventDefault()
+    if(password===""){
+      setError("Password rquired");
+      return 0;
+    }
+    if(email=== "") return 0
+       try {
+      const response = await axios.post('http://localhost:5000/api/user/login', {
+        password,
+        email,
+      }, {
+        withCredentials: 'true', 
+      });
+      if (response.status === 200) {
+        setEmail("");
+        setPassword("");
+        setTimeout(()=>{
+          navigate("/");
+        },3000) }
+      
+      
+    } catch (error) {
+       if (error.response && error.response.data && error.response.data.message) {
+        console.error('error12:', error.response.data.message);
+        setError(error.response.data.message);
+      } else {
+        setError('An unexpected error occurred. Please try again later.');
+      }
     }
   };
+
+  
+
 
   return (
     <div className="LoginPage">
@@ -30,10 +58,10 @@ function Login() {
           <div className="login-input">
             <MdOutlineMailOutline  />
             <input
-              type="text"
+              type="email"
               placeholder="Username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
         </div>
@@ -56,6 +84,7 @@ function Login() {
           </div>
           <NavLink to="/forgetpassword">Forgot Password?</NavLink>
         </div>
+        {error && <p style={{color:"red"}}>{error}</p>}
         <button onClick={handleLogin}>Login</button>
       </form>
     </div>
