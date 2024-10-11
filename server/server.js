@@ -5,7 +5,7 @@ require('dotenv').config({ path: '.env.local' });
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-
+const sendMail = require('./utils/sendMail');
 const userRoutes = require("./routes/userRoute")
 
 app.use(bodyParser.urlencoded({ extended: true }));

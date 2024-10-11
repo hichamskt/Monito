@@ -1,7 +1,7 @@
 const User = require("../models/userModel.js");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
-
+const sendMail = require("../utils/sendMail.js");
 
 const login = async (req, res) => {
     try {
@@ -43,7 +43,7 @@ const login = async (req, res) => {
       return res
         .status(200)
         .cookie("token", token, {
-          maxAge: 1 * 24 * 60 * 60 * 1000,
+          maxAge: 1 * 60 * 24 * 1000,
           httpsOnly: true,
           sameSite: "strict",
         })
@@ -60,9 +60,10 @@ const login = async (req, res) => {
 
   const logout = async (req, res) => {
     try {
-      return res.status(200).cookie("token", "", { maxAge: 0 }).json({
+      return res.status(200).cookie("token", "", { maxAge: 0 , httpOnly: true, sameSite: "strict",}).json({
         message: "Logged out successfully",
         success: true,
+        
       });
     } catch (error) {
       console.log(error);
@@ -103,4 +104,26 @@ const login = async (req, res) => {
         console.log(error);
       }
     };
-    module.exports = {  login,  logout ,register};
+
+  const sendEmail = async (req,res)=>{
+
+    try {
+      const link = `http://localhost:3000/resetpassword`;
+    const htmlTemplate = `
+            <div>
+                <h1>Click on the link to verify your email</h1>
+                <a href="${link}">Verify</a>
+            </div>
+        `;
+
+    await sendMail(email, "Email Verification", htmlTemplate);
+    console.log('Email sent successfully');
+
+    } catch (error) {
+      console.error('Error sending email:', error);
+    throw new Error('Email not sent');
+    }
+    
+  }
+
+    module.exports = {  login,  logout ,register,sendEmail};
