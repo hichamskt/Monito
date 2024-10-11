@@ -115,7 +115,7 @@ const login = async (req, res) => {
                 <a href="${link}">Verify</a>
             </div>
         `;
-
+    const email = process.env.Admin_Email;
     await sendMail(email, "Email Verification", htmlTemplate);
     console.log('Email sent successfully');
 

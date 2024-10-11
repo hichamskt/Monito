@@ -1,7 +1,8 @@
 import React from "react";
 import Logo from "../../assets/Logo.png";
 import "../SideBar/SideBar.css";
-
+import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 import { MdOutlineDashboard } from "react-icons/md";
 import { LiaDogSolid } from "react-icons/lia";
 import { LiaCatSolid } from "react-icons/lia";
@@ -12,6 +13,31 @@ import { GoSidebarExpand } from "react-icons/go";
 import { NavLink } from "react-router-dom";
 
 function SideBar({setShowSideBar,showSideBar}) {
+
+
+
+  const navigate = useNavigate();
+
+  const handleLogout = async (e) => {
+    e.preventDefault()
+   
+       try {
+      const response = await axios.post('http://localhost:5000/api/user/logout', {},{
+        withCredentials: 'true', 
+      });
+      
+      if (response.status === 200) {
+         
+          navigate("/login");
+         }
+      
+      
+    } catch (error) {
+       
+        console.error('error12:', error);
+      }
+    
+  };
   
   return (
     <div className="sidebar" style={showSideBar ? { left: 0 } : {}}>
@@ -58,7 +84,7 @@ function SideBar({setShowSideBar,showSideBar}) {
         </ul>
       </div>
 
-      <div className="logout">
+      <div className="logout" role="button" onClick={handleLogout}>
         <h4>LogOut</h4>
         <IoMdLogOut></IoMdLogOut>
       </div>

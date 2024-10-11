@@ -11,15 +11,16 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault()
+    if(email=== "") return 0
     if(password===""){
       setError("Password rquired");
       return 0;
     }
-    if(email=== "") return 0
        try {
       const response = await axios.post('http://localhost:5000/api/user/login', {
         password,
@@ -30,6 +31,7 @@ function Login() {
       if (response.status === 200) {
         setEmail("");
         setPassword("");
+        setIsLoading(true);
         setTimeout(()=>{
           navigate("/");
         },3000) }
@@ -51,7 +53,7 @@ function Login() {
   return (
     <div className="LoginPage">
       <img src={logo} alt="logo" className="logo"></img>
-      <form>
+      {isLoading ?<div class="custom-loader"></div>:<form>
         <h2>Welcome Back 👋</h2>
         <div className="login-input-grp">
           <span>Email:</span>
@@ -86,7 +88,7 @@ function Login() {
         </div>
         {error && <p style={{color:"red"}}>{error}</p>}
         <button onClick={handleLogin}>Login</button>
-      </form>
+      </form>}
     </div>
   );
 }

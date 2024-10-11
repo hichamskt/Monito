@@ -10,31 +10,33 @@ import Orders from "./Pages/Orders";
 import Login from "./Pages/Login";
 import ForgetPasswordPage from "./Pages/ForgetPasswordPage";
 import RessetPassword from "./Pages/RessetPassword";
+import PrivateRoute from "./auth/PrivateRoute";
 
 const router = createBrowserRouter([
   { path: "/login", element: <Login /> },
   { path: "/forgetpassword", element: <ForgetPasswordPage /> },
   { path: "/resetpassword", element: <RessetPassword /> },
+  
 
   {
     path: "/",
-    element: <Root></Root>,
+    element: <PrivateRoute element={<Root />} />,
     children: [
       {
         path: "/dashboard",
-        element: <DashBoard></DashBoard>,
+        element: <PrivateRoute element={<DashBoard/>} />,
       },
       {
         path: "/dogs",
-        element: <DogsPage />,
+        element: <PrivateRoute element={<DogsPage />} /> ,
       },
       {
         path: "/Products",
-        element: <ProductsPage />,
+        element:   <PrivateRoute element={<ProductsPage />} />,
       },
       {
         path: "/orders",
-        element: <Orders></Orders>,
+        element: <PrivateRoute element={<Orders></Orders>} /> ,
       },
     ],
   },
