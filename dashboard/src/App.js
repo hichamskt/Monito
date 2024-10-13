@@ -15,7 +15,7 @@ import PrivateRoute from "./auth/PrivateRoute";
 const router = createBrowserRouter([
   { path: "/login", element: <Login /> },
   { path: "/forgetpassword", element: <ForgetPasswordPage /> },
-  { path: "/resetpassword", element: <RessetPassword /> },
+  { path: "/:userId/resetpassword", element: <RessetPassword /> },
   
 
   {

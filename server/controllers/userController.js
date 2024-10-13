@@ -106,9 +106,20 @@ const login = async (req, res) => {
     };
 
   const sendEmail = async (req,res)=>{
-
+  
     try {
-      const link = `http://localhost:3000/${newUser._id}/resetpassword`;
+
+      
+      const admin = await User.findOne({ role: "admin" });
+
+      if(!admin){
+        return res.status(404).json({
+          success:false,
+          message :"admin not found"
+        })
+      }
+
+      const link = `http://localhost:3000/${admin._id}/resetpassword`;
     const htmlTemplate = `
             <div>
                 <h1>Click on the link to verify your email</h1>
@@ -127,7 +138,7 @@ const login = async (req, res) => {
   }
 
 
-  const resetpassword = async (req,res)=>{
+  const resetPassword = async (req,res)=>{
     try {
       const user = await User.findById(req.params.userId);
       if (!user) {
@@ -153,4 +164,4 @@ const login = async (req, res) => {
     }
   }
 
-    module.exports = {  login,  logout ,register,sendEmail};
+    module.exports = {  login,  logout ,register,sendEmail,resetPassword};

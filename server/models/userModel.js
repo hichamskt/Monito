@@ -15,6 +15,11 @@ const userSchema = new mongoose.Schema(
       //minlength: 8,
       //select: false
     },
+    role: {
+      type: String,
+      required: [true, 'Please provide a role'],
+      
+    },
   },
   {
     timestamps: true,

@@ -6,6 +6,7 @@ import { IoIosCheckmarkCircleOutline } from "react-icons/io";
 
 function RessetPassword() {
     const [password, setPassword] = useState("");
+    const [confirmPassword, setconfirmPassword] = useState("");
     const [passwordStrength, setPasswordStrength] = useState("");
     const [borderColor,setBorderColor]=useState('')
     const [ar,setAr]=useState([])
@@ -62,6 +63,9 @@ function RessetPassword() {
         setPassword(e.target.value);
         setPasswordStrength(validatePassword(e.target.value))
     }
+    const hundleconfirmPasswor = (e) =>{
+        setconfirmPassword(e.target.value);
+    }
 
   return (
     <div className='ressetpasswor'>
@@ -90,7 +94,7 @@ function RessetPassword() {
                 <div className='rest-inpu-group'>
                     <p>Re-enter Password</p>
                     <div className='rst-input'>
-                        <input type='password' ></input>
+                        <input type='password' value={confirmPassword} onChange={(e)=>hundleconfirmPasswor(e)} ></input>
                         
                     </div>
                     
