@@ -108,7 +108,7 @@ const login = async (req, res) => {
   const sendEmail = async (req,res)=>{
 
     try {
-      const link = `http://localhost:3000/resetpassword`;
+      const link = `http://localhost:3000/${newUser._id}/resetpassword`;
     const htmlTemplate = `
             <div>
                 <h1>Click on the link to verify your email</h1>
@@ -124,6 +124,33 @@ const login = async (req, res) => {
     throw new Error('Email not sent');
     }
     
+  }
+
+
+  const resetpassword = async (req,res)=>{
+    try {
+      const user = await User.findById(req.params.userId);
+      if (!user) {
+        return res.status(400).json({ message: "User Not Found", success: false });
+      }
+      const newPassword= req.body.password;
+      if (!newPassword) {
+        return res.status(400).json({
+          message: "messing passsword ",
+          success: false,
+        });
+      }
+      const hashedPassword = await bcrypt.hash(newPassword, 10);
+      user.password = hashedPassword ;
+     await user.save();
+
+      return res.status(200).json({
+        message: "password Updated successfully",
+        success: true,
+      });
+    } catch (error) {
+      console.log(error)
+    }
   }
 
     module.exports = {  login,  logout ,register,sendEmail};
