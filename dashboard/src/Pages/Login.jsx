@@ -6,6 +6,7 @@ import logo from "../assets/Logo.png";
 import { MdOutlineMailOutline } from "react-icons/md";
 import { MdOutlineLock } from "react-icons/md";
 import axios from 'axios';
+import Loading from "../UI/Loading/Loading";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -53,7 +54,9 @@ function Login() {
   return (
     <div className="LoginPage">
       <img src={logo} alt="logo" className="logo"></img>
-      {isLoading ?<div class="custom-loader"></div>:<form>
+      {isLoading ?
+      <Loading />
+      :<form>
         <h2>Welcome Back 👋</h2>
         <div className="login-input-grp">
           <span>Email:</span>

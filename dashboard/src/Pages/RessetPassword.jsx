@@ -3,6 +3,9 @@ import "../Styles/RessetPassword.css"
 import logo from "../assets/Logo.png"
 import imgg from "../assets/undraw_envelope_re_f5j4.svg"
 import { IoIosCheckmarkCircleOutline } from "react-icons/io";
+import axios from 'axios';
+import { useNavigate, useParams } from 'react-router-dom'; 
+import Loading from '../UI/Loading/Loading';
 
 function RessetPassword() {
     const [password, setPassword] = useState("");
@@ -10,7 +13,12 @@ function RessetPassword() {
     const [passwordStrength, setPasswordStrength] = useState("");
     const [borderColor,setBorderColor]=useState('')
     const [ar,setAr]=useState([])
-    
+    const [err,setErr]=useState("");
+    const [loading,setLoading]=useState(false);
+
+    const { userId } = useParams();  
+    const navigate = useNavigate();
+
     function validatePassword(password) {
         if(password === ""){
             setAr([]);
@@ -55,22 +63,53 @@ function RessetPassword() {
         }
     }
     
-    
+    const hundleSubmit = async (e)=>{
+
+        e.preventDefault()
+        if(password !== confirmPassword){
+            setErr("password not matching");
+            return ;
+        }
+
+        try {
+            const response = await axios.post(`http://localhost:5000/api/user/${userId}/resetPassword`, {
+              password,
+            }, {
+              withCredentials: 'true', 
+            });
+            if (response.status === 200) {
+              setLoading(true);
+              setTimeout(()=>{
+                navigate("/login");
+                
+              },3000) }
+            
+            
+          } catch (error) {
+             setErr("An error has occurred, please try again later")
+          }
+
+    }
     
     
 
     const HundlePassword = (e)=>{
         setPassword(e.target.value);
+        if(e.target.value === confirmPassword) setErr("")
         setPasswordStrength(validatePassword(e.target.value))
     }
     const hundleconfirmPasswor = (e) =>{
         setconfirmPassword(e.target.value);
+        if(password === e.target.value) setErr("")
+       else if(password !== e.target.value) setErr("password not matching");
     }
 
   return (
     <div className='ressetpasswor'>
         <img src={logo} alt='logo' className='logo'></img>
-        <div className='rest-sec'>
+        {loading ?
+        <Loading /> 
+           : <div className='rest-sec'>
             <div className='rest-top-sec'>
             <img src={imgg} alt='email'></img>
             <h1>Reset Password</h1>
@@ -97,11 +136,11 @@ function RessetPassword() {
                         <input type='password' value={confirmPassword} onChange={(e)=>hundleconfirmPasswor(e)} ></input>
                         
                     </div>
-                    
+                    {err&&<p style={{color:"red" , marginTop:"10px"}}>{err}</p>}
                 </div>
-                <button>Reset Password</button>
+                <button onClick={hundleSubmit}>Reset Password</button>
             </div>
-        </div>
+        </div>}
     </div>
   )
 }
