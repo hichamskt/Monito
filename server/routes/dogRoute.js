@@ -6,7 +6,7 @@ const express = require('express');
 
 const router = express.Router();
 
-router.route('/addnewdog').post(upload.array('dogImages', 10), addNewDog); 
+router.route('/addnewdog').post(upload.array('Images', 10), addNewDog); 
 
 
 module.exports = router ;

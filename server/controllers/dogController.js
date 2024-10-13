@@ -3,11 +3,15 @@ const Image = require("../models/imageModel")
 
 const addNewDog = async (req, res) => {
     try {
-        const { breed, name ,sku ,genre ,size ,price,color ,vaccinated, dewormed,status,additionalInfo ,files} = req.body;
+        const { breed, name ,sku ,genre ,size ,price,color ,vaccinated, dewormed,status,additionalInfo } = req.body;
 
         const imageIds = [];
+        const files = req.files;
 
-        for (const file of files) {
+        if (!files || files.length === 0) {
+            return res.status(400).json({ message: 'No files uploaded' });
+        }
+        for (const file of req.files) {
             const newImage = await Image.create({
               url: file.path, 
               altText: file.originalname, 

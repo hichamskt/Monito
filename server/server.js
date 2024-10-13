@@ -3,7 +3,7 @@ const app = express();
 const cors = require('cors');
 const multer = require('multer');
 const path = require('path');
-
+const fs = require('fs');
 require('dotenv').config({ path: '.env.local' });
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
@@ -20,6 +20,15 @@ app.use(cors({ origin: 'http://localhost:3000',
 app.use(cookieParser());
 
 
+
+
+const uploadsDir = path.join(__dirname, 'uploads');
+
+
+if (!fs.existsSync(uploadsDir)) {
+    fs.mkdirSync(uploadsDir, { recursive: true });
+    console.log('Uploads directory created:', uploadsDir);
+}
 
 
 
