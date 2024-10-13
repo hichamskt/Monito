@@ -5,23 +5,23 @@ import { NavLink } from "react-router-dom";
 import axios from 'axios';
 
 function ForgetPasswordPage() {
-  const [emailSent,setEmailSent]=useState(true);
+  const [emailSent,setEmailSent]=useState(false);
 
   const hundleSendMail = async (e)=>{
-
+    e.preventDefault();
+    setEmailSent(true);
+    
          try {
          await axios.post('http://localhost:5000/api/user/sendemail');
          
-        setEmailSent(true);
-      } catch (error) {
-         if (error) {
-          console.log("error",error)
-        } 
-      }
-    
-  
-
+        } catch (error) {
+          if (error) {
+            console.log("error",error)
+          } 
+        }
+        
   }
+
   return (
     <div className='forgetPassword'>
         <div className='fg-div'>
