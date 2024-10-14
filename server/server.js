@@ -23,6 +23,8 @@ app.use(cookieParser());
 
 
 const uploadsDir = path.join(__dirname, 'uploads');
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
 
 
 if (!fs.existsSync(uploadsDir)) {

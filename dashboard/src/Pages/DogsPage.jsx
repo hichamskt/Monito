@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../Styles/DogPage.css";
 import { useOutletContext } from "react-router-dom";
 import { FaSearch } from "react-icons/fa";
@@ -11,6 +11,8 @@ import { FiEdit } from "react-icons/fi";
 import { MdDelete } from "react-icons/md";
 import AddDogForm from "../Components/AddDogForm/AddDogForm";
 import UpdateDogForm from "../Components/UpdateDogForm/UpdateDogForm";
+import axiosInstance from "../axios/axiosInstance";
+import SmallDotedLoading from "../UI/Loading/SmallDotedLoading/SmallDotedLoading";
 
 function DogsPage() {
   const [showmore, setShowMore] = useState(false);
@@ -18,7 +20,36 @@ function DogsPage() {
   const [showAddDogForm, setAddDogForm] = useState(false);
   const [showUpdateForm,setShowUpdateForm]=useState(false);
   const [ShowLeftSide,setShowLeftSide]=useState(true);
-  const data = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  
+
+
+
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axiosInstance.get('/dog/getdogs'); 
+        setData(response.data);
+      } catch (err) {
+        setError(err);
+      } finally {
+        setLoading(false);
+      }
+      
+    };
+
+
+    fetchData();
+  }, []);
+
+ 
+
+if(loading ) return <SmallDotedLoading  />
+if(error ) return <p>Somthing went Wrong</p>
 
   return (
     <div className="dogpage">
@@ -32,7 +63,7 @@ function DogsPage() {
           setShowLeftSide={setShowLeftSide}
         />
       )}
-      {showAddDogForm ? <AddDogForm setAddDogForm={setAddDogForm} setShowInfo={setShowInfo} /> : ShowLeftSide && <LeftSide data={data}  setAddDogForm={setAddDogForm} setShowInfo={setShowInfo}   />}
+      {showAddDogForm ? <AddDogForm setAddDogForm={setAddDogForm} setShowInfo={setShowInfo} /> : ShowLeftSide && <LeftSide data={data}  setAddDogForm={setAddDogForm} setShowInfo={setShowInfo} loading={loading}  />}
      { showUpdateForm && <UpdateDogForm setShowLeftSide={setShowLeftSide} setAddDogForm={setAddDogForm} setShowInfo={setShowInfo} setShowUpdateForm={setShowUpdateForm} />}
     </div>
   );
@@ -126,8 +157,11 @@ function Rightside({ setShowMore, showmore, showInfoBar, setShowInfo, setShowUpd
   );
 }
 
-function LeftSide({ data,setAddDogForm,setShowInfo, }) {
-
+function LeftSide({ data,setAddDogForm,setShowInfo }) {
+  const [itemOffset, setItemOffset] = useState(0);
+  const endOffset = itemOffset + 5;
+  const currentItems = data.slice(itemOffset, endOffset);
+ 
 function handleAddPrdClick(){
   setShowInfo(false);
   setAddDogForm(true);
@@ -154,20 +188,20 @@ function handleAddPrdClick(){
               <th>Status</th>
             </tr>
           </thead>
-          <tbody>
-            {data.map((item, index) => (
+         <tbody>
+            {currentItems.map((item, index) => (
               <tr key={index}>
                 <td>
-                  <img src={dog}></img>
+                  <img src={`http://localhost:5000/${item.images[0].url}`} alt="dogimage"></img>
                 </td>
-                <td>shiba</td>
-                <td>#ki233344</td>
+                <td>{item.name}</td>
+                <td>{item.sku}</td>
                 <td>
-                  <span className="db-category">Rorwealer</span>
+                  <span className="db-category">{item.category}</span>
                 </td>
                 <td>
                   {" "}
-                  <span className="db-status">solde</span>
+                  <span className="db-status">{item.status}</span>
                 </td>
               </tr>
             ))}
@@ -175,8 +209,9 @@ function handleAddPrdClick(){
         </table>
       </div>
       <div className="pagination">
-        <Pagination></Pagination>
+        <Pagination data={data} itemOffset={itemOffset} setItemOffset={setItemOffset}  currentItems={currentItems} itemsPerPage={6} ></Pagination>
       </div>
     </div>
   );
 }
+

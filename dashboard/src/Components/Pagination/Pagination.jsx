@@ -2,12 +2,19 @@ import React ,{useState} from 'react'
 import ReactPaginate from 'react-paginate';
 import "../Pagination/Pagination.css"
 
-const items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
 
-function Pagination({  }) {
-    const [itemOffset, setItemOffset] = useState(0);
-function handlePageClick (i){
-console.log(i)
+
+function Pagination({ data  ,setItemOffset ,itemsPerPage }) {
+    
+
+
+const pageCount = Math.ceil(data.length / itemsPerPage);
+
+
+function handlePageClick (event){
+    const newOffset = (event.selected * itemsPerPage) % data.length;
+    setItemOffset(newOffset);
+
 }
 
     return(
@@ -17,7 +24,7 @@ console.log(i)
         nextLabel="next >"
         onPageChange={handlePageClick}
         pageRangeDisplayed={5}
-        pageCount={15}
+        pageCount={pageCount}
         previousLabel="< previous"
         renderOnZeroPageCount={null}
         containerClassName="paginationcontainer"
