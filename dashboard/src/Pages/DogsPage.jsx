@@ -19,39 +19,29 @@ function DogsPage() {
   const [showmore, setShowMore] = useState(false);
   const [showInfoBar, setShowInfo] = useState(false);
   const [showAddDogForm, setAddDogForm] = useState(false);
-  const [showUpdateForm,setShowUpdateForm]=useState(false);
-  const [ShowLeftSide,setShowLeftSide]=useState(true);
+  const [showUpdateForm, setShowUpdateForm] = useState(false);
+  const [ShowLeftSide, setShowLeftSide] = useState(true);
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [item, setItem] = useState({});
-  
-
-
-
-
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axiosInstance.get('/dog/getdogs'); 
+        const response = await axiosInstance.get("/dog/getdogs");
         setData(response.data);
       } catch (err) {
         setError(err);
       } finally {
         setLoading(false);
       }
-      
     };
-
-
     fetchData();
   }, []);
 
- 
-
-if(loading ) return <SmallDotedLoading  />
-if(error ) return <p>Somthing went Wrong</p>
+  if (loading) return <SmallDotedLoading />;
+  if (error) return <p>Somthing went Wrong</p>;
 
   return (
     <div className="dogpage">
@@ -66,22 +56,41 @@ if(error ) return <p>Somthing went Wrong</p>
           item={item}
         />
       )}
-      {showAddDogForm ? <AddDogForm setAddDogForm={setAddDogForm} setShowInfo={setShowInfo} /> : ShowLeftSide && <LeftSide data={data} setItem={setItem} setAddDogForm={setAddDogForm} setShowInfo={setShowInfo} loading={loading}  />}
-     { showUpdateForm && <UpdateDogForm setShowLeftSide={setShowLeftSide} setAddDogForm={setAddDogForm} setShowInfo={setShowInfo} setShowUpdateForm={setShowUpdateForm} />}
+      {showAddDogForm ? (
+        <AddDogForm setAddDogForm={setAddDogForm} setShowInfo={setShowInfo} />
+      ) : (
+        ShowLeftSide && (
+          <LeftSide
+            data={data}
+            setItem={setItem}
+            setAddDogForm={setAddDogForm}
+            setShowInfo={setShowInfo}
+            loading={loading}
+          />
+        )
+      )}
+      {showUpdateForm && (
+        <UpdateDogForm
+          setShowLeftSide={setShowLeftSide}
+          setAddDogForm={setAddDogForm}
+          setShowInfo={setShowInfo}
+          setShowUpdateForm={setShowUpdateForm}
+        />
+      )}
     </div>
   );
 }
 
 export default DogsPage;
 
-function Rightside({ 
-  setShowMore, 
-  showmore, 
-  showInfoBar, 
-  setShowInfo, 
-  setShowUpdateForm, 
-  setShowLeftSide, 
-  item 
+function Rightside({
+  setShowMore,
+  showmore,
+  showInfoBar,
+  setShowInfo,
+  setShowUpdateForm,
+  setShowLeftSide,
+  item,
 }) {
   const [loading, setLoading] = useState(true);
 
@@ -96,15 +105,28 @@ function Rightside({
     else setLoading(false);
   }, [item]);
 
-  console.log(item);
-  
+ 
+  const hundleDelet = async () => {
+    try {
+      const response = await axiosInstance.delete("/dog/deletdogbyid", {
+        data: { _id: item._id },
+      });
+      if (response.status === 200) {
+        console.log("Deletion successful:", response.data);
+        setShowMore(!showmore);
+        setShowInfo(!showInfoBar);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
+  console.log(item)
   if (loading) return <p>Loading...</p>;
 
   const dateObj = new Date(item.birthDate);
 
-const bDate = dateObj.toLocaleDateString('en-GB');
-
+  const bDate = dateObj.toLocaleDateString("en-GB");
 
   return (
     <div className="rightside">
@@ -123,9 +145,12 @@ const bDate = dateObj.toLocaleDateString('en-GB');
               <FiEdit />
               <p>Edit</p>
             </div>
-            <div>
+            <div  role="button" onClick={hundleDelet}>
               <MdDelete />
-              <p>Delete</p>
+              <p >
+                Delete
+              </p>
+              
             </div>
           </div>
         )}
@@ -133,7 +158,7 @@ const bDate = dateObj.toLocaleDateString('en-GB');
       <hr />
       <div className="dp-img">
         {item?.images && (
-          <img src={`http://localhost:5000/${item?.images[0].url}`} alt="dog" />
+          <img src={`http://localhost:5000/${item?.images[0]?.url}`} alt="dog" />
         )}
       </div>
       <hr />
@@ -169,19 +194,19 @@ const bDate = dateObj.toLocaleDateString('en-GB');
         </div>
         <div className="dp-text-ln">
           <p>Vaccinated</p>
-          <p>{item.vaccinated? "Yes":"No"}</p>
+          <p>{item.vaccinated ? "Yes" : "No"}</p>
         </div>
         <div className="dp-text-ln">
           <p>certified</p>
-          <p>{item.certified? "Yes":"No"}</p>
+          <p>{item.certified ? "Yes" : "No"}</p>
         </div>
         <div className="dp-text-ln">
           <p>Dewormed</p>
-          <p>{item.dewormed?"Yes":"No"}</p>
+          <p>{item.dewormed ? "Yes" : "No"}</p>
         </div>
         <div className="dp-text-ln">
           <p>Microchip</p>
-          <p>{item.microchip?"Yes":"No"}</p>
+          <p>{item.microchip ? "Yes" : "No"}</p>
         </div>
         <div className="dp-text-ln">
           <p>birth Date</p>
@@ -189,28 +214,27 @@ const bDate = dateObj.toLocaleDateString('en-GB');
         </div>
         <div className="dp-text-ln">
           <p>Location </p>
-          <p>{item.location }</p>
+          <p>{item.location}</p>
         </div>
       </div>
     </div>
   );
 }
 
-
-function LeftSide({ data,setAddDogForm,setShowInfo ,setItem }) {
+function LeftSide({ data, setAddDogForm, setShowInfo, setItem }) {
   const [itemOffset, setItemOffset] = useState(0);
   const endOffset = itemOffset + 5;
   const currentItems = data.slice(itemOffset, endOffset);
- 
-function handleAddPrdClick(){
-  setShowInfo(false);
-  setAddDogForm(true);
-}
-function handleClick(item){
-  setItem(item);
-  setShowInfo(true)
-  console.log(item)
-}
+
+  function handleAddPrdClick() {
+    setShowInfo(false);
+    setAddDogForm(true);
+  }
+  function handleClick(item) {
+    setItem(item);
+    setShowInfo(true);
+    console.log(item);
+  }
 
   return (
     <div className="dogleftside">
@@ -222,7 +246,7 @@ function handleClick(item){
         </div>
         <button onClick={handleAddPrdClick}>+ Add Product</button>
       </div>
-      <div className="dogsTable">
+      {currentItems && <div className="dogsTable">
         <table>
           <thead>
             <tr>
@@ -233,11 +257,14 @@ function handleClick(item){
               <th>Status</th>
             </tr>
           </thead>
-         <tbody>
-            {currentItems.map((item, index) => (
-              <tr key={index} role="button"  onClick={()=>handleClick(item)}>
+          <tbody>
+            {currentItems?.map((item, index) => (
+              <tr key={index} role="button" onClick={() => handleClick(item)}>
                 <td>
-                  <img src={`http://localhost:5000/${item.images[0].url}`} alt="dogimage"></img>
+                {item?.images && <img
+                    src={`http://localhost:5000/${item?.images[0]?.url}`}
+                    alt="dogimage"
+                  ></img>}
                 </td>
                 <td>{item.name}</td>
                 <td>{item.sku}</td>
@@ -252,11 +279,16 @@ function handleClick(item){
             ))}
           </tbody>
         </table>
-      </div>
+      </div>}
       <div className="pagination">
-        <Pagination data={data} itemOffset={itemOffset} setItemOffset={setItemOffset}  currentItems={currentItems} itemsPerPage={6} ></Pagination>
+        <Pagination
+          data={data}
+          itemOffset={itemOffset}
+          setItemOffset={setItemOffset}
+          currentItems={currentItems}
+          itemsPerPage={6}
+        ></Pagination>
       </div>
     </div>
   );
 }
-

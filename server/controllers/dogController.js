@@ -1,6 +1,8 @@
 const Dog = require('../models/dogModel');
 const Image = require("../models/imageModel")
+const fs = require('fs');
 const path = require('path');
+
 
 const addNewDog = async (req, res) => {
     try {
@@ -99,7 +101,51 @@ const getDogById = async (req,res)=>{
   }
 }
 
+const deleteDogById = async (req, res) => {
+  try {
+    const id = req.body._id;
+
+    if (!id) {
+      return res.status(400).json({ message: 'No ID provided.' });
+    }
+
+    
+    const images = await Image.find({ relatedId: id });
+
+    
+    if (!images || images.length === 0) {
+      return res.status(404).json({ message: 'No related images found.' });
+    }
+
+    
+
+    images.forEach((image) => {
+      const imagePath = path.join(image.url);
+      console.log(imagePath)
+      fs.unlink(imagePath, (err) => {
+        if (err) {
+          console.error('Failed to delete image from filesystem:', imagePath, err);
+        } else {
+          console.log(`Deleted image from filesystem: ${imagePath}`);
+        }
+      });
+    });
+    
+    await Image.deleteMany({ relatedId: id });
+
+  
+    await Dog.findByIdAndDelete(id);
+
+  
+    return res.status(200).json({ message: 'Dog and related images deleted successfully.' });
+
+  } catch (error) {
+    console.error('Error deleting dog and images:', error);
+    return res.status(500).json({ message: 'Internal server error.' });
+  }
+};
 
 
 
-module.exports = {  addNewDog , getAllDogs ,getDogById};
+
+module.exports = {  addNewDog , getAllDogs ,getDogById , deleteDogById};
