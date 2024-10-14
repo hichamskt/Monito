@@ -56,8 +56,8 @@ function AddDogForm({ setAddDogForm, setShowInfo }) {
         }
       );
 
-      if (response.status === 200) {
-        
+      if (response.status === 201) {
+        setAddDogForm(false);
       }
     } catch (error) {
       console.log(error.response?.data);

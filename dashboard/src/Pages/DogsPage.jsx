@@ -16,7 +16,7 @@ import SmallDotedLoading from "../UI/Loading/SmallDotedLoading/SmallDotedLoading
 
 function DogsPage() {
   const [showmore, setShowMore] = useState(false);
-  const [showInfoBar, setShowInfo] = useState(true);
+  const [showInfoBar, setShowInfo] = useState(false);
   const [showAddDogForm, setAddDogForm] = useState(false);
   const [showUpdateForm,setShowUpdateForm]=useState(false);
   const [ShowLeftSide,setShowLeftSide]=useState(true);
