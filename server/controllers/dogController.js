@@ -68,7 +68,7 @@ const getAllDogs = async (req,res)=>{
   try {
     const allDogs = await Dog.find().populate('images');
 
-    console.log(allDogs);
+    
     res.status(200).json(allDogs);
 
 
@@ -77,7 +77,29 @@ const getAllDogs = async (req,res)=>{
   }
 }
 
+const getDogById = async (req,res)=>{
+
+  try {
+    const id = req.body._id;
+    if(!id){
+      return res.status(400).json({ message: 'there is no id' });
+    }
+    const dog = await Dog.findById(id).populate('images');
+
+    if(!dog){
+      return res.status(400).json({ message: 'no data with id ' });
+    }
+
+    return res.status(200).json({
+      dog
+    });
+    
+  } catch (error) {
+    console.log(error)
+  }
+}
 
 
 
-module.exports = {  addNewDog , getAllDogs};
+
+module.exports = {  addNewDog , getAllDogs ,getDogById};

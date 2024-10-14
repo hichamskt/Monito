@@ -16,13 +16,14 @@ import SmallDotedLoading from "../UI/Loading/SmallDotedLoading/SmallDotedLoading
 
 function DogsPage() {
   const [showmore, setShowMore] = useState(false);
-  const [showInfoBar, setShowInfo] = useState(false);
+  const [showInfoBar, setShowInfo] = useState(true);
   const [showAddDogForm, setAddDogForm] = useState(false);
   const [showUpdateForm,setShowUpdateForm]=useState(false);
   const [ShowLeftSide,setShowLeftSide]=useState(true);
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [item, setItem] = useState({});
   
 
 
@@ -61,9 +62,10 @@ if(error ) return <p>Somthing went Wrong</p>
           showInfoBar={showInfoBar}
           setShowUpdateForm={setShowUpdateForm}
           setShowLeftSide={setShowLeftSide}
+          item={item}
         />
       )}
-      {showAddDogForm ? <AddDogForm setAddDogForm={setAddDogForm} setShowInfo={setShowInfo} /> : ShowLeftSide && <LeftSide data={data}  setAddDogForm={setAddDogForm} setShowInfo={setShowInfo} loading={loading}  />}
+      {showAddDogForm ? <AddDogForm setAddDogForm={setAddDogForm} setShowInfo={setShowInfo} /> : ShowLeftSide && <LeftSide data={data} setItem={setItem} setAddDogForm={setAddDogForm} setShowInfo={setShowInfo} loading={loading}  />}
      { showUpdateForm && <UpdateDogForm setShowLeftSide={setShowLeftSide} setAddDogForm={setAddDogForm} setShowInfo={setShowInfo} setShowUpdateForm={setShowUpdateForm} />}
     </div>
   );
@@ -73,7 +75,7 @@ export default DogsPage;
 
 function Rightside({ setShowMore, showmore, showInfoBar, setShowInfo, setShowUpdateForm,setShowLeftSide}) {
  
-  function handleUpdatebutton (){
+  function handleUpdatebutton ({item}){
     setShowUpdateForm(true);
     setShowInfo(false);
     setShowLeftSide(false);
@@ -157,7 +159,7 @@ function Rightside({ setShowMore, showmore, showInfoBar, setShowInfo, setShowUpd
   );
 }
 
-function LeftSide({ data,setAddDogForm,setShowInfo }) {
+function LeftSide({ data,setAddDogForm,setShowInfo ,setItem }) {
   const [itemOffset, setItemOffset] = useState(0);
   const endOffset = itemOffset + 5;
   const currentItems = data.slice(itemOffset, endOffset);
@@ -165,6 +167,11 @@ function LeftSide({ data,setAddDogForm,setShowInfo }) {
 function handleAddPrdClick(){
   setShowInfo(false);
   setAddDogForm(true);
+}
+function handleClick(item){
+  setItem(item);
+  setShowInfo(true)
+  console.log(item)
 }
 
   return (
@@ -190,7 +197,7 @@ function handleAddPrdClick(){
           </thead>
          <tbody>
             {currentItems.map((item, index) => (
-              <tr key={index}>
+              <tr key={index} role="button"  onClick={()=>handleClick(item)}>
                 <td>
                   <img src={`http://localhost:5000/${item.images[0].url}`} alt="dogimage"></img>
                 </td>
