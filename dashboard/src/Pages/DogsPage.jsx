@@ -13,10 +13,11 @@ import AddDogForm from "../Components/AddDogForm/AddDogForm";
 import UpdateDogForm from "../Components/UpdateDogForm/UpdateDogForm";
 import axiosInstance from "../axios/axiosInstance";
 import SmallDotedLoading from "../UI/Loading/SmallDotedLoading/SmallDotedLoading";
+import Loading from "../UI/Loading/Loading";
 
 function DogsPage() {
   const [showmore, setShowMore] = useState(false);
-  const [showInfoBar, setShowInfo] = useState(true);
+  const [showInfoBar, setShowInfo] = useState(false);
   const [showAddDogForm, setAddDogForm] = useState(false);
   const [showUpdateForm,setShowUpdateForm]=useState(false);
   const [ShowLeftSide,setShowLeftSide]=useState(true);
@@ -73,14 +74,38 @@ if(error ) return <p>Somthing went Wrong</p>
 
 export default DogsPage;
 
-function Rightside({ setShowMore, showmore, showInfoBar, setShowInfo, setShowUpdateForm,setShowLeftSide}) {
- 
-  function handleUpdatebutton ({item}){
+function Rightside({ 
+  setShowMore, 
+  showmore, 
+  showInfoBar, 
+  setShowInfo, 
+  setShowUpdateForm, 
+  setShowLeftSide, 
+  item 
+}) {
+  const [loading, setLoading] = useState(true);
+
+  const handleUpdatebutton = () => {
     setShowUpdateForm(true);
     setShowInfo(false);
     setShowLeftSide(false);
-  }
- 
+  };
+
+  useEffect(() => {
+    if (!item) setLoading(true);
+    else setLoading(false);
+  }, [item]);
+
+  console.log(item);
+  
+
+  if (loading) return <p>Loading...</p>;
+
+  const dateObj = new Date(item.birthDate);
+
+const bDate = dateObj.toLocaleDateString('en-GB');
+
+
   return (
     <div className="rightside">
       <div className="dp-rs-header">
@@ -96,68 +121,81 @@ function Rightside({ setShowMore, showmore, showInfoBar, setShowInfo, setShowUpd
           <div className="db-more">
             <div role="button" onClick={handleUpdatebutton}>
               <FiEdit />
-              <p>Edite</p>
+              <p>Edit</p>
             </div>
             <div>
               <MdDelete />
-              <p>Delet</p>
+              <p>Delete</p>
             </div>
           </div>
-          
         )}
       </div>
       <hr />
       <div className="dp-img">
-        <img src={imgg} alt="dog" />
+        {item?.images && (
+          <img src={`http://localhost:5000/${item?.images[0].url}`} alt="dog" />
+        )}
       </div>
-      <hr></hr>
+      <hr />
       <div className="dp-text">
-        <h3>Deails</h3>
+        <h3>Details</h3>
         <div className="dp-text-ln">
           <p>Breed</p>
-          <p>Shiba Inu Sepai</p>
+          <p>{item.category}</p>
         </div>
         <div className="dp-text-ln">
           <p>Name</p>
-          <p>Spike</p>
+          <p>{item.name}</p>
         </div>
         <div className="dp-text-ln">
           <p>Sku</p>
-          <p>#100024</p>
+          <p>{item.sku}</p>
         </div>
         <div className="dp-text-ln">
           <p>Genre</p>
-          <p>Female</p>
+          <p>{item.gender}</p>
         </div>
         <div className="dp-text-ln">
           <p>Size</p>
-          <p>Small</p>
+          <p>{item.size}</p>
         </div>
         <div className="dp-text-ln">
-          <p>price</p>
-          <p>50000vnd</p>
+          <p>Price</p>
+          <p>{item.price}</p>
         </div>
         <div className="dp-text-ln">
           <p>Color</p>
-          <p>Appricot</p>
+          <p>{item.color}</p>
         </div>
         <div className="dp-text-ln">
-          <p>Vaccianted</p>
-          <p>Yes</p>
+          <p>Vaccinated</p>
+          <p>{item.vaccinated? "Yes":"No"}</p>
+        </div>
+        <div className="dp-text-ln">
+          <p>certified</p>
+          <p>{item.certified? "Yes":"No"}</p>
         </div>
         <div className="dp-text-ln">
           <p>Dewormed</p>
-          <p>Yes</p>
+          <p>{item.dewormed?"Yes":"No"}</p>
         </div>
         <div className="dp-text-ln">
-          <p>Published date</p>
-          <p>12/october/2023</p>
+          <p>Microchip</p>
+          <p>{item.microchip?"Yes":"No"}</p>
+        </div>
+        <div className="dp-text-ln">
+          <p>birth Date</p>
+          <p>{bDate}</p>
+        </div>
+        <div className="dp-text-ln">
+          <p>Location </p>
+          <p>{item.location }</p>
         </div>
       </div>
-      
     </div>
   );
 }
+
 
 function LeftSide({ data,setAddDogForm,setShowInfo ,setItem }) {
   const [itemOffset, setItemOffset] = useState(0);

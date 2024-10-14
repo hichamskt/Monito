@@ -85,7 +85,7 @@ function Login() {
         <div className="login-fpw-sec">
           <div className="login-fpw-kl">
             <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike" />
-            <label for="vehicle1"> Keep me Logged in </label>
+            <label htmlFor="vehicle1"> Keep me Logged in </label>
           </div>
           <NavLink to="/forgetpassword">Forgot Password?</NavLink>
         </div>
