@@ -156,7 +156,7 @@ function handleAddPrdClick(){
           </thead>
           <tbody>
             {data.map((item, index) => (
-              <tr>
+              <tr key={index}>
                 <td>
                   <img src={dog}></img>
                 </td>

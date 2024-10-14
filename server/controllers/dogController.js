@@ -8,7 +8,7 @@ const addNewDog = async (req, res) => {
 
         const imageIds = [];
         const files = req.files;
-        console.log(additionalInfo);
+        
         
         if (!files || files.length === 0) {
             return res.status(400).json({ message: 'No files uploaded' });
@@ -63,4 +63,21 @@ const addNewDog = async (req, res) => {
     }
 }
 
-module.exports = {  addNewDog};
+
+const getAllDogs = async (req,res)=>{
+  try {
+    const allDogs = await Dog.find().populate('images');
+
+    console.log(allDogs);
+    res.status(200).json(allDogs);
+
+
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+
+
+
+module.exports = {  addNewDog , getAllDogs};
