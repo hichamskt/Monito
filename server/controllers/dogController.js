@@ -1,17 +1,20 @@
 const Dog = require('../models/dogModel');
 const Image = require("../models/imageModel")
+const path = require('path');
 
 const addNewDog = async (req, res) => {
     try {
-        const { breed, name ,sku ,genre ,size ,price,color ,vaccinated, dewormed,status,additionalInfo } = req.body;
+        const {  name ,sku ,size,gender,category ,price,color ,vaccinated, dewormed,status,additionalInfo , birthDate,location,certified,microchip} = req.body;
 
         const imageIds = [];
         const files = req.files;
-
+        console.log(additionalInfo);
+        
         if (!files || files.length === 0) {
             return res.status(400).json({ message: 'No files uploaded' });
         }
-        for (const file of req.files) {
+        
+        for (const file of files) {
             const newImage = await Image.create({
               url: file.path, 
               altText: file.originalname, 
@@ -22,17 +25,21 @@ const addNewDog = async (req, res) => {
           }
         
           const newDog = new Dog({
-            breed,
              name ,
              sku ,
-             genre ,
+             gender,
              size ,
              price,
              color ,
+             category,
              vaccinated,
               dewormed,
               status,
               additionalInfo,
+              location,
+              certified,
+              microchip,
+              birthDate,
             images: imageIds,
             
           });
@@ -51,7 +58,8 @@ const addNewDog = async (req, res) => {
           });
 
     } catch (error) {
-        console.log(error)
+      console.error(error);
+      return res.status(500).json({ message: 'An error occurred while adding the dog.', error: error.message });
     }
 }
 

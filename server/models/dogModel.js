@@ -3,10 +3,7 @@ const mongoose = require('mongoose');
 
 const dogSchema = new mongoose.Schema(
   {
-    breed: {
-        type: String,
-        required: true
-    },
+    
     name: {
         type: String,
         required: true
@@ -16,7 +13,7 @@ const dogSchema = new mongoose.Schema(
         required: true,
         unique: true
     },
-    genre: {
+    category: {
         type: String,
         required: true
     },
@@ -40,10 +37,26 @@ const dogSchema = new mongoose.Schema(
         type: Boolean,
         required: true
     },
+    certified: {
+        type: Boolean,
+        required: true
+    },
+    microchip: {
+        type: Boolean,
+        required: true
+    },
     status: {
         type: String,
         enum: ['Sold', 'Available'], 
         default: 'Available'
+    },
+    birthDate: {
+        type: Date,
+        required:true
+    },
+    location: {
+        type: String,
+        required:true
     },
     additionalInfo: {
         type: [String],

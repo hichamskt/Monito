@@ -2,6 +2,8 @@ import React , { useRef, useState }from 'react'
 import "../AddProductForm/AddProductForm.css"
 import { RxCross2 } from "react-icons/rx";
 import { FaPlus } from "react-icons/fa6";
+import axios from 'axios';
+
 
 function AddProductForm({setShowAddPrd}) {
   const [images, setImages] = useState([]);
@@ -31,6 +33,7 @@ function AddProductForm({setShowAddPrd}) {
     setImages((prevImages) => prevImages.filter((_, i) => i !== index));
   }
 
+   
 
   return (
     <div className='addProfuctForm'>
