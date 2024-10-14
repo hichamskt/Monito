@@ -293,7 +293,7 @@ function AddDogForm({ setAddDogForm, setShowInfo }) {
                     <label>
                       <input
                         type="radio"
-                        name="certifiedt"
+                        name="certified"
                         value="false"
                         checked={formData.certified === "false"}
                         onChange={handleInputChange}

@@ -50,6 +50,11 @@ const dogSchema = new mongoose.Schema(
         enum: ['Sold', 'Available'], 
         default: 'Available'
     },
+    gender: {
+        type: String,
+        enum: ['Male', 'Female'], 
+        default: 'Available'
+    },
     birthDate: {
         type: Date,
         required:true
