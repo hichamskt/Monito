@@ -149,88 +149,63 @@ const deleteDogById = async (req, res) => {
 
 const updateDog = async (req, res) => {
   try {
-    const id = req.body._id;
-    const {
-      name,
-      sku,
-      size,
-      gender,
-      category,
-      price,
-      color,
-      vaccinated,
-      dewormed,
-      status,
-      additionalInfo,
-      birthDate,
-      location,
-      certified,
-      microchip,
+    const dogId = req.body._id;
+    const fieldsToUpdate = [
+      'name', 'sku', 'size', 'gender', 'category', 
+      'price', 'color', 'vaccinated', 'dewormed', 
+      'status', 'additionalInfo', 'birthDate', 
+      'location', 'certified', 'microchip'
+    ];
 
-    } = req.body;
-
-    const files = req.files; 
-    const existingDog = await Dog.findById(dogId); 
-
+    const existingDog = await Dog.findById(dogId);
     if (!existingDog) {
       return res.status(404).json({ message: 'Dog not found' });
     }
 
     
-    if (name !== undefined && name !== existingDog.name) existingDog.name = name;
-    if (sku !== undefined && sku !== existingDog.sku) existingDog.sku = sku;
-    if (size !== undefined && size !== existingDog.size) existingDog.size = size;
-    if (gender !== undefined && gender !== existingDog.gender) existingDog.gender = gender;
-    if (category !== undefined && category !== existingDog.category) existingDog.category = category;
-    if (price !== undefined && price !== existingDog.price) existingDog.price = price;
-    if (color !== undefined && color !== existingDog.color) existingDog.color = color;
-    if (vaccinated !== undefined && vaccinated !== existingDog.vaccinated) existingDog.vaccinated = vaccinated;
-    if (dewormed !== undefined && dewormed !== existingDog.dewormed) existingDog.dewormed = dewormed;
-    if (status !== undefined && status !== existingDog.status) existingDog.status = status;
-    if (additionalInfo !== undefined && additionalInfo !== existingDog.additionalInfo) existingDog.additionalInfo = additionalInfo;
-    if (birthDate !== undefined && birthDate !== existingDog.birthDate) existingDog.birthDate = birthDate;
-    if (location !== undefined && location !== existingDog.location) existingDog.location = location;
-    if (certified !== undefined && certified !== existingDog.certified) existingDog.certified = certified;
-    if (microchip !== undefined && microchip !== existingDog.microchip) existingDog.microchip = microchip;
-
-    // Get existing image IDs to check against
-    const existingImageIds = existingDog.images.map(image => image.toString());
-
-    // Process uploaded files
-    if (files && files.length > 0) {
-      for (const file of files) {
-        // Only add new images if they don't already exist
-        if (!existingImageIds.includes(file.filename)) {
-          const newImage = await Image.create({
-            url: file.path,
-            altText: file.originalname,
-            type: 'Dog',
-            relatedId: null,
-          });
-          existingDog.images.push(newImage._id); // Add new image ID to existing images
-        }
+    fieldsToUpdate.forEach(field => {
+      if (req.body[field] !== undefined && req.body[field] !== existingDog[field]) {
+        existingDog[field] = req.body[field];
       }
-    }
+    });
 
-    // Save the updated dog entry
+    // Delete existing images
+    
+    const images = await Image.find({ relatedId: dogId });
+    await Promise.all(images.map(image => {
+      const imagePath = path.join(image.url);
+      return fs.promises.unlink(imagePath)
+        .then(() => console.log(`Deleted image from filesystem: ${imagePath}`))
+        .catch(err => console.error('Failed to delete image from filesystem:', imagePath, err));
+    }));
+
+    await Image.deleteMany({ relatedId: dogId });
+
+    // Save new images
+    const files = req.files;
+    const newImages = await Promise.all(files.map(file => 
+      Image.create({
+        url: file.path,
+        altText: file.originalname,
+        type: 'Dog',
+        relatedId: dogId
+      })
+    ));
+
     const updatedDog = await existingDog.save();
-
-    // Update the related images to link them to the updated dog entry
-    await Image.updateMany(
-      { _id: { $in: existingDog.images } },
-      { $set: { relatedId: updatedDog._id } }
-    );
 
     return res.status(200).json({
       message: 'Dog updated successfully',
       success: true,
       updatedDog,
+      newImages // Include new images in the response if needed
     });
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: 'An error occurred while updating the dog.', error: error.message });
   }
 };
+
 
 
 
