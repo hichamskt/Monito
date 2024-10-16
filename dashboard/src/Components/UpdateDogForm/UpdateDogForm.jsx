@@ -3,12 +3,14 @@ import "../UpdateDogForm/UpdateDogForm.css";
 import { RxCross2 } from "react-icons/rx";
 import axios from "axios";
 function UpdateDogForm({setAddDogForm ,setShowInfo,setShowUpdateForm,setShowLeftSide,item,setRefresh}) {
- const [additionalInfo, setAdditionalInfo] = useState([]);
+ const [additionalInfo, setAdditionalInfo] = useState(item?.additionalInfo && item?.additionalInfo != "" ? item.additionalInfo.toString().split(','):[]);
   const [inputValue, setInputValue] = useState("");
-  const [images, setImages] = useState([]);
- 
+  const [images, setImages] = useState([...item.images]);
+ console.log(additionalInfo)
   const bDate = new Date(item.birthDate).toISOString().split('T')[0];
 
+
+console.log(item.additionalInfo.toString().split(','))
 const [formData, setFormData] = useState({
     name: item.name,
     sku: item.sku,
@@ -23,6 +25,7 @@ const [formData, setFormData] = useState({
     dewormed: item.dewormed,
     certified: item.certified,
     microchip: item.microchip,
+    status:item.status
   });
 
 
@@ -274,6 +277,29 @@ console.log(bDate)
                       Not Yet
                     </label>
                   </div>
+                  <div className="ad-checkout-box">
+                    <p>status:</p>
+                    <label>
+                      <input
+                        type="radio"
+                        name="status"
+                        value="Sold"
+                        checked={formData.status === 'Sold'}
+                        onChange={handleInputChange}
+                      />
+                      Sold
+                    </label>
+                    <label>
+                      <input
+                        type="radio"
+                        name="status"
+                        value="Available"
+                        checked={formData.status === 'Available'}
+                        onChange={handleInputChange}
+                      />
+                      Available
+                    </label>
+                  </div>
 
                   <div className="ad-checkout-box">
                     <p>Dewormed:</p>
@@ -476,12 +502,14 @@ function DragandDropSection({ images, setImages }) {
           ></input>
         </div>
         <div className="ddp-container">
-          {images.map((images, index) => (
+          {images.map((image, index) => (
             <div className="ddp-image" key={index}>
               <span className="ddp-delete" onClick={() => deleteImage(index)}>
                 <RxCross2 />
               </span>
-              <img src={images.url} alt={images.name}></img>
+              <img 
+      src={image.url.includes('upload') ? `http://localhost:5000/${image.url}` : image.url} 
+      alt={image.name}></img>
             </div>
           ))}
         </div>
