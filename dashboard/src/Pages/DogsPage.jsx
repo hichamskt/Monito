@@ -25,6 +25,7 @@ function DogsPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [item, setItem] = useState({});
+  const [refresh, setRefresh] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -38,7 +39,7 @@ function DogsPage() {
       }
     };
     fetchData();
-  }, []);
+  }, [refresh]);
 
   if (loading) return <SmallDotedLoading />;
   if (error) return <p>Somthing went Wrong</p>;
@@ -54,10 +55,11 @@ function DogsPage() {
           setShowUpdateForm={setShowUpdateForm}
           setShowLeftSide={setShowLeftSide}
           item={item}
+          setRefresh={setRefresh}
         />
       )}
       {showAddDogForm ? (
-        <AddDogForm setAddDogForm={setAddDogForm} setShowInfo={setShowInfo} />
+        <AddDogForm setAddDogForm={setAddDogForm} setShowInfo={setShowInfo} setRefresh={setRefresh} />
       ) : (
         ShowLeftSide && (
           <LeftSide
@@ -91,6 +93,7 @@ function Rightside({
   setShowUpdateForm,
   setShowLeftSide,
   item,
+  setRefresh
 }) {
   const [loading, setLoading] = useState(true);
 
@@ -115,6 +118,7 @@ function Rightside({
         console.log("Deletion successful:", response.data);
         setShowMore(!showmore);
         setShowInfo(!showInfoBar);
+        setRefresh((prv)=>!prv)
       }
     } catch (err) {
       console.log(err);

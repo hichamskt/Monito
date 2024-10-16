@@ -3,7 +3,7 @@ import "../AddDogForm/AddDogForm.css";
 import { RxCross2 } from "react-icons/rx";
 import axios from "axios";
 
-function AddDogForm({ setAddDogForm, setShowInfo }) {
+function AddDogForm({ setAddDogForm, setShowInfo , setRefresh }) {
   const [additionalInfo, setAdditionalInfo] = useState([]);
   const [inputValue, setInputValue] = useState("");
   const [images, setImages] = useState([]);
@@ -58,6 +58,7 @@ function AddDogForm({ setAddDogForm, setShowInfo }) {
 
       if (response.status === 201) {
         setAddDogForm(false);
+        setRefresh((prv)=>!prv);
       }
     } catch (error) {
       console.log(error.response?.data);
@@ -72,7 +73,7 @@ function AddDogForm({ setAddDogForm, setShowInfo }) {
 
   function handleCancleButton() {
     setAddDogForm(false);
-    setShowInfo(true);
+    setShowInfo(false);
   }
   const handleAddClick = () => {
     if (inputValue.trim() !== "") {
