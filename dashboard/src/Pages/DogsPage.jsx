@@ -77,6 +77,8 @@ function DogsPage() {
           setAddDogForm={setAddDogForm}
           setShowInfo={setShowInfo}
           setShowUpdateForm={setShowUpdateForm}
+          item={item}
+          setRefresh={setRefresh}
         />
       )}
     </div>
