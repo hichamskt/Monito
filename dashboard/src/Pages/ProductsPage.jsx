@@ -13,6 +13,11 @@ function ProductsPage() {
   const [showUpdatePrd,setShowUpdatePrd]=useState(false);
 
 
+  function hundleUpdateButton (){
+    setShowUpdatePrd(true);
+
+  }
+
 
     const data =  Array(9).fill('X')
   return (
@@ -67,7 +72,7 @@ function ProductsPage() {
                   <span >15000 vnd</span>
                 </td>
                 <td>
-                  <span className='pointer'><FaPencilAlt /></span>
+                  <span className='pointer' role='button' onClick={hundleUpdateButton}><FaPencilAlt /></span>
                 </td>
               </tr>
             ))}
@@ -75,7 +80,7 @@ function ProductsPage() {
         </table>
       </div>
       <div className="pagination">
-        <Pagination></Pagination>
+        {/* <Pagination></Pagination> */}
       </div>
     </div>
   )
