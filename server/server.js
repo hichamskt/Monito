@@ -11,6 +11,7 @@ const cookieParser = require('cookie-parser');
 const sendMail = require('./utils/sendMail');
 const userRoutes = require("./routes/userRoute")
 const dogRoutes = require("./routes/dogRoute")
+const productRoutes = require("./routes/productRoute")
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -36,6 +37,7 @@ if (!fs.existsSync(uploadsDir)) {
 
 app.use('/api/user',userRoutes)
 app.use('/api/dog',dogRoutes)
+app.use('/api/product',productRoutes)
 
 
 const DB = process.env.DATABASE.replace('<password>', process.env.DATABASE_PASSWORD);

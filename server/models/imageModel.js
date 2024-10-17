@@ -6,7 +6,7 @@ const imageSchema = new mongoose.Schema({
   altText: { type: String, required: true },
   type: {
     type: String,
-    enum: ['Dog', 'product', 'Cat'],
+    enum: ['Dog', 'Product', 'Cat'],
     required: true,
   },
   relatedId: { type: mongoose.Schema.Types.ObjectId,  } 

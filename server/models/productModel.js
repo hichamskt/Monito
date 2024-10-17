@@ -8,7 +8,7 @@ const productSchema = new mongoose.Schema(
         type: String,
         required: true
     },
-    category: {
+    productCategory: {
         type: String,
         required: true
     },
@@ -31,7 +31,7 @@ const productSchema = new mongoose.Schema(
         required: true
     },
     unite: {
-        type: string,
+        type: String,
         required: true
     },
     status: {
@@ -49,6 +49,6 @@ const productSchema = new mongoose.Schema(
 );
 
 
-const Dog = mongoose.model('Product', productSchema);
+const Product = mongoose.model('Product', productSchema);
 
 module.exports = Product;
