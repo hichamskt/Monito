@@ -206,25 +206,36 @@ const updateDog = async (req, res) => {
       })
     );
 
-    // Save new images (if any are uploaded)
-    const files = req.files || [];
-    const newImages = [];
 
-    if (files.length > 0) {
-      newImages.push(
-        ...await Promise.all(
-          files.map(file =>
-            Image.create({
-              url: file.path,
-              altText: file.originalname,
-              type: 'Dog',
-              relatedId: dogId
-            })
-          )
-        )
-      );
+    // Save new images (if any are uploaded)
+const newImgsId = []
+    const files = req.files || [];
+    for (const file of files) {
+      const newimg =  await Image.create({
+        url: file.path, 
+        altText: file.originalname, 
+        type: 'Dog', 
+        relatedId: dogId 
+      });
+      newImgsId.push(newimg._id);
     }
 
+    //save new images id 
+    const idOfNotDeletedImages = []; 
+    
+   
+    existingDog.images.forEach(id => {
+      
+
+      if (!imagsId.includes(id)) {
+        idOfNotDeletedImages.push(id);
+      }
+    });
+
+    
+
+    existingDog.images = [...idOfNotDeletedImages, ...newImgsId];
+    
     // Save updated dog
     const updatedDog = await existingDog.save();
 
@@ -232,7 +243,7 @@ const updateDog = async (req, res) => {
       message: 'Dog updated successfully',
       success: true,
       updatedDog,
-      newImages // Return new images if any were added
+       // Return new images if any were added
     });
   } catch (error) {
     console.error(error);
