@@ -150,7 +150,7 @@ const deleteDogById = async (req, res) => {
 const updateDog = async (req, res) => {
   try {
     const dogId = req.body.id;
-    console.log('url', req.body.imagesarr );
+    
 
     const fieldsToUpdate = [
       'name', 'sku', 'size', 'gender', 'category',
@@ -165,6 +165,7 @@ const updateDog = async (req, res) => {
       return res.status(404).json({ message: 'Dog not found' });
     }
 
+    console.log(req.body.additionalInfo);
     // Update fields if changed
     fieldsToUpdate.forEach(field => {
       if (req.body[field] !== undefined && req.body[field] !== existingDog[field]) {

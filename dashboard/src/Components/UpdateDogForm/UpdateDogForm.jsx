@@ -30,7 +30,7 @@ const [formData, setFormData] = useState({
     status:item.status
   });
 
-console.log(images);
+
 
   const handleAddionInputChange = (event) => {
     setInputValue(event.target.value);
@@ -79,7 +79,7 @@ console.log(images);
       fd.append('imagesarr', images[i].url); 
     }
     
-
+    fd.append("additionalInfo",additionalInfo);
     try {
       const response = await axios.post(
         "http://localhost:5000/api/dog/updatdog",
