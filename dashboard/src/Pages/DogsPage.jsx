@@ -26,7 +26,7 @@ function DogsPage() {
   const [error, setError] = useState(null);
   const [item, setItem] = useState({});
   const [refresh, setRefresh] = useState(false);
-
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -41,6 +41,7 @@ function DogsPage() {
     fetchData();
   }, [refresh]);
 
+  
   if (loading) return <SmallDotedLoading />;
   if (error) return <p>Somthing went Wrong</p>;
 
@@ -59,7 +60,11 @@ function DogsPage() {
         />
       )}
       {showAddDogForm ? (
-        <AddDogForm setAddDogForm={setAddDogForm} setShowInfo={setShowInfo} setRefresh={setRefresh} />
+        <AddDogForm
+          setAddDogForm={setAddDogForm}
+          setShowInfo={setShowInfo}
+          setRefresh={setRefresh}
+        />
       ) : (
         ShowLeftSide && (
           <LeftSide
@@ -95,7 +100,7 @@ function Rightside({
   setShowUpdateForm,
   setShowLeftSide,
   item,
-  setRefresh
+  setRefresh,
 }) {
   const [loading, setLoading] = useState(true);
 
@@ -110,7 +115,6 @@ function Rightside({
     else setLoading(false);
   }, [item]);
 
- 
   const hundleDelet = async () => {
     try {
       const response = await axiosInstance.delete("/dog/deletdogbyid", {
@@ -120,14 +124,14 @@ function Rightside({
         console.log("Deletion successful:", response.data);
         setShowMore(!showmore);
         setShowInfo(!showInfoBar);
-        setRefresh((prv)=>!prv)
+        setRefresh((prv) => !prv);
       }
     } catch (err) {
       console.log(err);
     }
   };
 
-  console.log(item)
+  console.log(item);
   if (loading) return <p>Loading...</p>;
 
   const dateObj = new Date(item.birthDate);
@@ -151,12 +155,9 @@ function Rightside({
               <FiEdit />
               <p>Edit</p>
             </div>
-            <div  role="button" onClick={hundleDelet}>
+            <div role="button" onClick={hundleDelet}>
               <MdDelete />
-              <p >
-                Delete
-              </p>
-              
+              <p>Delete</p>
             </div>
           </div>
         )}
@@ -164,7 +165,10 @@ function Rightside({
       <hr />
       <div className="dp-img">
         {item?.images && (
-          <img src={`http://localhost:5000/${item?.images[0]?.url}`} alt="dog" />
+          <img
+            src={`http://localhost:5000/${item?.images[0]?.url}`}
+            alt="dog"
+          />
         )}
       </div>
       <hr />
@@ -229,8 +233,22 @@ function Rightside({
 
 function LeftSide({ data, setAddDogForm, setShowInfo, setItem }) {
   const [itemOffset, setItemOffset] = useState(0);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const filteredItems = data.filter((item) =>
+    item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    item.category.toLowerCase().includes(searchTerm.toLowerCase())||
+    item.status.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+  
+
   const endOffset = itemOffset + 5;
-  const currentItems = data.slice(itemOffset, endOffset);
+  const currentItems =  filteredItems.slice(itemOffset, endOffset);
+
+
+  
+
+
 
   function handleAddPrdClick() {
     setShowInfo(false);
@@ -242,50 +260,63 @@ function LeftSide({ data, setAddDogForm, setShowInfo, setItem }) {
     console.log(item);
   }
 
+  const handleSearch = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
   return (
     <div className="dogleftside">
       <h2 className="sectiontitle">Dogs</h2>
       <div className="search">
         <div className="searchinput">
           <FaSearch />
-          <input type="text" placeholder="Search"></input>
+          <input
+            type="text"
+            placeholder="Search"
+            value={searchTerm}
+            onChange={handleSearch}
+          ></input>
         </div>
         <button onClick={handleAddPrdClick}>+ Add Product</button>
       </div>
-      {currentItems && <div className="dogsTable">
-        <table>
-          <thead>
-            <tr>
-              <th>Pet</th>
-              <th>Name</th>
-              <th>Usk</th>
-              <th>Category</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            {currentItems?.map((item, index) => (
-              <tr key={index} role="button" onClick={() => handleClick(item)}>
-                <td>
-                {item?.images && <img
-                    src={`http://localhost:5000/${item?.images[0]?.url}`}
-                    alt="dogimage"
-                  ></img>}
-                </td>
-                <td>{item.name}</td>
-                <td>{item.sku}</td>
-                <td>
-                  <span className="db-category">{item.category}</span>
-                </td>
-                <td>
-                  {" "}
-                  <span className="db-status">{item.status}</span>
-                </td>
+      {currentItems && (
+        <div className="dogsTable">
+          <table>
+            <thead>
+              <tr>
+                <th>Pet</th>
+                <th>Name</th>
+                <th>Usk</th>
+                <th>Category</th>
+                <th>Status</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>}
+            </thead>
+            <tbody>
+              {currentItems?.map((item, index) => (
+                <tr key={index} role="button" onClick={() => handleClick(item)}>
+                  <td>
+                    {item?.images && (
+                      <img
+                        src={`http://localhost:5000/${item?.images[0]?.url}`}
+                        alt="dogimage"
+                      ></img>
+                    )}
+                  </td>
+                  <td>{item.name}</td>
+                  <td>{item.sku}</td>
+                  <td>
+                    <span className="db-category">{item.category}</span>
+                  </td>
+                  <td>
+                    {" "}
+                    <span className="db-status">{item.status}</span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
       <div className="pagination">
         <Pagination
           data={data}
