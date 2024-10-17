@@ -149,62 +149,100 @@ const deleteDogById = async (req, res) => {
 
 const updateDog = async (req, res) => {
   try {
-    const dogId = req.body._id;
+    const dogId = req.body.id;
+    console.log('url', req.body.imagesarr );
+
     const fieldsToUpdate = [
-      'name', 'sku', 'size', 'gender', 'category', 
-      'price', 'color', 'vaccinated', 'dewormed', 
-      'status', 'additionalInfo', 'birthDate', 
+      'name', 'sku', 'size', 'gender', 'category',
+      'price', 'color', 'vaccinated', 'dewormed',
+      'status', 'additionalInfo', 'birthDate',
       'location', 'certified', 'microchip'
     ];
 
+    // Find existing dog
     const existingDog = await Dog.findById(dogId);
     if (!existingDog) {
       return res.status(404).json({ message: 'Dog not found' });
     }
 
-    
+    // Update fields if changed
     fieldsToUpdate.forEach(field => {
       if (req.body[field] !== undefined && req.body[field] !== existingDog[field]) {
         existingDog[field] = req.body[field];
       }
     });
 
-    // Delete existing images
-    
+    // Fetch existing images related to the dog
     const images = await Image.find({ relatedId: dogId });
-    await Promise.all(images.map(image => {
-      const imagePath = path.join(image.url);
-      return fs.promises.unlink(imagePath)
-        .then(() => console.log(`Deleted image from filesystem: ${imagePath}`))
-        .catch(err => console.error('Failed to delete image from filesystem:', imagePath, err));
-    }));
+    const imagsId = [];
 
-    await Image.deleteMany({ relatedId: dogId });
+    // Delete images that are not in the req.body.imagesarr
+    await Promise.all(
+      images.map(async (image) => {
+        const imagePath = path.join(image.url);
 
-    // Save new images
-    const files = req.files;
-    const newImages = await Promise.all(files.map(file => 
-      Image.create({
-        url: file.path,
-        altText: file.originalname,
-        type: 'Dog',
-        relatedId: dogId
+        // If the image URL is not included in req.body.imagesarr, delete it
+        if (!req.body.imagesarr || !req.body.imagesarr.includes(image.url)) {
+          imagsId.push(image._id); // Collect image IDs for database deletion
+          try {
+            await fs.promises.unlink(imagePath); // Delete from filesystem
+            console.log(`Deleted image from filesystem: ${imagePath}`);
+          } catch (err) {
+            console.error('Failed to delete image from filesystem:', imagePath, err);
+          }
+        }
       })
-    ));
+    );
 
+    // Delete image records from the database
+    await Promise.all(
+      imagsId.map(async (imagId) => {
+        try {
+          await Image.findByIdAndDelete(imagId);
+          console.log(`Deleted image from database: ${imagId}`);
+        } catch (err) {
+          console.error(`Failed to delete image from database: ${imagId}`, err);
+        }
+      })
+    );
+
+    // Save new images (if any are uploaded)
+    const files = req.files || [];
+    const newImages = [];
+
+    if (files.length > 0) {
+      newImages.push(
+        ...await Promise.all(
+          files.map(file =>
+            Image.create({
+              url: file.path,
+              altText: file.originalname,
+              type: 'Dog',
+              relatedId: dogId
+            })
+          )
+        )
+      );
+    }
+
+    // Save updated dog
     const updatedDog = await existingDog.save();
 
     return res.status(200).json({
       message: 'Dog updated successfully',
       success: true,
       updatedDog,
-      newImages // Include new images in the response if needed
+      newImages // Return new images if any were added
     });
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ message: 'An error occurred while updating the dog.', error: error.message });
+    return res.status(500).json({
+      message: 'An error occurred while updating the dog.',
+      error: error.message
+    });
   }
 };
+
 
 
 

@@ -6,12 +6,14 @@ function UpdateDogForm({setAddDogForm ,setShowInfo,setShowUpdateForm,setShowLeft
  const [additionalInfo, setAdditionalInfo] = useState(item?.additionalInfo && item?.additionalInfo != "" ? item.additionalInfo.toString().split(','):[]);
   const [inputValue, setInputValue] = useState("");
   const [images, setImages] = useState([...item.images]);
+  const [imagesarr, setImagesArr] = useState([]);
  console.log(additionalInfo)
   const bDate = new Date(item.birthDate).toISOString().split('T')[0];
 
 
-console.log(item.additionalInfo.toString().split(','))
+console.log("imagesurl",imagesarr)
 const [formData, setFormData] = useState({
+  id :item._id,
     name: item.name,
     sku: item.sku,
     price: item.price,
@@ -28,7 +30,7 @@ const [formData, setFormData] = useState({
     status:item.status
   });
 
-
+console.log(images);
 
   const handleAddionInputChange = (event) => {
     setInputValue(event.target.value);
@@ -63,7 +65,8 @@ const [formData, setFormData] = useState({
   const handleSubmitData = async (e) => {
     e.preventDefault();
     
-    
+    setImagesArr(images.map((item)=>item.url));
+
     const fd = new FormData();
     Object.entries(formData).forEach(([key, value]) => {
       fd.append(key, value);
@@ -72,20 +75,23 @@ const [formData, setFormData] = useState({
     for (let i = 0; i < images.length; i++) {
       fd.append('images', images[i].file); 
     }
-    fd.append("additionalInfo",additionalInfo);
+    for (let i = 0; i < images.length; i++) {
+      fd.append('imagesarr', images[i].url); 
+    }
     
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/dog/addnewdog",
+        "http://localhost:5000/api/dog/updatdog",
         fd,
         {
           headers: { "Content-Type": "multipart/form-data" },
         }
       );
 
-      if (response.status === 201) {
-        setAddDogForm(false);
+      if (response.status === 200) {
+        setShowUpdateForm(false);
+        setShowLeftSide(true);
         setRefresh((prv)=>!prv);
       }
     } catch (error) {
@@ -96,14 +102,12 @@ const [formData, setFormData] = useState({
   };
 
   
-console.log(bDate)
+
   function handleCancleButton() {
     setAddDogForm(false);
     setShowInfo(false);
     setShowUpdateForm(false);
     setShowLeftSide(true)
-
-    console.log('aa')
   }
  
   
