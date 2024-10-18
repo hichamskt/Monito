@@ -2,14 +2,17 @@ import React , { useRef, useState }from 'react'
 import { RxCross2 } from "react-icons/rx";
 import { FaPlus } from "react-icons/fa6";
 import axios from "axios";
+import axiosInstance from '../../axios/axiosInstance';
 
 function UpdateProduct({setShowUpdatePrd,item}) {
     
     const [images, setImages] = useState([...item.images]);
+    const [imagesarr, setImagesArr] = useState([]);
     const fileInputRef = useRef(null);
 console.log(item)
    
   const [formData, setFormData] = useState({
+    _id:item._id,
     porductName: item.porductName,
     productCategory:item.productCategory,
     productSku:item.productSku,
@@ -23,7 +26,8 @@ console.log(item)
 
   const handleSubmitData = async (e) => {
     e.preventDefault();
-    
+    setImagesArr(images.map((item)=>item.url));
+
     
     const fd = new FormData();
     Object.entries(formData).forEach(([key, value]) => {
@@ -33,11 +37,14 @@ console.log(item)
     for (let i = 0; i < images.length; i++) {
       fd.append('images', images[i].file); 
     }
+    for (let i = 0; i < images.length; i++) {
+      fd.append('imagesarr', images[i].url); 
+    }
     
     
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/product/addnewproduct",
+        "http://localhost:5000/api/product/updatproduct",
         fd,
         {
           headers: { "Content-Type": "multipart/form-data" },
@@ -91,6 +98,21 @@ console.log(item)
     setImages((prevImages) => prevImages.filter((_, i) => i !== index));
   }
 
+
+  const hundleDelet = async () => {
+    try {
+      const response = await axiosInstance.delete("/product/deletproductbyid", {
+        data: { _id: item._id },
+      });
+      if (response.status === 200) {
+        console.log("Deletion successful:", response.data);
+        setShowUpdatePrd(false);
+
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
    
 
   return (
@@ -198,6 +220,7 @@ console.log(item)
         <hr />
         <div className='addp-button-sec'>
           <button onClick={handleSubmitData}>Save</button>
+          <button style={{backgroundColor:'red'}} onClick={hundleDelet}>Delete</button>
         </div>
     </div>
   )

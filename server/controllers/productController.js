@@ -115,4 +115,159 @@ const modifieProductStatus = async (req, res) => {
   }
 };
 
-module.exports = {addNewProduct, getAllProducts, modifieProductStatus};
+
+const updateProduct = async (req, res) => {
+  try {
+    const productId = req.body._id;
+    
+
+    const fieldsToUpdate = [
+      'porductName',
+      'productCategory',
+      'productSku',
+      'purchasePrice',
+      'sellingPrice',
+      'quantity',
+      'unite',
+    ];
+
+    // Find existing product
+    const existingPrd = await Product.findById(productId);
+    if (!existingPrd) {
+      return res.status(404).json({ message: 'prd not found' });
+    }
+
+   
+    // Update fields if changed
+    fieldsToUpdate.forEach(field => {
+      if (req.body[field] !== undefined && req.body[field] !== existingPrd[field]) {
+        existingPrd[field] = req.body[field];
+      }
+    });
+
+    // Fetch existing images related to the dog
+    const images = await Image.find({ relatedId: productId  });
+    const imagsId = [];
+
+    // Delete images that are not in the req.body.imagesarr
+    await Promise.all(
+      images.map(async (image) => {
+        const imagePath = path.join(image.url);
+
+        // If the image URL is not included in req.body.imagesarr, delete it
+        if (!req.body.imagesarr || !req.body.imagesarr.includes(image.url)) {
+          imagsId.push(image._id); // Collect image IDs for database deletion
+          try {
+            await fs.promises.unlink(imagePath); // Delete from filesystem
+            console.log(`Deleted image from filesystem: ${imagePath}`);
+          } catch (err) {
+            console.error('Failed to delete image from filesystem:', imagePath, err);
+          }
+        }
+      })
+    );
+
+    // Delete image records from the database
+    await Promise.all(
+      imagsId.map(async (imagId) => {
+        try {
+          await Image.findByIdAndDelete(imagId);
+          console.log(`Deleted image from database: ${imagId}`);
+        } catch (err) {
+          console.error(`Failed to delete image from database: ${imagId}`, err);
+        }
+      })
+    );
+
+
+    // Save new images (if any are uploaded)
+const newImgsId = []
+    const files = req.files || [];
+    for (const file of files) {
+      const newimg =  await Image.create({
+        url: file.path, 
+        altText: file.originalname, 
+        type: 'Product', 
+        relatedId: productId
+      });
+      newImgsId.push(newimg._id);
+    }
+
+    //save new images id 
+    const idOfNotDeletedImages = []; 
+    
+   
+    existingPrd.images.forEach(id => {
+      
+
+      if (!imagsId.includes(id)) {
+        idOfNotDeletedImages.push(id);
+      }
+    });
+
+    
+
+    existingPrd.images = [...idOfNotDeletedImages, ...newImgsId];
+    
+    // Save updated product
+    const updatedPrd = await existingPrd.save();
+
+    return res.status(200).json({
+      message: 'Product updated successfully',
+      success: true,
+      updatedPrd,
+       // Return new images if any were added
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      message: 'An error occurred while updating the prd.',
+      error: error.message
+    });
+  }
+};
+const deleteProductById = async (req, res) => {
+  try {
+    const id = req.body._id;
+
+    if (!id) {
+      return res.status(400).json({ message: 'No ID provided.' });
+    }
+
+    
+    const images = await Image.find({ relatedId: id });
+
+    
+    if (!images || images.length === 0) {
+      return res.status(404).json({ message: 'No related images found.' });
+    }
+
+    
+
+    images.forEach((image) => {
+      const imagePath = path.join(image.url);
+      console.log(imagePath)
+      fs.unlink(imagePath, (err) => {
+        if (err) {
+          console.error('Failed to delete image from filesystem:', imagePath, err);
+        } else {
+          console.log(`Deleted image from filesystem: ${imagePath}`);
+        }
+      });
+    });
+    
+    await Image.deleteMany({ relatedId: id });
+
+  
+    await Product.findByIdAndDelete(id);
+
+  
+    return res.status(200).json({ message: 'Dog and related images deleted successfully.' });
+
+  } catch (error) {
+    console.error('Error deleting dog and images:', error);
+    return res.status(500).json({ message: 'Internal server error.' });
+  }
+};
+
+module.exports = {addNewProduct, getAllProducts, modifieProductStatus , updateProduct, deleteProductById};
