@@ -54,7 +54,7 @@ const addNewDog = async (req, res) => {
           );
 
           return res.status(201).json({
-            message: 'Product added successfully',
+            message: 'dog added successfully',
             success: true,
             savedDog
           });

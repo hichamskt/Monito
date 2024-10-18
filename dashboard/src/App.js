@@ -11,6 +11,7 @@ import Login from "./Pages/Login";
 import ForgetPasswordPage from "./Pages/ForgetPasswordPage";
 import RessetPassword from "./Pages/RessetPassword";
 import PrivateRoute from "./auth/PrivateRoute";
+import CatsPage from "./Pages/CatsPage";
 
 const router = createBrowserRouter([
   { path: "/login", element: <Login /> },
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
       {
         path: "/dogs",
         element: <PrivateRoute element={<DogsPage />} /> ,
+      },
+      {
+        path: "/cats",
+        element: <PrivateRoute element={<CatsPage />} /> ,
       },
       {
         path: "/Products",

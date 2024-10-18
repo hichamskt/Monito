@@ -110,7 +110,7 @@ const data2 = [1,2,3,4]
             <OrdersTable data={data} setshowDetais={setshowDetais} />
       <div className="orderpage-footer">
         <h5 className="ord-rslt">106 Results</h5>
-        <Pagination></Pagination>
+        {/* <Pagination></Pagination> */}
       </div>
       {showDetais && <Deails data={data2}  setshowDetais={setshowDetais} />}
     </div>

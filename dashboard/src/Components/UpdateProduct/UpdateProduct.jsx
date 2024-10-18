@@ -71,7 +71,7 @@ console.log(item)
       ...formData,
       [name]: value,
     });
-    if(name === 'purchasePrice' ||  name === 'sellingPrice' ){
+    
       
       setProfit(prevProfit => {
         const purchasePrice = name === 'purchasePrice' ? Number(value) : Number(formData.purchasePrice);
@@ -81,7 +81,7 @@ console.log(item)
 
 
 
-    }
+    
   };
 
 
