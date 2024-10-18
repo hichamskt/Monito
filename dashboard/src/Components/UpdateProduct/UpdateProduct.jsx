@@ -4,10 +4,11 @@ import { FaPlus } from "react-icons/fa6";
 import axios from "axios";
 import axiosInstance from '../../axios/axiosInstance';
 
-function UpdateProduct({setShowUpdatePrd,item}) {
+function UpdateProduct({setShowUpdatePrd,item, setRefresh}) {
     
     const [images, setImages] = useState([...item.images]);
     const [imagesarr, setImagesArr] = useState([]);
+    
     const fileInputRef = useRef(null);
 console.log(item)
    
@@ -23,6 +24,7 @@ console.log(item)
     status:item.status,
   });
 
+  const [profit,setProfit]=useState(  Number(formData.sellingPrice) - Number(formData.purchasePrice) );
 
   const handleSubmitData = async (e) => {
     e.preventDefault();
@@ -53,6 +55,7 @@ console.log(item)
 
       if (response.status === 201) {
        setShowUpdatePrd(false);
+       setRefresh((prv)=>!prv);
       }
     } catch (error) {
       console.log(error.response?.data);
@@ -68,6 +71,17 @@ console.log(item)
       ...formData,
       [name]: value,
     });
+    if(name === 'purchasePrice' ||  name === 'sellingPrice' ){
+      
+      setProfit(prevProfit => {
+        const purchasePrice = name === 'purchasePrice' ? Number(value) : Number(formData.purchasePrice);
+        const sellingPrice = name === 'sellingPrice' ? Number(value) : Number(formData.sellingPrice);
+        return sellingPrice - purchasePrice;
+      });
+
+
+
+    }
   };
 
 
@@ -189,11 +203,12 @@ console.log(item)
               <span className="ad-ig-text">Selling price</span>
               <input type="number" className="ad-field" placeholder="Selling price"   value={formData.sellingPrice}
                 name="sellingPrice"
+                
                 onChange={(e) => handleInputChange(e)} />
         </div>
         <div className="addp-inv-input-group ">
               <span className="ad-ig-text">Profit</span>
-              <input type="number" className="ad-field" placeholder="00" disabled  />
+              <input type="number" className="ad-field" value={profit} placeholder="00" disabled  />
         </div>
         </div>
         <hr />

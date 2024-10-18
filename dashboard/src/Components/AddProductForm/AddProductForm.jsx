@@ -5,9 +5,10 @@ import { FaPlus } from "react-icons/fa6";
 import axios from 'axios';
 
 
-function AddProductForm({setShowAddPrd}) {
+function AddProductForm({setShowAddPrd, setRefresh}) {
   const [images, setImages] = useState([]);
   const fileInputRef = useRef(null);
+  const [profit,setProfit]=useState( 0 );
 
   const [formData, setFormData] = useState({
     porductName:"",
@@ -45,6 +46,7 @@ function AddProductForm({setShowAddPrd}) {
 
       if (response.status === 201) {
        setShowAddPrd(false);
+       setRefresh((prv)=>!prv);
       }
     } catch (error) {
       console.log(error.response?.data);
@@ -60,6 +62,14 @@ function AddProductForm({setShowAddPrd}) {
       ...formData,
       [name]: value,
     });
+    
+    setProfit(prevProfit => {
+      const purchasePrice = name === 'purchasePrice' ? Number(value) : Number(formData.purchasePrice);
+      const sellingPrice = name === 'sellingPrice' ? Number(value) : Number(formData.sellingPrice);
+      return sellingPrice - purchasePrice;
+    });
+    
+
   };
 
 
@@ -167,7 +177,7 @@ function AddProductForm({setShowAddPrd}) {
         </div>
         <div className="addp-inv-input-group ">
               <span className="ad-ig-text">Profit</span>
-              <input type="number" className="ad-field" placeholder="00" disabled  />
+              <input type="number" className="ad-field" placeholder="00" disabled value={profit} />
         </div>
         </div>
         <hr />

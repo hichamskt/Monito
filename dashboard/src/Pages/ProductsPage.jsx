@@ -19,14 +19,21 @@ function ProductsPage() {
   const [data,setData]=useState([])
   const [item,setItem]=useState([])
   const [searchTerm, setSearchTerm] = useState("");
+  const [itemOffset, setItemOffset] = useState(0);
 
+  
+  
+  
   const filteredItems = data.filter((item) =>
     item.porductName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    item.productCategory.toLowerCase().includes(searchTerm.toLowerCase())||
-    item.status.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  item.productCategory.toLowerCase().includes(searchTerm.toLowerCase())||
+  item.status.toLowerCase().includes(searchTerm.toLowerCase())
+);
 
-  const fetchData = async () => {
+const endOffset = itemOffset + 4;
+const currentItems =  filteredItems.slice(itemOffset, endOffset);
+ 
+const fetchData = async () => {
     try {
       const response = await axiosInstance.get("/product/getallproducts");
       setData(response.data);
@@ -90,8 +97,8 @@ function ProductsPage() {
     
   return (
     <div className='product-Page'>
-      {showAddPrd && <AddProductForm  setShowAddPrd={setShowAddPrd}></AddProductForm>}
-      {showUpdatePrd && <UpdateProduct setShowUpdatePrd={setShowUpdatePrd} item={item}></UpdateProduct>}
+      {showAddPrd && <AddProductForm  setShowAddPrd={setShowAddPrd} setRefresh={setRefresh}></AddProductForm>}
+      {showUpdatePrd && <UpdateProduct setShowUpdatePrd={setShowUpdatePrd} item={item} setRefresh={setRefresh}></UpdateProduct>}
       {showAddPrd && <div className='darkeffect'></div>}
       {showUpdatePrd && <div className='darkeffect'></div>}
         <h2 className="pp-sectiontitle">Products Listing</h2>
@@ -119,7 +126,7 @@ function ProductsPage() {
             </tr>
           </thead>
           <tbody>
-            {filteredItems.map((item, index) => (
+            {currentItems.map((item, index) => (
               <tr>
                 <td>
                 {item?.images && (
@@ -154,7 +161,14 @@ function ProductsPage() {
         </table>
       </div>
       <div className="pagination">
-        {/* <Pagination></Pagination> */}
+        <Pagination
+        data={data}
+        itemOffset={itemOffset}
+        setItemOffset={setItemOffset}
+        currentItems={currentItems}
+        itemsPerPage={4}
+        
+        />
       </div>
     </div>
   )
