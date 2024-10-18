@@ -120,7 +120,7 @@ function Rightside({
 
   const hundleDelet = async () => {
     try {
-      const response = await axiosInstance.delete("/dog/deletdogbyid", {
+      const response = await axiosInstance.delete("/cat/deletcatbyid", {
         data: { _id: item._id },
       });
       if (response.status === 200) {
