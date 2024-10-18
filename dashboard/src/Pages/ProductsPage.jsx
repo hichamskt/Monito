@@ -17,7 +17,13 @@ function ProductsPage() {
   const [loading,setLoading]=useState(false);
   const [error,setError]=useState("")
   const [data,setData]=useState([])
+  const [searchTerm, setSearchTerm] = useState("");
 
+  const filteredItems = data.filter((item) =>
+    item.porductName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    item.productCategory.toLowerCase().includes(searchTerm.toLowerCase())||
+    item.status.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   const fetchData = async () => {
     try {
@@ -41,6 +47,9 @@ function ProductsPage() {
     setShowUpdatePrd(true);
   }
 
+  const handleSearch = (event) => {
+    setSearchTerm(event.target.value);
+  };
   
   const handleStatus = async (productId) => {
   
@@ -56,7 +65,7 @@ function ProductsPage() {
   
     try {
       
-      const response = await axiosInstance.post("/product/modifieproductstatus", {
+       await axiosInstance.post("/product/modifieproductstatus", {
         _id: productId,
         status: newStatus,
       });
@@ -87,7 +96,8 @@ function ProductsPage() {
         <div className="pp-search">
         <div className="pp-searchinput">
           <FaSearch />
-          <input type="text" placeholder="Search"></input>
+          <input type="text" placeholder="Search" value={searchTerm}
+            onChange={handleSearch}></input>
         </div>
         <button onClick={()=>setShowAddPrd(true)}>+ Add Product</button>
       </div>
@@ -107,7 +117,7 @@ function ProductsPage() {
             </tr>
           </thead>
           <tbody>
-            {data.map((item, index) => (
+            {filteredItems.map((item, index) => (
               <tr>
                 <td>
                 {item?.images && (
