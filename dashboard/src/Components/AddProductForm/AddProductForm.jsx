@@ -9,6 +9,29 @@ function AddProductForm({setShowAddPrd}) {
   const [images, setImages] = useState([]);
   const fileInputRef = useRef(null);
 
+  const [formData, setFormData] = useState({
+    porductName:"",
+    productCategory:"",
+    productSku:"",
+    purchasePrice:"",
+    sellingPrice:"",
+    quantity:"",
+    unite:"",
+  });
+
+
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+
+
+
   function selectFiles() {
     fileInputRef.current.click();
   }
@@ -50,7 +73,9 @@ function AddProductForm({setShowAddPrd}) {
         </div>
         <div className="addp-input-group">
               <span>Category:</span>
-              <select id="options" value="dd">
+              <select id="options"  value={formData.productCategory}
+                name="productCategory"
+                onChange={(e) => handleInputChange(e)}>
                 <option value="">--Please choose an option--</option>
                 <option value="option1">Option 1</option>
                 <option value="option2">Option 2</option>
@@ -60,7 +85,9 @@ function AddProductForm({setShowAddPrd}) {
   
         <div className="addp-input-group">
               <span className="ad-ig-text">product Sku</span>
-              <input type="text" className="ad-field" placeholder="Purchase price" />
+              <input type="text" className="ad-field" placeholder="Purchase price" value={formData.productSku}
+                name="productSku"
+                onChange={(e) => handleInputChange(e)} />
         </div>
         </div>
         <hr></hr>
@@ -92,15 +119,19 @@ function AddProductForm({setShowAddPrd}) {
         <div className='addp-inv'>
         <div className="addp-inv-input-group">
               <span className="ad-ig-text">purchase price</span>
-              <input type="number" className="ad-field" placeholder="purchase price" />
+              <input type="number" className="ad-field" placeholder="purchase price"  value={formData.purchasePrice}
+                name="purchasePrice"
+                onChange={(e) => handleInputChange(e)} />
         </div>
         <div className="addp-inv-input-group">
               <span className="ad-ig-text">Selling price</span>
-              <input type="number" className="ad-field" placeholder="Selling price" />
+              <input type="number" className="ad-field" placeholder="Selling price"   value={formData.sellingPrice}
+                name="sellingPrice"
+                onChange={(e) => handleInputChange(e)} />
         </div>
         <div className="addp-inv-input-group ">
               <span className="ad-ig-text">Profit</span>
-              <input type="number" className="ad-field" placeholder="00" disabled />
+              <input type="number" className="ad-field" placeholder="00" disabled  />
         </div>
         </div>
         <hr />
@@ -108,11 +139,15 @@ function AddProductForm({setShowAddPrd}) {
         <div className='addp-inv'>
         <div className="addp-input-group">
               <span className="ad-ig-text">Quantity</span>
-              <input type="text" className="ad-field" placeholder="Purchase price" />
+              <input type="text" className="ad-field" placeholder="00"   value={formData.quantity}
+                name="quantity"
+                onChange={(e) => handleInputChange(e)} />
         </div>
         <div className="addp-input-group">
         <span>Unite:</span>
-              <select id="options" value="dd">
+              <select id="options"  value={formData.unite}
+                name="unite"
+                onChange={(e) => handleInputChange(e)}>
                 <option value="">Unit</option>
                 <option value="option1">Option 1</option>
                 <option value="option2">Option 2</option>
