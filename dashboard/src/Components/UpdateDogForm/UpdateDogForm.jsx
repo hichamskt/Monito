@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import "../UpdateDogForm/UpdateDogForm.css";
 import { RxCross2 } from "react-icons/rx";
 import axios from "axios";
-function UpdateDogForm({setAddDogForm ,setShowInfo,setShowUpdateForm,setShowLeftSide,item,setRefresh}) {
+function UpdateDogForm({setAddDogForm ,setShowInfo,setShowUpdateForm,setShowLeftSide,item,setRefresh ,route}) {
  const [additionalInfo, setAdditionalInfo] = useState(item?.additionalInfo && item?.additionalInfo != "" ? item.additionalInfo.toString().split(','):[]);
   const [inputValue, setInputValue] = useState("");
   const [images, setImages] = useState([...item.images]);
@@ -82,7 +82,7 @@ const [formData, setFormData] = useState({
     fd.append("additionalInfo",additionalInfo);
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/dog/updatdog",
+        `http://localhost:5000/api/${route}`,
         fd,
         {
           headers: { "Content-Type": "multipart/form-data" },

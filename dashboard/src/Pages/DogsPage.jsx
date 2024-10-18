@@ -64,6 +64,7 @@ function DogsPage() {
           setAddDogForm={setAddDogForm}
           setShowInfo={setShowInfo}
           setRefresh={setRefresh}
+          route={'dog/addnewdog'}
         />
       ) : (
         ShowLeftSide && (
@@ -84,6 +85,7 @@ function DogsPage() {
           setShowUpdateForm={setShowUpdateForm}
           item={item}
           setRefresh={setRefresh}
+          route={'dog/updatdog'}
         />
       )}
     </div>

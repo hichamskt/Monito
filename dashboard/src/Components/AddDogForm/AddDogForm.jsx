@@ -3,7 +3,7 @@ import "../AddDogForm/AddDogForm.css";
 import { RxCross2 } from "react-icons/rx";
 import axios from "axios";
 
-function AddDogForm({ setAddDogForm, setShowInfo , setRefresh }) {
+function AddDogForm({ setAddDogForm, setShowInfo , setRefresh , route }) {
   const [additionalInfo, setAdditionalInfo] = useState([]);
   const [inputValue, setInputValue] = useState("");
   const [images, setImages] = useState([]);
@@ -49,7 +49,7 @@ function AddDogForm({ setAddDogForm, setShowInfo , setRefresh }) {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/dog/addnewdog",
+        `http://localhost:5000/api/${route}`,
         fd,
         {
           headers: { "Content-Type": "multipart/form-data" },

@@ -11,6 +11,7 @@ const cookieParser = require('cookie-parser');
 const sendMail = require('./utils/sendMail');
 const userRoutes = require("./routes/userRoute")
 const dogRoutes = require("./routes/dogRoute")
+const catRoutes = require("./routes/catRoute")
 const productRoutes = require("./routes/productRoute")
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -37,6 +38,7 @@ if (!fs.existsSync(uploadsDir)) {
 
 app.use('/api/user',userRoutes)
 app.use('/api/dog',dogRoutes)
+app.use('/api/cat',catRoutes)
 app.use('/api/product',productRoutes)
 
 

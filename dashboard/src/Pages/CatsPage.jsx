@@ -31,7 +31,7 @@ function CatsPage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axiosInstance.get("/dog/getdogs");
+        const response = await axiosInstance.get("/cat/getcats");
         setData(response.data);
       } catch (err) {
         setError(err);
@@ -65,6 +65,7 @@ function CatsPage() {
           setAddDogForm={setAddDogForm}
           setShowInfo={setShowInfo}
           setRefresh={setRefresh}
+          route={'cat/addnewcat'}
         />
       ) : (
         ShowLeftSide && (
@@ -85,6 +86,7 @@ function CatsPage() {
           setShowUpdateForm={setShowUpdateForm}
           item={item}
           setRefresh={setRefresh}
+          route={"cat/updatcat"}
         />
       )}
     </div>
