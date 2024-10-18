@@ -73,4 +73,46 @@ const addNewProduct = async (req, res) => {
 };
 
 
-module.exports = {addNewProduct};
+
+const getAllProducts = async (req,res)=>{
+  try {
+    const allProducts = await Product.find().populate('images');
+
+    
+    res.status(200).json(allProducts);
+
+
+  } catch (error) {
+    console.log(error)
+  }
+}
+const modifieProductStatus = async (req, res) => {
+  try {
+    const id = req.body._id;
+    const newStatus = req.body.status;
+    
+    
+    const product = await Product.findById(id);
+
+    
+    if (!product) {
+      return res.status(400).json({ message: 'No product found with the provided ID.' });
+    }
+
+   
+    product.status = newStatus;
+
+   
+    await product.save();
+
+    
+    res.status(200).json({ message: 'Product status updated successfully', product });
+
+  } catch (error) {
+    console.error(error);
+    
+    res.status(500).json({ message: 'An error occurred while updating the product status.' });
+  }
+};
+
+module.exports = {addNewProduct, getAllProducts, modifieProductStatus};
