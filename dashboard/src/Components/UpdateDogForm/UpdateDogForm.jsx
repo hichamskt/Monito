@@ -7,11 +7,11 @@ function UpdateDogForm({setAddDogForm ,setShowInfo,setShowUpdateForm,setShowLeft
   const [inputValue, setInputValue] = useState("");
   const [images, setImages] = useState([...item.images]);
   const [imagesarr, setImagesArr] = useState([]);
- console.log(additionalInfo)
+ 
   const bDate = new Date(item.birthDate).toISOString().split('T')[0];
 
 
-console.log("imagesurl",imagesarr)
+
 const [formData, setFormData] = useState({
   id :item._id,
     name: item.name,

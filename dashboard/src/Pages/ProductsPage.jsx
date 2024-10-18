@@ -17,6 +17,7 @@ function ProductsPage() {
   const [loading,setLoading]=useState(false);
   const [error,setError]=useState("")
   const [data,setData]=useState([])
+  const [item,setItem]=useState([])
   const [searchTerm, setSearchTerm] = useState("");
 
   const filteredItems = data.filter((item) =>
@@ -43,8 +44,9 @@ function ProductsPage() {
 
 
 
-  function hundleUpdateButton (){
+  function hundleUpdateButton (item){
     setShowUpdatePrd(true);
+    setItem(item);
   }
 
   const handleSearch = (event) => {
@@ -89,7 +91,7 @@ function ProductsPage() {
   return (
     <div className='product-Page'>
       {showAddPrd && <AddProductForm  setShowAddPrd={setShowAddPrd}></AddProductForm>}
-      {showUpdatePrd && <UpdateProduct setShowUpdatePrd={setShowUpdatePrd}></UpdateProduct>}
+      {showUpdatePrd && <UpdateProduct setShowUpdatePrd={setShowUpdatePrd} item={item}></UpdateProduct>}
       {showAddPrd && <div className='darkeffect'></div>}
       {showUpdatePrd && <div className='darkeffect'></div>}
         <h2 className="pp-sectiontitle">Products Listing</h2>
@@ -144,7 +146,7 @@ function ProductsPage() {
                   <span >{item.sellingPrice}</span>
                 </td>
                 <td>
-                  <span className='pointer' role='button' onClick={hundleUpdateButton}><FaPencilAlt /></span>
+                  <span className='pointer' role='button' onClick={()=>hundleUpdateButton(item)}><FaPencilAlt /></span>
                 </td>
               </tr>
             ))}

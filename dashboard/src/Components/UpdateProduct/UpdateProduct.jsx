@@ -1,40 +1,100 @@
 import React , { useRef, useState }from 'react'
 import { RxCross2 } from "react-icons/rx";
 import { FaPlus } from "react-icons/fa6";
+import axios from "axios";
 
-function UpdateProduct({setShowUpdatePrd}) {
-    const [images, setImages] = useState([]);
+function UpdateProduct({setShowUpdatePrd,item}) {
+    
+    const [images, setImages] = useState([...item.images]);
     const fileInputRef = useRef(null);
+console.log(item)
+   
+  const [formData, setFormData] = useState({
+    porductName: item.porductName,
+    productCategory:item.productCategory,
+    productSku:item.productSku,
+    purchasePrice:item.purchasePrice,
+    sellingPrice:item.sellingPrice,
+    quantity:item.quantity,
+    unite:item.unite,
+    status:item.status,
+  });
 
-    function selectFiles() {
-      fileInputRef.current.click();
+
+  const handleSubmitData = async (e) => {
+    e.preventDefault();
+    
+    
+    const fd = new FormData();
+    Object.entries(formData).forEach(([key, value]) => {
+      fd.append(key, value);
+    });
+  
+    for (let i = 0; i < images.length; i++) {
+      fd.append('images', images[i].file); 
     }
-    function onFileSelect(event) {
-      const files = event.target.files;
-      if (files.length == 0) return;
-      for (let i = 0; i < files.length; i++) {
-        if (files[i].type.split("/")[0] !== "image") continue;
-        if (!images.some((e) => e.name == files[i].name)) {
-          setImages((prevImages) => [
-            ...prevImages,
-            {
-              name: files[i].name,
-              url: URL.createObjectURL(files[i]),
-            },
-          ]);
+    
+    
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/product/addnewproduct",
+        fd,
+        {
+          headers: { "Content-Type": "multipart/form-data" },
         }
+      );
+
+      if (response.status === 201) {
+       setShowUpdatePrd(false);
+      }
+    } catch (error) {
+      console.log(error.response?.data);
+      
+    }
+    
+  };
+
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+
+
+
+  function selectFiles() {
+    fileInputRef.current.click();
+  }
+  function onFileSelect(event) {
+    const files = event.target.files;
+    if (files.length == 0) return;
+    for (let i = 0; i < files.length; i++) {
+      if (files[i].type.split("/")[0] !== "image") continue;
+      if (!images.some((e) => e.name == files[i].name)) {
+        setImages((prevImages) => [
+          ...prevImages,
+          {
+            file: files[i],
+            name: files[i].name,
+            url: URL.createObjectURL(files[i]),
+          },
+        ]);
       }
     }
-  
-    function deleteImage(index) {
-      setImages((prevImages) => prevImages.filter((_, i) => i !== index));
-    }
-  
+  }
 
+  function deleteImage(index) {
+    setImages((prevImages) => prevImages.filter((_, i) => i !== index));
+  }
 
+   
 
-return(
-<div className='addProfuctForm'>
+  return (
+    <div className='addProfuctForm'>
         <div className='adp-Header'>
             <h3>Create New Product</h3>
             <RxCross2 onClick={()=>setShowUpdatePrd(false)} />
@@ -44,11 +104,15 @@ return(
         <div className='adp-basicinfo'>
         <div className="addp-input-group">
               <span className="ad-ig-text">Product Name</span>
-              <input type="text" className="ad-field" placeholder="Pets Name" />
+              <input type="text" className="ad-field" placeholder="Pets Name" value={formData.porductName}
+                name="porductName"
+                onChange={(e) => handleInputChange(e)}  />
         </div>
         <div className="addp-input-group">
               <span>Category:</span>
-              <select id="options" value="dd">
+              <select id="options"  value={formData.productCategory}
+                name="productCategory"
+                onChange={(e) => handleInputChange(e)}>
                 <option value="">--Please choose an option--</option>
                 <option value="option1">Option 1</option>
                 <option value="option2">Option 2</option>
@@ -58,19 +122,24 @@ return(
   
         <div className="addp-input-group">
               <span className="ad-ig-text">product Sku</span>
-              <input type="text" className="ad-field" placeholder="Purchase price" />
+              <input type="text" className="ad-field" placeholder="Purchase price" value={formData.productSku}
+                name="productSku"
+                onChange={(e) => handleInputChange(e)} />
         </div>
         </div>
         <hr></hr>
         <h3 className='addp-sec-ttl'>Media<span>(images)</span></h3>
         <div className='addp-img-section'>
           
-        {images.map((images, index) => (
+        {images.map((image, index) => (
           <div className="addp-image" key={index}>
             <span className="addp-delete" onClick={() => deleteImage(index)}>
               <RxCross2 className='addp-cross'/>
             </span>
-            <img src={images.url} alt={images.name}></img>
+            
+            <img 
+      src={image.url.includes('upload') ? `http://localhost:5000/${image.url}` : image.url} 
+      alt={image.name}></img>
           </div>
         ))}
 {images.length<4 && <div className='addp-add-img' role='button' onClick={selectFiles}>
@@ -90,15 +159,19 @@ return(
         <div className='addp-inv'>
         <div className="addp-inv-input-group">
               <span className="ad-ig-text">purchase price</span>
-              <input type="number" className="ad-field" placeholder="purchase price" />
+              <input type="number" className="ad-field" placeholder="purchase price"  value={formData.purchasePrice}
+                name="purchasePrice"
+                onChange={(e) => handleInputChange(e)} />
         </div>
         <div className="addp-inv-input-group">
               <span className="ad-ig-text">Selling price</span>
-              <input type="number" className="ad-field" placeholder="Selling price" />
+              <input type="number" className="ad-field" placeholder="Selling price"   value={formData.sellingPrice}
+                name="sellingPrice"
+                onChange={(e) => handleInputChange(e)} />
         </div>
         <div className="addp-inv-input-group ">
               <span className="ad-ig-text">Profit</span>
-              <input type="number" className="ad-field" placeholder="00" disabled />
+              <input type="number" className="ad-field" placeholder="00" disabled  />
         </div>
         </div>
         <hr />
@@ -106,11 +179,15 @@ return(
         <div className='addp-inv'>
         <div className="addp-input-group">
               <span className="ad-ig-text">Quantity</span>
-              <input type="text" className="ad-field" placeholder="Purchase price" />
+              <input type="text" className="ad-field" placeholder="00"   value={formData.quantity}
+                name="quantity"
+                onChange={(e) => handleInputChange(e)} />
         </div>
         <div className="addp-input-group">
         <span>Unite:</span>
-              <select id="options" value="dd">
+              <select id="options"  value={formData.unite}
+                name="unite"
+                onChange={(e) => handleInputChange(e)}>
                 <option value="">Unit</option>
                 <option value="option1">Option 1</option>
                 <option value="option2">Option 2</option>
@@ -120,12 +197,10 @@ return(
         </div>
         <hr />
         <div className='addp-button-sec'>
-          <button className='delet'>Delet </button>
-          <button>Save</button>
-
+          <button onClick={handleSubmitData}>Save</button>
         </div>
     </div>
-)
+  )
 
 
 }
