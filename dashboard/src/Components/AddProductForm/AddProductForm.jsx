@@ -20,6 +20,39 @@ function AddProductForm({setShowAddPrd}) {
   });
 
 
+  const handleSubmitData = async (e) => {
+    e.preventDefault();
+    
+    
+    const fd = new FormData();
+    Object.entries(formData).forEach(([key, value]) => {
+      fd.append(key, value);
+    });
+  
+    for (let i = 0; i < images.length; i++) {
+      fd.append('images', images[i].file); 
+    }
+    
+    
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/product/addnewproduct",
+        fd,
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+        }
+      );
+
+      if (response.status === 201) {
+       setShowAddPrd(false);
+      }
+    } catch (error) {
+      console.log(error.response?.data);
+      
+    }
+    
+  };
+
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -44,6 +77,7 @@ function AddProductForm({setShowAddPrd}) {
         setImages((prevImages) => [
           ...prevImages,
           {
+            file: files[i],
             name: files[i].name,
             url: URL.createObjectURL(files[i]),
           },
@@ -69,7 +103,9 @@ function AddProductForm({setShowAddPrd}) {
         <div className='adp-basicinfo'>
         <div className="addp-input-group">
               <span className="ad-ig-text">Product Name</span>
-              <input type="text" className="ad-field" placeholder="Pets Name" />
+              <input type="text" className="ad-field" placeholder="Pets Name" value={formData.porductName}
+                name="porductName"
+                onChange={(e) => handleInputChange(e)}  />
         </div>
         <div className="addp-input-group">
               <span>Category:</span>
@@ -157,7 +193,7 @@ function AddProductForm({setShowAddPrd}) {
         </div>
         <hr />
         <div className='addp-button-sec'>
-          <button>Save</button>
+          <button onClick={handleSubmitData}>Save</button>
         </div>
     </div>
   )
