@@ -6,6 +6,7 @@ import { FaSearch } from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { useMediaQuery } from 'react-responsive';
 import { IoIosExit } from "react-icons/io";
+import { NavLink } from "react-router-dom";
 
 function Header() {
 const [showSearch,setShowSearch]=useState(false);
@@ -19,8 +20,9 @@ const [showSideBar,setShowSideBar]=useState(false);
       <img src={Logo} alt="Logo" className="logo"></img>
       <div className="nav">
         <ul>
-          <li>Home</li>
-          <li>Category</li>
+          
+          <NavLink to="/"><li>Home</li></NavLink>
+          <NavLink to="/category"><li>Category</li></NavLink>
           <li>About</li>
           <li>Contact</li>
         </ul>

@@ -157,9 +157,11 @@ function AddDogForm({ setAddDogForm, setShowInfo , setRefresh , route }) {
                 onChange={(e) => handleInputChange(e)}
               >
                 <option value="">category</option>
-                <option value="option1">Option 1</option>
-                <option value="option2">Option 2</option>
-                <option value="option3">Option 3</option>
+                <option value="option1">Small Dogs</option>
+                <option value="option2">Airedale</option>
+                <option value="option3">Akita</option>
+                <option value="option3">Australian Shepherd</option>
+                <option value="option3">Shiba</option>
               </select>
             </div>
 
@@ -172,9 +174,9 @@ function AddDogForm({ setAddDogForm, setShowInfo , setRefresh , route }) {
                 onChange={(e) => handleInputChange(e)}
               >
                 <option value="">size</option>
-                <option value="option1">Option 1</option>
-                <option value="option2">Option 2</option>
-                <option value="option3">Option 3</option>
+                <option value="option1">Small</option>
+                <option value="option2">Midiem</option>
+                <option value="option3">Big</option>
               </select>
             </div>
             <div className="ad-input-group">
@@ -186,9 +188,12 @@ function AddDogForm({ setAddDogForm, setShowInfo , setRefresh , route }) {
                 onChange={(e) => handleInputChange(e)}
               >
                 <option value="">color</option>
-                <option value="option1">Option 1</option>
-                <option value="option2">Option 2</option>
-                <option value="option3">Option 3</option>
+                <option value="option1">Apricot & Tan</option>
+                <option value="option2">black</option>
+                <option value="option3">red</option>
+                <option value="option3">yellow</option>
+                <option value="option3">sepia</option>
+                <option value="option3">grey</option>
               </select>
             </div>
             <div className="ad-input-group">
