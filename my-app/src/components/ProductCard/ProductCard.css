@@ -29,6 +29,10 @@
     font-size: .9rem;
 }
 
+.ProductCard .dogimg{
+    width: 100%;
+    height: 230px;
+}
 @media (max-width: 770px) {
     .ProductCard{
         width: 300px;

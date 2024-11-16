@@ -16,7 +16,7 @@ function App() {
     <Route path="/category" element={<CategoryPage></CategoryPage>}></Route>
     <Route path="/category/dogs" element={<DogsPage></DogsPage>}></Route>
     <Route path="/Products" element={<ProductsPage/>}></Route>
-    <Route path="/dog" element={<DogPage/>}></Route>
+    <Route path="/dog/:id" element={<DogPage/>}></Route>
     </Routes>
 
     </BrowserRouter>

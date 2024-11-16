@@ -18,6 +18,8 @@ function AddProductForm({setShowAddPrd, setRefresh}) {
     sellingPrice:"",
     quantity:"",
     unite:"",
+    size:"",
+    sizeUnit:""
   });
 
 
@@ -122,13 +124,33 @@ function AddProductForm({setShowAddPrd, setRefresh}) {
               <select id="options"  value={formData.productCategory}
                 name="productCategory"
                 onChange={(e) => handleInputChange(e)}>
-                <option value="">--Please choose an option--</option>
-                <option value="option1">Option 1</option>
-                <option value="option2">Option 2</option>
-                <option value="option3">Option 3</option>
+                
+                <option value=""></option>
+                <option value="Dogs Food">Dogs Food</option>
+                <option value="Cats Food">Cats Food</option>
+                <option value="Toy">Toy</option>
+              </select>
+            </div>
+        <div className="addp-input-group">
+              <span className="ad-ig-text">Size</span>
+              <input type="text" className="ad-field" placeholder="Size" value={formData.size}
+                name="size"
+                onChange={(e) => handleInputChange(e)}  />
+        </div>
+        <div className="addp-input-group">
+              <span>size Unit:</span>
+              <select id="options"  value={formData.sizeUnit}
+                name="sizeUnit"
+                onChange={(e) => handleInputChange(e)}>
+                
+                <option value=""></option>
+                <option value="gm">gm</option>
+                <option value="kg">kg</option>
+               
               </select>
             </div>
   
+        
         <div className="addp-input-group">
               <span className="ad-ig-text">product Sku</span>
               <input type="text" className="ad-field" placeholder="Purchase price" value={formData.productSku}
@@ -194,10 +216,10 @@ function AddProductForm({setShowAddPrd, setRefresh}) {
               <select id="options"  value={formData.unite}
                 name="unite"
                 onChange={(e) => handleInputChange(e)}>
-                <option value="">Unit</option>
-                <option value="option1">Option 1</option>
-                <option value="option2">Option 2</option>
-                <option value="option3">Option 3</option>
+                <option value=""></option>
+                <option value="unite">Unit</option>
+                <option value="gm">gm</option>
+                <option value="kg">kg</option>
               </select>
         </div>
         </div>

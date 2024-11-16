@@ -2,10 +2,10 @@ import React from "react";
 import "../DogProductCard/DogProductCard.css";
 import gift from "../../assets/gift.png";
 
-function DogProductCard({ imag, desc, prix, product, size }) {
+function DogProductCard({ imag, desc, prix, product, size ,sizeUnit }) {
   return (
     <div className="ProductCard">
-      <img src={imag} alt="dogprd"></img>
+      <img src={`http://localhost:5000/${imag[0]?.url}`} alt="dogprd"></img>
       <h3>{desc}</h3>
       <div className="productageInfo">
         <p>
@@ -13,7 +13,7 @@ function DogProductCard({ imag, desc, prix, product, size }) {
         </p>
         {size ? (
           <p>
-            Size:&nbsp; <span>{size}</span>
+            Size:&nbsp; <span>{size}{sizeUnit}</span>
           </p>
         ) : (
           ""

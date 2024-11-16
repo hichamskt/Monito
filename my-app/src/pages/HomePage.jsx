@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../styles/HomePage.css";
 import Header from "../components/Header/Header";
 import HeroSection from "../components/HeroSection/HeroSection";
 import TitleSection from "../components/TitleSection/TitleSection";
+import { Link } from "react-router-dom";
+
 import dog1 from "../assets/dog1.png";
 import dog2 from "../assets/dog2.png";
 import dog3 from "../assets/dog3.png";
@@ -14,6 +16,8 @@ import dog8 from "../assets/dog8.png";
 import ProductCard from "../components/ProductCard/ProductCard";
 import FirstPoster from "../components/FirstPoster/FirstPoster";
 import Button from "../components/Button/Button";
+import axiosInstance from "../axios/axiosInstance";
+
 
 import prd1 from "../assets/prd1.png";
 import prd2 from "../assets/prd2.png";
@@ -32,6 +36,7 @@ import img2 from "../assets/kno2.png"
 import img3 from "../assets/kno3.png"
 import DogKnowledgeCard from "../components/DogKnowledgeCard/DogKnowledgeCard";
 import Footer from "../components/Footer/Footer";
+import { useState } from "react";
 const dummyKnowledgeData = [
   {
     imag:img1,
@@ -163,6 +168,41 @@ const DummyDogProducts = [
   },
 ];
 function HomePage() {
+const [dogData,setDogData]=useState([]);
+const [productData,setProductData]=useState([]);
+
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axiosInstance.get("/dog/getdogs");
+        setDogData(response.data);
+      } catch (err) {
+        console.log(err)
+      } 
+    };
+
+    fetchData();
+
+  }, []);
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axiosInstance.get("/product/getallproducts");
+        setProductData(response.data);
+      } catch (err) {
+        console.log(err)
+      }
+    };
+    
+    fetchData();
+
+  }, []);
+  
+  
   return (
     <div>
       <div className="colored">
@@ -178,15 +218,17 @@ function HomePage() {
           ButtonText="View more"
         ></TitleSection>
         <div className="dogsSection">
-          {dummyDogData.map((item, index) => (
+          {dogData.map((item, index) => (
+            <Link to={`/dog/${item.id}`} key={index} style={{ textDecoration: "none"}}>
             <ProductCard
-              imag={item.imag}
-              desc={item.desc}
-              gene={item.gene}
-              age={item.age}
-              prix={item.prix}
+              imag={item.images}
+              desc={item.name}
+              gene={item.gender}
+              age={item.birthDate}
+              prix={item.price}
               key={index}
             ></ProductCard>
+            </Link>
           ))}
         </div>
         <Button></Button>
@@ -198,13 +240,14 @@ function HomePage() {
         ></TitleSection>
 
         <div className="dogsSection">
-          {DummyDogProducts.map((item, index) => (
+          {productData.map((item, index) => (
             <DogProductCard
-              imag={item.imag}
-              desc={item.desc}
-              prix={item.prix}
-              product={item.product}
+              imag={item.images}
+              desc={item.porductName}
+              prix={item.sellingPrice}
+              product={item.productCategory}
               size={item.size}
+              sizeUnit={item.sizeUnit}
               key={index}
             ></DogProductCard>
           ))}

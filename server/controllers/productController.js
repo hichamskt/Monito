@@ -14,6 +14,8 @@ const addNewProduct = async (req, res) => {
       quantity,
       unite,
       status,
+      sizeUnit,
+      size
     } = req.body;
 
     const imageIds = [];
@@ -41,6 +43,8 @@ const addNewProduct = async (req, res) => {
       sellingPrice,
       quantity,
       unite,
+      size,
+      sizeUnit,
       images: imageIds,
     });
 
@@ -129,6 +133,8 @@ const updateProduct = async (req, res) => {
       'sellingPrice',
       'quantity',
       'unite',
+      'size',
+      "sizeUnit"
     ];
 
     // Find existing product
