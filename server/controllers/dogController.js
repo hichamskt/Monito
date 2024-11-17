@@ -82,7 +82,8 @@ const getAllDogs = async (req,res)=>{
 const getDogById = async (req,res)=>{
 
   try {
-    const id = req.body._id;
+    const { id } = req.params;
+   
     if(!id){
       return res.status(400).json({ message: 'there is no id' });
     }

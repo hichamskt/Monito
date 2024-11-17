@@ -6,6 +6,7 @@ import HomePage from './pages/HomePage';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import ProductsPage from './pages/ProductsPage';
 import DogPage from './pages/DogPage';
+import ProductPage from './pages/ProductPage';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
     <Route path="/category" element={<CategoryPage></CategoryPage>}></Route>
     <Route path="/category/dogs" element={<DogsPage></DogsPage>}></Route>
     <Route path="/Products" element={<ProductsPage/>}></Route>
+    <Route path="/Products/:product" element={<ProductPage></ProductPage>}></Route>
     <Route path="/dog/:id" element={<DogPage/>}></Route>
     </Routes>
 

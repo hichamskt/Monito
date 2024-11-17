@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "../styles/DogPage.css";
 import Header from "../components/Header/Header";
+
 import img1 from "../assets/prddog1.png";
 import img2 from "../assets/prddog2.png";
 import img3 from "../assets/prddog3.png";
@@ -17,6 +18,13 @@ import youtube from "../assets/youtube.png";
 import insta from "../assets/insta.png";
 import chat from "../assets/chat.png";
 import BreadCrumb from "../UI/BreadCrumb/BreadCrumb";
+import axiosInstance from "../axios/axiosInstance";
+
+import { useParams } from "react-router-dom";
+import { useEffect } from "react";
+
+
+
 const doginfo = {
   SKU: "#1000078",
   Breed: "Shiba Inu Sepia",
@@ -37,46 +45,112 @@ const doginfo = {
 };
 
 function DogPage() {
-  const [selectedImg, setSelectedImg] = useState({index:0,img:img1});
+  const [dogData, setDogData] = useState([]);
+  const [selectedImg, setSelectedImg] = useState(()=>{
+    return dogData?.images && dogData.images[0]
+    ? { index: 0, url: dogData.images[0].url }
+    : { index: 0, url: "" };
+  });
+  const [loading, setLoading] = useState(true);
+  const { id } = useParams();
   
 
+
+  useEffect(() => {
+    const fetchData = async (id) => {
+      try {
+        const response = await axiosInstance.get(`/dog/getdogbyid/${id}`);
+        setDogData(response.data.dog);
+        setSelectedImg({ index: 0,url:response.data.dog.images[0].url})
+
+      } catch (err) {
+        console.log(err);
+      } finally {
+      setLoading(false);
+    }
+    };
+
+    fetchData(id);
+
+  }, [id]);
+
+  console.log(dogData)
+  console.log(selectedImg)
+
   const rightArrowHundler= ()=>{
-    if(doginfo.imgs.length>selectedImg.index+1){
-      setSelectedImg({ index: selectedImg.index + 1,img:doginfo.imgs[selectedImg.index+1]})
+    if(dogData.images.length>selectedImg.index+1){
+      setSelectedImg({ index: selectedImg.index + 1,url:dogData.images[selectedImg.index+1].url})
     }else{
-      setSelectedImg({ index: 0 ,img:doginfo.imgs[0]})
+      setSelectedImg({ index: 0 ,url:dogData.images[0].url})
     }
   }
 
   const leftArrowHundler= ()=>{
     if(0 < selectedImg.index){
       
-      setSelectedImg({ index: selectedImg.index - 1,img:doginfo.imgs[selectedImg.index-1]})
+      setSelectedImg({ index: selectedImg.index - 1,url:dogData.images[selectedImg.index-1].url})
     }else{
       
-      setSelectedImg({ index: doginfo.imgs.length-1 ,img:doginfo.imgs[doginfo.imgs.length - 1]})
+      setSelectedImg({ index: doginfo.imgs.length-1 ,url:dogData.images[selectedImg.index-1].url})
     }
 
   }
 
+
+  const date = new Date(dogData.createdAt);
+  
+  const formattedDate = date.toLocaleDateString(undefined, {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+
+
+  const calculateAge = (birthDate) => {
+    const birth = new Date(birthDate);
+    const today = new Date();
+  
+   
+    const yearDiff = today.getFullYear() - birth.getFullYear();
+    const monthDiff = today.getMonth() - birth.getMonth();
+    const dayDiff = today.getDate() - birth.getDate();
+  
+   
+    if (yearDiff === 0) {
+      let months = monthDiff;
+      if (dayDiff < 0) {
+        months--; 
+      }
+      return months > 0 ? `${months} months` : `Less than 1 month`;
+    }
+  
+  
+    let age = yearDiff;
+    if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {
+      age--; 
+    }
+  
+    return `${age} years`;
+  };
+
   return (
     <div className="container">
       <Header></Header>
-      <div className="dogPage">
+      {loading? "loading": <div className="dogPage">
         <div className="dogSection">
           <div className="dpleftside">
             <div className="mainimg">
               <div className="arleft">
                 <img src={larrow} alt="larrarow" onClick={leftArrowHundler}></img>
               </div>
-              <img src={selectedImg.img} alt="dog" className="maini"></img>
+              <img  src={`http://localhost:5000/${selectedImg?.url}`}  alt="dog" className="maini"></img>
               <div className="arright">
                 <img src={rarrow} alt="raraow" onClick={rightArrowHundler}></img>
               </div>
             </div>
             <div className="aimgs">
-              {doginfo.imgs.map((item, index) => (
-                <img src={item} key={index} alt="dog" onClick={()=>setSelectedImg({index,img:item})} className={selectedImg.img===item?"active":""}></img>
+              {dogData.images.map((item, index) => (
+                <img  src={`http://localhost:5000/${item?.url}`} key={index} alt="dog" onClick={()=>setSelectedImg({index,url:item.url})} className={selectedImg.img===item?"active":""}></img>
               ))}
             </div>
             <div className="healthsec">
@@ -98,9 +172,9 @@ function DogPage() {
           </div>
           <div className="sprightside">
             <BreadCrumb tring="Home category Dog ShibaInuSepia"></BreadCrumb>
-            <p>SKU{doginfo.SKU}</p>
-            <h3>{doginfo.Breed}</h3>
-            <h3>{doginfo.Price}</h3>
+            <p>SKU{dogData.sku}</p>
+            <h3>{dogData.name}</h3>
+            <h3>{dogData.price}VND</h3>
             <div className="btnsgpp">
               <button>Contact us</button>
               <button>
@@ -114,7 +188,7 @@ function DogPage() {
                     <p>SKU</p>
                   </td>
                   <td>
-                    <p>:{doginfo.SKU}</p>
+                    <p>:{dogData.sku}</p>
                   </td>
                 </tr>
                 <tr>
@@ -122,7 +196,7 @@ function DogPage() {
                     <p>Gender</p>
                   </td>
                   <td>
-                    <p>:{doginfo.Gender}</p>
+                    <p>:{dogData.gender}</p>
                   </td>
                 </tr>
                 <tr>
@@ -130,7 +204,7 @@ function DogPage() {
                     <p>Age</p>
                   </td>
                   <td>
-                    <p>:{doginfo.Age}</p>
+                    <p>:{calculateAge(dogData.birthDate)}</p>
                   </td>
                 </tr>
                 <tr>
@@ -138,7 +212,7 @@ function DogPage() {
                     <p>Size</p>
                   </td>
                   <td>
-                    <p>:{doginfo.Size}</p>
+                    <p>:{dogData.size}</p>
                   </td>
                 </tr>
                 <tr>
@@ -146,7 +220,7 @@ function DogPage() {
                     <p>Color</p>
                   </td>
                   <td>
-                    <p>:{doginfo.Color}</p>
+                    <p>:{dogData.color}</p>
                   </td>
                 </tr>
                 <tr>
@@ -154,7 +228,7 @@ function DogPage() {
                     <p>Vaccinated</p>
                   </td>
                   <td>
-                    <p>:{doginfo.Vaccinated}</p>
+                    <p>:{dogData.vaccinated?'Yes':"NO"}</p>
                   </td>
                 </tr>
                 <tr>
@@ -162,7 +236,7 @@ function DogPage() {
                     <p>Dewormed</p>
                   </td>
                   <td>
-                    <p>:{doginfo.Dewormed}</p>
+                    <p>:{dogData.dewormed?"Yes":"No"}</p>
                   </td>
                 </tr>
                 <tr>
@@ -170,7 +244,7 @@ function DogPage() {
                     <p>Cert</p>
                   </td>
                   <td>
-                    <p>:{doginfo.Cert}</p>
+                    <p>:{dogData.certified?'Yes':"No"}</p>
                   </td>
                 </tr>
                 <tr>
@@ -178,7 +252,7 @@ function DogPage() {
                     <p>MicorShip</p>
                   </td>
                   <td>
-                    <p>:{doginfo.Microchip}</p>
+                    <p>:{dogData.microchip?"Yes":"No"}</p>
                   </td>
                 </tr>
                 <tr>
@@ -186,7 +260,7 @@ function DogPage() {
                     <p>Location</p>
                   </td>
                   <td>
-                    <p>:{doginfo.Location}</p>
+                    <p>:{dogData.location}</p>
                   </td>
                 </tr>
                 <tr>
@@ -194,7 +268,7 @@ function DogPage() {
                     <p>Published Date</p>
                   </td>
                   <td>
-                    <p>:{doginfo.Published_Date}</p>
+                    <p>:{formattedDate}</p>
                   </td>
                 </tr>
                 <tr>
@@ -202,14 +276,14 @@ function DogPage() {
                     <p>Additional Information</p>
                   </td>
                   <td>
-                    <p>:{doginfo.Additional_Info}</p>
+                    <p>:{dogData.additionalInfo}</p>
                   </td>
                 </tr>
               </tbody>
             </table>
           </div>
         </div>
-      </div>
+      </div>}
     </div>
   );
 }
