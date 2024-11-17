@@ -22,27 +22,12 @@ import axiosInstance from "../axios/axiosInstance";
 
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
+import ShopIcone from "../UI/ShopIcone/ShopIcone";
+import Cart from "../components/Cart/Cart";
+import { useAppContext } from "../AppContex";
 
 
 
-const doginfo = {
-  SKU: "#1000078",
-  Breed: "Shiba Inu Sepia",
-  Price: "34.000.000 VND",
-  Gender: "Female",
-  Age: "2 Months",
-  Size: "Small",
-  Color: "Apricot & Tan",
-  Vaccinated: "Yes",
-  Dewormed: "Yes",
-  Cert: "Yes (MKA)",
-  Microchip: "Yes",
-  Location: "Vietnam",
-  Published_Date: "12-Oct-2022",
-  imgs: [img1, img2, img3, img4, img5],
-  Additional_Info:
-    "Pure breed Shih Tzu Good body structure With MKA cert and Microchip Father from champion lineage",
-};
 
 function DogPage() {
   const [dogData, setDogData] = useState([]);
@@ -53,7 +38,8 @@ function DogPage() {
   });
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
-  
+  const { setShowCard ,showCard } = useAppContext();
+
 
 
   useEffect(() => {
@@ -74,8 +60,7 @@ function DogPage() {
 
   }, [id]);
 
-  console.log(dogData)
-  console.log(selectedImg)
+  
 
   const rightArrowHundler= ()=>{
     if(dogData.images.length>selectedImg.index+1){
@@ -91,7 +76,7 @@ function DogPage() {
       setSelectedImg({ index: selectedImg.index - 1,url:dogData.images[selectedImg.index-1].url})
     }else{
       
-      setSelectedImg({ index: doginfo.imgs.length-1 ,url:dogData.images[selectedImg.index-1].url})
+      setSelectedImg({ index: dogData.images.length-1 ,url:dogData.images[selectedImg.index-1].url})
     }
 
   }
@@ -136,6 +121,10 @@ function DogPage() {
   return (
     <div className="container">
       <Header></Header>
+      {showCard && <Cart/>}
+      {showCard && <div className='overlay-black'></div>}
+      
+      <ShopIcone/>
       {loading? "loading": <div className="dogPage">
         <div className="dogSection">
           <div className="dpleftside">

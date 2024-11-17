@@ -1,0 +1,20 @@
+.shopicc{
+    position: fixed;
+    right: 50px;
+    bottom: 50px;
+    padding: 1rem;
+    border: 1px solid var( --color-orange-shine);
+    border-radius: 50%;
+    cursor: pointer;
+    opacity: .5;
+}
+
+.shopicc:hover{
+    opacity: 1;
+}
+
+.shopicc svg{
+    width: 40px;
+    color: var( --color-orange-shine);
+}
+

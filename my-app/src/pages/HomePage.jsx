@@ -4,6 +4,7 @@ import Header from "../components/Header/Header";
 import HeroSection from "../components/HeroSection/HeroSection";
 import TitleSection from "../components/TitleSection/TitleSection";
 import { Link } from "react-router-dom";
+import { useAppContext } from "../AppContex";
 
 import dog1 from "../assets/dog1.png";
 import dog2 from "../assets/dog2.png";
@@ -37,6 +38,8 @@ import img3 from "../assets/kno3.png"
 import DogKnowledgeCard from "../components/DogKnowledgeCard/DogKnowledgeCard";
 import Footer from "../components/Footer/Footer";
 import { useState } from "react";
+import ShopIcone from "../UI/ShopIcone/ShopIcone";
+import Cart from "../components/Cart/Cart";
 const dummyKnowledgeData = [
   {
     imag:img1,
@@ -170,6 +173,7 @@ const DummyDogProducts = [
 function HomePage() {
 const [dogData,setDogData]=useState([]);
 const [productData,setProductData]=useState([]);
+const { setShowCard ,showCard } = useAppContext();
 
 
 
@@ -208,6 +212,10 @@ const [productData,setProductData]=useState([]);
       <div className="colored">
         <div className="container">
           <Header></Header>
+          {showCard && <Cart/>}
+      {showCard && <div className='overlay-black'></div>}
+      
+          <ShopIcone/>
           <HeroSection></HeroSection>
         </div>
       </div>

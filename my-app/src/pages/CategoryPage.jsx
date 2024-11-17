@@ -16,7 +16,9 @@ import BreadCrumb from "../UI/BreadCrumb/BreadCrumb";
 import Footer from "../components/Footer/Footer";
 import CategoryCard from "../components/CategoryCard/CategoryCard";
 import CategoryCatPoster from "../components/CategoryCatPoster/CategoryCatPoster";
-
+import ShopIcone from "../UI/ShopIcone/ShopIcone";
+import { useAppContext } from "../AppContex";
+import Cart from "../components/Cart/Cart";
 const dummyDogData = [
   {
     dogimg: img1,
@@ -56,9 +58,16 @@ function CategoryPage() {
   const [showCategory, setShowCategory] = useState(false);
   const [showDogCategory, setShowDogCategory] = useState(false);
   const [showCatsCategory, setShowCatsCategory] = useState(true);
+
+  const { setShowCard ,showCard } = useAppContext();
+
+
   return (
     <div className="container">
       <Header></Header>
+      {showCard && <Cart/>}
+      {showCard && <div className='overlay-black'></div>}
+      <ShopIcone/>
       {showCategory && <Category></Category>}
       {showDogCategory && (
         <div className="dogCategorySection">

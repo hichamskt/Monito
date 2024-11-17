@@ -1,0 +1,153 @@
+.Cart {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: min(100%, 40rem);
+  height: 100%;
+  padding: 2rem;
+  transition: 0.2s cubic-bezier(0.12, 0, 0.39, 0);
+  z-index: 1000;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.Cart .cart-top {
+  display: flex;
+  justify-content: space-between;
+  font-size: 2rem;
+  align-items: center;
+}
+
+.Cart .cart-top svg {
+  font-size: 2.5rem;
+  cursor: pointer;
+}
+.Cart .cart-top svg:hover {
+  color: var(--color-orange-shine);
+  cursor: pointer;
+}
+
+.Cart .emptycard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 2rem;
+  margin-top: 15rem;
+}
+.Cart .emptycard img {
+  width: 100px;
+}
+
+.Cart .cart-mid {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-height: 50vh;
+  overflow-y: auto;
+}
+.Cart .carditem {
+  display: flex;
+  flex-direction: column;
+
+  border: 1px solid #e5e7eb;
+  border-radius: 5px;
+  padding: 0.5rem;
+  gap: 1rem;
+}
+
+.Cart .carditem-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-items: center;
+}
+
+.Cart .carditem-top img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+}
+.Cart .carditem-top svg {
+  cursor: pointer;
+  font-size: 1.3rem;
+}
+.Cart .carditem-top svg:hover {
+  color: var(--color-orange-shine);
+}
+
+.Cart .card-item-info {
+  text-align: left;
+  font-size: 1.3rem;
+  font-weight: 500;
+  text-overflow: ellipsis;
+}
+.Cart .card-item-info p:first-of-type {
+  font-size: 1rem;
+  color: #667479;
+}
+
+.carditem .carditem-bottum {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2rem;
+  justify-content: space-between;
+  border-top: 1px solid #e5e7eb;
+  padding-top: 2rem;
+}
+
+ .carditem .card-item-qnt{
+  background-color: #f3f4f6;
+  border-radius: 4px;
+  color: #003459;
+  display: flex;
+  align-items: center;
+}
+ .carditem .card-item-qnt button{
+    padding: .2rem 1.4rem;
+    font-size: 2rem;
+    cursor: pointer;
+}
+.carditem .card-item-qnt span{
+    font-size: 1.2rem;
+}
+
+.carditem .carditem-bottum p{
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.Cart .cart-btm{
+    padding : .5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    border: 1px solid #e5e7eb;
+    border-radius: 5px;
+}
+
+.Cart .cart-btm p {
+    font-size: 1.3rem;
+}
+.Cart .ttl-line{
+    display: flex;
+    justify-content: space-between;
+}
+.Cart .ttl-card{
+    display: flex;
+    justify-content: space-between;
+    font-weight: Bold;
+}
+.Cart .checkout{
+   padding-top: 1rem;
+   padding-bottom: 1rem;
+   color: white;
+   background-color:  var(--color-primary-darkblue);
+   font-size: 1.3rem;
+   border-radius: 5px;
+   
+   align-items: flex-end;
+}

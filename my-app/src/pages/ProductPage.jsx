@@ -1,19 +1,51 @@
-import React, { useState } from 'react'
+import React, { useState , useEffect} from 'react'
 import Header from '../components/Header/Header'
 import '../styles/ProductPage.css'
-import prd from "../assets/prd2.png"
+import { useParams } from "react-router-dom";
+import axiosInstance from "../axios/axiosInstance";
+import ShopIcone from '../UI/ShopIcone/ShopIcone';
+import Cart from '../components/Cart/Cart';
+import { useAppContext } from '../AppContex';
 
 function ProductPage() {
+  const { setShowCard ,showCard } = useAppContext();
+
   const [quant,setquant]=useState(1);
+  const [loading, setLoading] = useState(true);
+  const [productData, setProductData] = useState();
+  const { productid } = useParams();
+console.log(productid)
+
+  useEffect(() => {
+    const fetchData = async (id) => {
+      try {
+        const response = await axiosInstance.get(`/product/getproductbyid/${id}`);
+        setProductData(response.data.product);
+      } catch (err) {
+        console.log(err);
+      } finally {
+      setLoading(false);
+    }
+    };
+
+    fetchData(productid);
+
+  }, [productid]);
+
+  
+
   return (
     <div className="container">
+      {showCard && <Cart/>}
+      {showCard && <div className='overlay-black'></div>}
         <Header></Header>
-        <div className='productitem'>
-         <img src={prd} alt='produit' className='prdctimage'></img>   
+        <ShopIcone />
+       { !loading && <div className='productitem'>
+         <img src={`http://localhost:5000/${productData.images[0]?.url}`}alt='produit' className='prdctimage'></img>   
         <div className='producttext'>
-        <h4>#aaa23</h4>
-        <h2>Hill Science Weight Cat Food</h2>
-        <h3>280 DH</h3>
+        <h4>{productData.productSku}</h4>
+        <h2>{productData.porductName}</h2>
+        <h3>{productData.sellingPrice}DH</h3>
         <div className='qntAddToCard'>
           <div className='quantt'>
           <button disabled={quant <= 1}  onClick={() => setquant(quant - 1)}>-</button>
@@ -26,30 +58,27 @@ function ProductPage() {
         <tbody>
         <tr>
           <td>SKU</td>
-          <td>#1000078</td>
+          <td>{productData.productSku}</td>
         </tr>
         <tr>
           <td>Status</td>
-          <td>Availabel</td>
+          <td>{productData.status}</td>
         </tr>
         <tr>
           <td>Type</td>
-          <td>Cat Food</td>
+          <td>{productData.productCategory}</td>
         </tr>
         <tr>
           <td>Weigth</td>
-          <td>2gm</td>
+          <td>{productData.size }{productData.sizeUnit }</td>
         </tr>
-        <tr>
-          <td>Weigth</td>
-          <td>2gm</td>
-        </tr>
+        
 
         </tbody>
 
         </table>
         </div>
-        </div>
+        </div>}
     </div>
   )
 }

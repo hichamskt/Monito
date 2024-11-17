@@ -78,6 +78,31 @@ const addNewProduct = async (req, res) => {
 
 
 
+
+const getProductById = async (req,res)=>{
+
+  try {
+    const { productid } = req.params;
+    console.log(productid)
+   
+    if(!productid){
+      return res.status(400).json({ message: 'there is no id' });
+    }
+    const product = await Product.findById(productid).populate('images');
+
+    if(!product){
+      return res.status(400).json({ message: 'no data with id ' });
+    }
+
+    return res.status(200).json({
+      product
+    });
+    
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 const getAllProducts = async (req,res)=>{
   try {
     const allProducts = await Product.find().populate('images');
@@ -276,4 +301,4 @@ const deleteProductById = async (req, res) => {
   }
 };
 
-module.exports = {addNewProduct, getAllProducts, modifieProductStatus , updateProduct, deleteProductById};
+module.exports = {addNewProduct, getAllProducts, modifieProductStatus , updateProduct, deleteProductById , getProductById};

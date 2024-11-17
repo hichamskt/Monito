@@ -7,9 +7,14 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import ProductsPage from './pages/ProductsPage';
 import DogPage from './pages/DogPage';
 import ProductPage from './pages/ProductPage';
+import { AppProvider } from './AppContex';
 
 function App() {
+
+
+
   return (
+    <AppProvider>
     <div className="App">
     <BrowserRouter>
     <Routes>
@@ -24,6 +29,8 @@ function App() {
     </BrowserRouter>
      
     </div>
+
+      </AppProvider>
   );
 }
 

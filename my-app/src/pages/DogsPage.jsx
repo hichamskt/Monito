@@ -16,7 +16,9 @@ import dog5 from "../assets/dog5.png";
 import dog6 from "../assets/dog6.png";
 import dog7 from "../assets/dog7.png";
 import dog8 from "../assets/dog8.png";
-
+import ShopIcone from "../UI/ShopIcone/ShopIcone";
+import { useAppContext } from "../AppContex";
+import Cart from "../components/Cart/Cart";
 
 
 const dummyDogData = [
@@ -81,6 +83,7 @@ const dummyDogData = [
 function DogsPage() {
 const [showFilter,setShowFilter]=useState(true);
 const isSmallScreen = useMediaQuery({ query: '(max-width: 846px)' });
+const { setShowCard ,showCard } = useAppContext();
 
 
 const showFilterHundler = () =>{
@@ -93,6 +96,10 @@ const showFilterHundler = () =>{
   return (
     <div className="container">
       <Header></Header>
+      {showCard && <Cart/>}
+      {showCard && <div className='overlay-black'></div>}
+      
+      <ShopIcone/>
       <div className="dogspage">
         <BreadCrumb tring="Category dogs small dogs"></BreadCrumb>
         <CategoryDogPoster></CategoryDogPoster>
