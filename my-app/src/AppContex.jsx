@@ -4,9 +4,10 @@ const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
   const [showCard, setShowCard] = useState(false);
+  const [items , setItems ] = useState([]);
 
   return (
-    <AppContext.Provider value={{ showCard, setShowCard }}>
+    <AppContext.Provider value={{ showCard, setShowCard, items , setItems }}>
       {children}
     </AppContext.Provider>
   );

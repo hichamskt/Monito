@@ -1,31 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../Cart/Cart.css";
 import { IoMdCloseCircleOutline } from "react-icons/io";
 import { LuTrash } from "react-icons/lu";
 
 import emptyCard from "../../assets/shopping-cart.png";
 import { useAppContext } from "../../AppContex";
-const items = 
-  [ {
-    url:"",
-    productName:"name",
-    price:22,
-    qnt:2,
-    productUsk:"#aze"
-   },
-   {
-    url:"",
-    productName:"name",
-    price:22,
-    qnt:2,
-    productUsk:"#aze"
-   },]
+
   
 
 
 
 function Cart() {
-  const { setShowCard  } = useAppContext();
+  const { setShowCard ,items , setItems } = useAppContext();
+  const [total,setTotal] = useState(items.reduce((total, item) => {
+    return total + item.price * item.qnt;
+  }, 0))
+
+  useEffect(() => {
+    const newTotal = items.reduce((total, item) => {
+      return total + item.price * item.qnt;
+    }, 0);
+    setTotal(newTotal);
+  }, [items]);
+  
 
   return (
     <div className="Cart">
@@ -33,19 +30,19 @@ function Cart() {
         <p>Your Cart</p>
         <IoMdCloseCircleOutline onClick={()=>setShowCard(false)} />
       </div>
-      {/* {<div className="emptycard">
+       {items.length===0 && <div className="emptycard">
         <img src={emptyCard} alt="emptycard" />
         <p>Votre panier est vide !</p>
-      </div>} */}
-      <div className="cart-mid">
+      </div>} 
+      {items.length>0 && <div className="cart-mid">
         {items.map((item, index) => (
-          <CardItem key={index} />
+          <CardItem key={index} product={item}  setItems={ setItems} />
         ))}
-      </div>
-      <div className="cart-btm">
+      </div>}
+      {items.length>0 && <div className="cart-btm">
         <div className="ttl-line">
             <p>Subtotal:</p>
-            <p>555 DH</p>
+            <p>{total} DH</p>
         </div>
         <div className="ttl-line">
             <p>Shipping :</p>
@@ -53,35 +50,66 @@ function Cart() {
         </div>
         <div className="ttl-card">
             <p>Total :</p>
-            <p>600 DH</p>
+            <p>{total+20} DH</p>
         </div>
-      </div>
-      <button className="checkout">Checkout</button>
+      </div>}
+      {items.length>0 && <button className="checkout">Checkout</button>}
     </div>
   );
 }
 
 export default Cart;
 
-function CardItem() {
+function CardItem({product, setItems}) {
+const [ttl,setTtl]=useState(product.qnt * product.price)
+  const handleDeleteFromCart = (id) => {
+    setItems((prevItems) => prevItems.filter((item) => item.productSku !== id));
+  };
+
+  const hundleAddQnt = (id) => {
+     setItems((prevItems) => {
+      
+      return prevItems.map((item) =>
+        item.productSku === id
+          ? { ...item, qnt: item.qnt + 1 }
+          : item
+      );
+    
+  });
+    
+  }
+  const hundleMinusQnt = (id) => {
+     setItems((prevItems) => {
+      
+      return prevItems.map((item) =>
+        item.productSku === id
+          ? { ...item, qnt: item.qnt - 1 }
+          : item
+      );
+    
+  });
+    
+
+  }
+  
   return (
     <div className="carditem">
 
     <div className="carditem-top">
-      <img src={emptyCard} alt="carditem"></img>
+      <img  src={`http://localhost:5000/${product.url}`} alt="carditem"></img>
       <div className="card-item-info">
-        <p>#uaze</p>
-        <p>Authority Everyday Indoor Cat Dry</p>
+        <p>{product.productSku}</p>
+        <p>{product.porductName}</p>
       </div>
-      <LuTrash />
+      <LuTrash onClick={()=>handleDeleteFromCart(product.productSku)} />
     </div>
     <div className="carditem-bottum">
         <div className="card-item-qnt">
-            <button>-</button>
-            <span>1</span>
-            <button>+</button>
+            <button disabled={product.qnt <= 1} onClick={()=>hundleMinusQnt(product.productSku)} >-</button>
+            <span>{product.qnt}</span>
+            <button onClick={()=>hundleAddQnt(product.productSku)}>+</button>
         </div>
-        <p>220Dh</p>
+        <p>{ttl}Dh</p>
     </div>
     </div>
   );

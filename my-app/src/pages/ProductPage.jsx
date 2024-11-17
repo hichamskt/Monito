@@ -8,13 +8,13 @@ import Cart from '../components/Cart/Cart';
 import { useAppContext } from '../AppContex';
 
 function ProductPage() {
-  const { setShowCard ,showCard } = useAppContext();
+  const { setShowCard ,showCard ,items , setItems } = useAppContext();
 
   const [quant,setquant]=useState(1);
   const [loading, setLoading] = useState(true);
   const [productData, setProductData] = useState();
   const { productid } = useParams();
-console.log(productid)
+
 
   useEffect(() => {
     const fetchData = async (id) => {
@@ -32,8 +32,24 @@ console.log(productid)
 
   }, [productid]);
 
+  const hundleAddToCard = (newItem) => {
+    setItems((prevItems) => {
+      const exists = prevItems.find((item) => item.productSku === newItem.productSku);
+      if (exists) {
+        
+        return prevItems.map((item) =>
+          item.productSku === newItem.productSku
+            ? { ...item, qnt: item.qnt + newItem.qnt }
+            : item
+        );
+      } else {
+        
+        return [...prevItems, newItem];
+      }
+    });
+    setShowCard(true);
+  };
   
-
   return (
     <div className="container">
       {showCard && <Cart/>}
@@ -52,7 +68,13 @@ console.log(productid)
             <span>{quant}</span>
             <button onClick={()=>setquant(quant+1)}>+</button>
           </div>
-          <button className='addtocard'>Add To Cart</button>
+          <button className='addtocard'  onClick={()=> hundleAddToCard({
+            productSku:productData.productSku,
+            url:productData.images[0]?.url,
+            porductName: productData.porductName,
+            qnt:quant,
+            price:productData.sellingPrice
+          })}>Add To Cart</button>
         </div>
         <table>
         <tbody>

@@ -6,12 +6,12 @@ function ProductCard({ imag ,
     age,
     prix}) {
 
-      console.log('age:',age)
+      
       const calculateAge = (birthDate) => {
         const birth = new Date(birthDate);
         const today = new Date();
       
-        console.log(birth)
+       
         const yearDiff = today.getFullYear() - birth.getFullYear();
         const monthDiff = today.getMonth() - birth.getMonth();
         const dayDiff = today.getDate() - birth.getDate();
