@@ -241,6 +241,7 @@ const [productData,setProductData]=useState([]);
 
         <div className="dogsSection">
           {productData.map((item, index) => (
+          <Link to={`/Products/product/${item.id}`} key={index} style={{ textDecoration: "none"}}>
             <DogProductCard
               imag={item.images}
               desc={item.porductName}
@@ -250,6 +251,7 @@ const [productData,setProductData]=useState([]);
               sizeUnit={item.sizeUnit}
               key={index}
             ></DogProductCard>
+            </Link>
           ))}
         </div>
 
