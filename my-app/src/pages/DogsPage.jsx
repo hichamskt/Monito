@@ -6,7 +6,7 @@ import CategoryDogPoster from "../components/CategoryDogPoster/CategoryDogPoster
 import Filter from "../components/Filtter/Filter";
 import filter from "../assets/filter.png";
 import ProductCard from "../components/ProductCard/ProductCard";
-import { useMediaQuery } from 'react-responsive';
+import { useMediaQuery } from "react-responsive";
 
 import dog1 from "../assets/dog1.png";
 import dog2 from "../assets/dog2.png";
@@ -19,100 +19,117 @@ import dog8 from "../assets/dog8.png";
 import ShopIcone from "../UI/ShopIcone/ShopIcone";
 import { useAppContext } from "../AppContex";
 import Cart from "../components/Cart/Cart";
-
+import { Link, useParams } from "react-router-dom";
+import axiosInstance from "../axios/axiosInstance";
 
 const dummyDogData = [
-    {
-      imag: dog1,
-      desc: "MO231 - Pomeranian White",
-      gene: "Male",
-      age: 2,
-      prix: 69000000,
-    },
-    {
-      imag: dog2,
-      desc: "MO502 - Poodle  Tiny Yellow",
-      gene: "Female",
-      age: 2,
-      prix: 39000000,
-    },
-    {
-      imag: dog3,
-      desc: "MO102 - Poodle  Tiny Sepia",
-      gene: "Male",
-      age: 2,
-      prix: 40000000,
-    },
-    {
-      imag: dog4,
-      desc: "MO512 - Alaskan  Malamute Grey",
-      gene: "Male",
-      age: 2,
-      prix: 89000000,
-    },
-    {
-      imag: dog5, 
-      desc: "MO231 - Pembroke  Corgi Cream",
-      gene: "Male",
-      age: 2,
-      prix: 79000000,
-    },
-    {
-      imag: dog6,
-      desc: "MO502 - Pembroke  Corgi Tricolor",
-      gene: "Female",
-      age: 2,
-      prix: 90000000,
-    },
-    {
-      imag: dog7,
-      desc: "MO231 - Pomeranian  White",
-      gene: "Female",
-      age: 2,
-      prix: 65000000,
-    },
-    {
-      imag: dog8,
-      desc: "MO512 - Poodle  Tiny Dairy Cow",
-      gene: "Male",
-      age: 2,
-      prix: 50000000,
-    },
-  ];
+  {
+    imag: dog1,
+    desc: "MO231 - Pomeranian White",
+    gene: "Male",
+    age: 2,
+    prix: 69000000,
+  },
+  {
+    imag: dog2,
+    desc: "MO502 - Poodle  Tiny Yellow",
+    gene: "Female",
+    age: 2,
+    prix: 39000000,
+  },
+  {
+    imag: dog3,
+    desc: "MO102 - Poodle  Tiny Sepia",
+    gene: "Male",
+    age: 2,
+    prix: 40000000,
+  },
+  {
+    imag: dog4,
+    desc: "MO512 - Alaskan  Malamute Grey",
+    gene: "Male",
+    age: 2,
+    prix: 89000000,
+  },
+  {
+    imag: dog5,
+    desc: "MO231 - Pembroke  Corgi Cream",
+    gene: "Male",
+    age: 2,
+    prix: 79000000,
+  },
+  {
+    imag: dog6,
+    desc: "MO502 - Pembroke  Corgi Tricolor",
+    gene: "Female",
+    age: 2,
+    prix: 90000000,
+  },
+  {
+    imag: dog7,
+    desc: "MO231 - Pomeranian  White",
+    gene: "Female",
+    age: 2,
+    prix: 65000000,
+  },
+  {
+    imag: dog8,
+    desc: "MO512 - Poodle  Tiny Dairy Cow",
+    gene: "Male",
+    age: 2,
+    prix: 50000000,
+  },
+];
 
 function DogsPage() {
-const [showFilter,setShowFilter]=useState(true);
-const isSmallScreen = useMediaQuery({ query: '(max-width: 846px)' });
-const { setShowCard ,showCard } = useAppContext();
+  const [showFilter, setShowFilter] = useState(true);
+  const [loading, setLoading] = useState(true);
+  const [dogsData, setDogsData] = useState();
+  const [filterdData, setFiltredData] = useState();
+  const isSmallScreen = useMediaQuery({ query: "(max-width: 846px)" });
+  const { setShowCard, showCard } = useAppContext();
+  const { breed } = useParams();
 
+  useEffect(() => {
+    const fetchData = async (id) => {
+      try {
+        const response = await axiosInstance.get(`/dog/getdogbybreed/${breed}`);
+        setDogsData(response.data.dogs);
+      } catch (err) {
+        console.log(err);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-const showFilterHundler = () =>{
-  setShowFilter(!showFilter)
-  
+    fetchData(breed);
+    setFiltredData(dogsData);
+  }, [breed]);
 
-  
-}
+ 
+  const showFilterHundler = () => {
+    setShowFilter(!showFilter);
+  };
 
   return (
     <div className="container">
       <Header></Header>
-      {showCard && <Cart/>}
-      {showCard && <div className='overlay-black'></div>}
-      
-      <ShopIcone/>
+      {showCard && <Cart />}
+      {showCard && <div className="overlay-black"></div>}
+
+      <ShopIcone />
       <div className="dogspage">
         <BreadCrumb tring="Category dogs small dogs"></BreadCrumb>
         <CategoryDogPoster></CategoryDogPoster>
         <div className="dogspageside">
-          {showFilter && <Filter ></Filter>}
+          {showFilter && <Filter setFiltredData={setFiltredData} dogsData={dogsData} ></Filter>}
           <div className="categorypets">
             <div className="categorypetsTitle">
               <span>
-                <h2>Small Dogs</h2>
-                <p>52 puppies</p>
+                <h2>{breed}</h2>
+                <p> 22 puppies</p>
               </span>
               <div className="categorypetsinput">
-                
                 <select
                   id="sortBy"
                   class="sort-select"
@@ -132,18 +149,24 @@ const showFilterHundler = () =>{
               </div>
             </div>
             <div className="cateDogCards">
-            {dummyDogData.map((item, index) => (
-            <ProductCard
-              imag={item.imag}
-              desc={item.desc}
-              gene={item.gene}
-              age={item.age}
-              prix={item.prix}
-              key={index}
-            ></ProductCard>
-          ))}
-          
-                </div>
+              {!loading  &&  dogsData.map((item, index) => (
+                <Link
+                  to={`/dog/${item.id}`}
+                  key={index}
+                  style={{ textDecoration: "none" }}
+                >
+                  
+                  <ProductCard
+                    imag={item.images}
+                    desc={item.name}
+                    gene={item.gender}
+                    age={item.birthDate}
+                    prix={item.price}
+                    key={index}
+                  ></ProductCard>
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
       </div>

@@ -19,6 +19,7 @@ import CategoryCatPoster from "../components/CategoryCatPoster/CategoryCatPoster
 import ShopIcone from "../UI/ShopIcone/ShopIcone";
 import { useAppContext } from "../AppContex";
 import Cart from "../components/Cart/Cart";
+import { Link } from "react-router-dom";
 const dummyDogData = [
   {
     dogimg: img1,
@@ -93,11 +94,13 @@ function CategoryPage() {
           <div className="categoriesCardsGroup">
             {dummyDogData.map((item, index) => {
               return (
+                <Link to={`/category/dogs/${item.disc}`} key={index} style={{ textDecoration: "none"}}>
                 <CategoryCard
                   imag={item.dogimg}
                   disc={item.disc}
                   key={index}
-                ></CategoryCard>
+                  ></CategoryCard>
+                  </Link>
               );
             })}
           </div>

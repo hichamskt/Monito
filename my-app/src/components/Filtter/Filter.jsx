@@ -2,39 +2,47 @@ import React, { useState , forwardRef } from "react";
 import "../Filtter/Filter.css";
 
 
-function Filter() {
-  const [selected, setSelected] = useState({
-    colors: {
-      red: false,
-      green: false,
-      blue: false,
-    },
-    gender: {
-      male: false,
-      female: false,
-    },
-    size: {
-      Small: false,
-      Medium: false,
-      Large: false,
-    },
-  });
+function Filter({
+  setFiltredData,
+  dogsData
+}) {
 
-  const handleColorChange = (event) => {
-    const { name, checked } = event.target;
-    setSelected((prevPreferences) => ({
-      ...prevPreferences,
-      colors: { ...prevPreferences.colors, [name]: checked },
-    }));
+  const [selectedColors, setSelectedColors] = useState([]);
+  const [selectedGender, setSelectedGender] = useState([]);
+  const [priceRange, setPriceRange] = useState({ min: '', max: '' });
+
+  const handleCheckboxChange = (event, stateUpdater, property) => {
+    const { value, checked } = event.target;
+  
+    
+    stateUpdater((prev) =>
+      checked ? [...prev, value] : prev.filter((item) => item !== value)
+    );
+  
+    
+    setFiltredData((prev) =>
+      prev.filter((item) => {
+        const updatedState = checked
+          ? [...stateUpdater, value]
+          : stateUpdater.filter((state) => state !== value);
+  
+        return updatedState.includes(item[property]);
+      })
+    );
+  };
+  
+
+  const handlePriceChange = (event) => {
+    const { name, value } = event.target;
+    setPriceRange((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleGenderChange = (event) => {
-    const { name, checked } = event.target;
-    setSelected((prevPreferences) => ({
-      ...prevPreferences,
-      gender: { ...prevPreferences.gender, [name]: checked },
-    }));
-  };
+
+
+  console.log(dogsData);
+  
+
+  
 
   return (
     <div className="filtercontainer">
@@ -45,8 +53,9 @@ function Filter() {
           <input
             type="checkbox"
             name="male"
-            checked={selected.gender.male}
-            onChange={handleGenderChange}
+
+            onChange={(e) => handleCheckboxChange(e, setSelectedColors)}
+            
           />
           Male
         </label>
@@ -55,8 +64,9 @@ function Filter() {
           <input
             type="checkbox"
             name="female"
-            checked={selected.gender.female}
-            onChange={handleGenderChange}
+            
+            onChange={(e) => handleCheckboxChange(e, setSelectedColors)}
+
           />
           Female
         </label>

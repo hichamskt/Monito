@@ -13,14 +13,6 @@
     border-radius: 10px;
 }
 
-.categorycard img:hover{
-    transform: scale(1.1);
-    
-}
-.categorycard:hover p{
-    background-color: var(--color-secondary-MonYellow-80);
-    color: var(--color-primary-darkblue-80);
-}
 .categorycard p{
     position: absolute;
     background-color: #1035595c;

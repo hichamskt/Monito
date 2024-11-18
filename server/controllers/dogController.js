@@ -101,6 +101,28 @@ const getDogById = async (req,res)=>{
     console.log(error)
   }
 }
+const getDogsByBreed = async (req, res) => {
+  try {
+    const { breed } = req.params;
+
+    console.log(`Requested breed: ${breed}`);
+    if (!breed) {
+      return res.status(400).json({ message: 'Breed parameter is required.' });
+    }
+
+    const dogs = await Dog.find({ category: breed }).populate('images');
+
+    if (!dogs ) {
+      return res.status(404).json({ message: `No dogs found for breed: ${breed}` });
+    }
+
+    return res.status(200).json({ dogs });
+  } catch (error) {
+    console.error('Error fetching dogs by breed:', error);
+    return res.status(500).json({ message: 'An error occurred while fetching data.' });
+  }
+};
+
 
 const deleteDogById = async (req, res) => {
   try {
@@ -264,4 +286,4 @@ const newImgsId = []
 
 
 
-module.exports = {  addNewDog , getAllDogs ,getDogById , deleteDogById , updateDog};
+module.exports = {  addNewDog , getAllDogs ,getDogById , deleteDogById , updateDog , getDogsByBreed};

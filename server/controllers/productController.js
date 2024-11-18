@@ -83,7 +83,7 @@ const getProductById = async (req,res)=>{
 
   try {
     const { productid } = req.params;
-    console.log(productid)
+    
    
     if(!productid){
       return res.status(400).json({ message: 'there is no id' });
