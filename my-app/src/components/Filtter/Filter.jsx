@@ -1,45 +1,45 @@
-import React, { useState , forwardRef } from "react";
+import React, { useState , forwardRef, useEffect } from "react";
 import "../Filtter/Filter.css";
 
 
 function Filter({
   setFiltredData,
-  dogsData
+  dogsData,
+  filterdData
 }) {
 
   const [selectedColors, setSelectedColors] = useState([]);
   const [selectedGender, setSelectedGender] = useState([]);
   const [priceRange, setPriceRange] = useState({ min: '', max: '' });
 
-  const handleCheckboxChange = (event, stateUpdater, property) => {
-    const { value, checked } = event.target;
+  console.log('data',dogsData)
+
+  useEffect(() => {
+    const filtered = dogsData?.filter((item) => {
+      const matchesColor =
+        selectedColors.length === 0 || selectedColors.includes(item.color);
   
-    
-    stateUpdater((prev) =>
-      checked ? [...prev, value] : prev.filter((item) => item !== value)
-    );
+      const matchesGender =
+        selectedGender.length === 0 || selectedGender.includes(item.gender);
   
-    
-    setFiltredData((prev) =>
-      prev.filter((item) => {
-        const updatedState = checked
-          ? [...stateUpdater, value]
-          : stateUpdater.filter((state) => state !== value);
+      const matchesPrice =
+        (priceRange.min === "" || item.price >= priceRange.min) &&
+        (priceRange.max === "" || item.price <= priceRange.max);
   
-        return updatedState.includes(item[property]);
-      })
-    );
-  };
+      return matchesColor && matchesGender && matchesPrice;
+    });
+  
+    setFiltredData(filtered);
+  }, [selectedColors, selectedGender, priceRange]);
+  
+  
   
 
-  const handlePriceChange = (event) => {
-    const { name, value } = event.target;
-    setPriceRange((prev) => ({ ...prev, [name]: value }));
-  };
+  console.log('gender',selectedGender)
 
 
 
-  console.log(dogsData);
+  console.log('filtred',filterdData);
   
 
   
@@ -52,9 +52,14 @@ function Filter({
         <label>
           <input
             type="checkbox"
-            name="male"
-
-            onChange={(e) => handleCheckboxChange(e, setSelectedColors)}
+            name="Male"
+            value="Male"
+            onChange={(e) => {
+              const { value, checked } = e.target;
+              setSelectedGender((prev) =>
+                checked ? [...prev, value] : prev.filter((gender) => gender !== value)
+              );
+            }}
             
           />
           Male
@@ -63,9 +68,14 @@ function Filter({
         <label>
           <input
             type="checkbox"
-            name="female"
-            
-            onChange={(e) => handleCheckboxChange(e, setSelectedColors)}
+            name="Female"
+            value="Female"
+            onChange={(e) => {
+              const { value, checked } = e.target;
+              setSelectedGender((prev) =>
+                checked ? [...prev, value] : prev.filter((gender) => gender !== value)
+              );
+            }}
 
           />
           Female

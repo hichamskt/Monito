@@ -95,6 +95,8 @@ function DogsPage() {
       try {
         const response = await axiosInstance.get(`/dog/getdogbybreed/${breed}`);
         setDogsData(response.data.dogs);
+        setFiltredData(response.data.dogs);
+        
       } catch (err) {
         console.log(err);
       } finally {
@@ -122,7 +124,7 @@ function DogsPage() {
         <BreadCrumb tring="Category dogs small dogs"></BreadCrumb>
         <CategoryDogPoster></CategoryDogPoster>
         <div className="dogspageside">
-          {showFilter && <Filter setFiltredData={setFiltredData} dogsData={dogsData} ></Filter>}
+          {showFilter && <Filter setFiltredData={setFiltredData} dogsData={dogsData} filterdData={filterdData} ></Filter>}
           <div className="categorypets">
             <div className="categorypetsTitle">
               <span>
@@ -149,7 +151,7 @@ function DogsPage() {
               </div>
             </div>
             <div className="cateDogCards">
-              {!loading  &&  dogsData.map((item, index) => (
+              {!loading  &&  filterdData.map((item, index) => (
                 <Link
                   to={`/dog/${item.id}`}
                   key={index}

@@ -13,6 +13,10 @@
     width: -webkit-fill-available;
     
 }
+.dogspage .categorypets {
+    width: -webkit-fill-available;
+    
+}
 .dogspage .dogspageside .categorypetsTitle{
     display: flex;
     justify-content: space-between;
