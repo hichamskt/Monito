@@ -8,78 +8,14 @@ import filter from "../assets/filter.png";
 import ProductCard from "../components/ProductCard/ProductCard";
 import { useMediaQuery } from "react-responsive";
 
-import dog1 from "../assets/dog1.png";
-import dog2 from "../assets/dog2.png";
-import dog3 from "../assets/dog3.png";
-import dog4 from "../assets/dog4.png";
-import dog5 from "../assets/dog5.png";
-import dog6 from "../assets/dog6.png";
-import dog7 from "../assets/dog7.png";
-import dog8 from "../assets/dog8.png";
+import nodata from "../assets/empty-box.png";
+
 import ShopIcone from "../UI/ShopIcone/ShopIcone";
 import { useAppContext } from "../AppContex";
 import Cart from "../components/Cart/Cart";
 import { Link, useParams } from "react-router-dom";
 import axiosInstance from "../axios/axiosInstance";
 
-const dummyDogData = [
-  {
-    imag: dog1,
-    desc: "MO231 - Pomeranian White",
-    gene: "Male",
-    age: 2,
-    prix: 69000000,
-  },
-  {
-    imag: dog2,
-    desc: "MO502 - Poodle  Tiny Yellow",
-    gene: "Female",
-    age: 2,
-    prix: 39000000,
-  },
-  {
-    imag: dog3,
-    desc: "MO102 - Poodle  Tiny Sepia",
-    gene: "Male",
-    age: 2,
-    prix: 40000000,
-  },
-  {
-    imag: dog4,
-    desc: "MO512 - Alaskan  Malamute Grey",
-    gene: "Male",
-    age: 2,
-    prix: 89000000,
-  },
-  {
-    imag: dog5,
-    desc: "MO231 - Pembroke  Corgi Cream",
-    gene: "Male",
-    age: 2,
-    prix: 79000000,
-  },
-  {
-    imag: dog6,
-    desc: "MO502 - Pembroke  Corgi Tricolor",
-    gene: "Female",
-    age: 2,
-    prix: 90000000,
-  },
-  {
-    imag: dog7,
-    desc: "MO231 - Pomeranian  White",
-    gene: "Female",
-    age: 2,
-    prix: 65000000,
-  },
-  {
-    imag: dog8,
-    desc: "MO512 - Poodle  Tiny Dairy Cow",
-    gene: "Male",
-    age: 2,
-    prix: 50000000,
-  },
-];
 
 function DogsPage() {
   const [showFilter, setShowFilter] = useState(true);
@@ -134,8 +70,8 @@ function DogsPage() {
               <div className="categorypetsinput">
                 <select
                   id="sortBy"
-                  class="sort-select"
-                  onchange="sortByOption()"
+                  className="sort-select"
+                  
                 >
                   <option value="popularity">Popularity</option>
                   <option value="date-asc">Date (Newest first)</option>
@@ -150,7 +86,7 @@ function DogsPage() {
                 </div>
               </div>
             </div>
-            <div className="cateDogCards">
+            {filterdData?.length === 0 ? <div className="nodogfound"><img src={nodata} alt="no dogs"></img> <p>No Dogs Were Found</p></div> :<div className="cateDogCards">
               {!loading  &&  filterdData.map((item, index) => (
                 <Link
                   to={`/dog/${item.id}`}
@@ -168,7 +104,7 @@ function DogsPage() {
                   ></ProductCard>
                 </Link>
               ))}
-            </div>
+            </div>}
           </div>
         </div>
       </div>
@@ -177,3 +113,4 @@ function DogsPage() {
 }
 
 export default DogsPage;
+

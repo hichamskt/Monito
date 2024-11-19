@@ -156,7 +156,7 @@ function AddDogForm({ setAddDogForm, setShowInfo , setRefresh , route }) {
                 name="category"
                 onChange={(e) => handleInputChange(e)}
               >
-                <option value="">category</option>
+                <option value=""></option>
                 <option value="option1">Small Dogs</option>
                 <option value="option2">Airedale</option>
                 <option value="option3">Akita</option>
@@ -173,7 +173,7 @@ function AddDogForm({ setAddDogForm, setShowInfo , setRefresh , route }) {
                 name="size"
                 onChange={(e) => handleInputChange(e)}
               >
-                <option value="">size</option>
+                <option value=""></option>
                 <option value="option1">Small</option>
                 <option value="option2">Midiem</option>
                 <option value="option3">Big</option>
@@ -187,7 +187,7 @@ function AddDogForm({ setAddDogForm, setShowInfo , setRefresh , route }) {
                 name="color"
                 onChange={(e) => handleInputChange(e)}
               >
-                <option value="">color</option>
+                <option value=""></option>
                 <option value="option1">Apricot & Tan</option>
                 <option value="option2">black</option>
                 <option value="option3">red</option>

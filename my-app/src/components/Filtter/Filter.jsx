@@ -10,10 +10,11 @@ function Filter({
 
   const [selectedColors, setSelectedColors] = useState([]);
   const [selectedGender, setSelectedGender] = useState([]);
+  const [selectedSize, setSelectedSize] = useState([]);
   const [priceRange, setPriceRange] = useState({ min: '', max: '' });
   
 
-  console.log('data',dogsData)
+  const sizes = ["Small","Meduim","Large"]
 
   useEffect(() => {
     const filtered = dogsData?.filter((item) => {
@@ -23,15 +24,20 @@ function Filter({
       const matchesGender =
         selectedGender.length === 0 || selectedGender.includes(item.gender);
   
+      const matchesSize =
+        selectedSize.length === 0 || selectedSize.includes(item.size);
+  
+
+
       const matchesPrice =
         (priceRange.min === "" || item.price >= priceRange.min) &&
         (priceRange.max === "" || item.price <= priceRange.max);
   
-      return matchesColor && matchesGender && matchesPrice;
+      return matchesColor && matchesGender && matchesPrice && matchesSize;
     });
   
     setFiltredData(filtered);
-  }, [selectedColors, selectedGender, priceRange]);
+  }, [selectedColors, selectedGender, priceRange , selectedSize]);
   
   
   
@@ -50,7 +56,15 @@ const hundleColorChange = (e)=>{
                 checked ? [...prev, value] : prev.filter((color) => color !== value)
               );
 }
+const hundleSizeChange = (e)=>{
+  const { value, checked } = e.target;
+
+              setSelectedSize((prev) =>
+                checked ? [...prev, value] : prev.filter((size) => size !== value)
+              );
+}
   
+console.log("dogs",dogsData)
 
   
 
@@ -128,23 +142,28 @@ const hundleColorChange = (e)=>{
       <hr></hr>
       <h3>Price</h3>
       <div className="pricefilter">
-        <input type="number" min={0} placeholder="Min"></input>
-        <input type="number" min={0} placeholder="Max"></input>
+        <input type="number" min={0} placeholder="Min"  value={priceRange.min}
+            onChange={(e) =>
+              setPriceRange((prev) => ({ ...prev, min: e.target.value }))
+            }></input>
+        <input type="number" min={0} placeholder="Max"  value={priceRange.max}
+            onChange={(e) =>
+              setPriceRange((prev) => ({ ...prev, max: e.target.value }))
+            } ></input>
       </div>
       <hr />
-      <h3>Bread</h3>
-      <label>
-        <input type="checkbox" name="Small" />
-        Small
+      <h3>Size</h3>
+
+
+      {
+        sizes.map((size)=>(
+          <label key={size}>
+        <input type="checkbox" name={size} value={size} onChange={(e)=>hundleSizeChange(e)}  />
+        {size}
       </label>
-      <label>
-        <input type="checkbox" name="Meduim" />
-        Meduim
-      </label>
-      <label>
-        <input type="checkbox" name="Large" />
-        Large
-      </label>
+        ))
+      }
+
       <hr></hr>
     </div>
   );

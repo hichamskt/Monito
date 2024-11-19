@@ -183,10 +183,12 @@ const [formData, setFormData] = useState({
                 name="category"
                 onChange={(e) => handleInputChange(e)}
               >
-                <option value="">category</option>
-                <option value="option1">Option 1</option>
-                <option value="option2">Option 2</option>
-                <option value="option3">Option 3</option>
+                <option value=""></option>
+                <option value="Small Dogs">Small Dogs</option>
+                <option value="Airedale">Airedale</option>
+                <option value="Akita">Akita</option>
+                <option value="Australian Shepherd">Australian Shepherd</option>
+                <option value="Shiba">Shiba</option>
               </select>
             </div>
 
@@ -199,9 +201,9 @@ const [formData, setFormData] = useState({
                 onChange={(e) => handleInputChange(e)}
               >
                 <option value="">size</option>
-                <option value="option1">Option 1</option>
-                <option value="option2">Option 2</option>
-                <option value="option3">Option 3</option>
+                <option value="Small">Small</option>
+                <option value="Meduim">Meduim</option>
+                <option value="Large">Large</option>
               </select>
             </div>
             <div className="ad-input-group">
@@ -212,10 +214,14 @@ const [formData, setFormData] = useState({
                 name="color"
                 onChange={(e) => handleInputChange(e)}
               >
-                <option value="">color</option>
-                <option value="option1">Option 1</option>
-                <option value="option2">Option 2</option>
-                <option value="option3">Option 3</option>
+                <option value=""></option>
+                <option value="Apricot & Tan">Apricot & Tan</option>
+                <option value="black">black</option>
+                <option value="white">white</option>
+                <option value="red">red</option>
+                <option value="yellow">yellow</option>
+                <option value="sepia">sepia</option>
+                <option value="grey">grey</option>
               </select>
             </div>
             <div className="ad-input-group">

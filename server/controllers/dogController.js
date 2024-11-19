@@ -188,7 +188,7 @@ const updateDog = async (req, res) => {
       return res.status(404).json({ message: 'Dog not found' });
     }
 
-    console.log(req.body.additionalInfo);
+    console.log(req.body.category);
     // Update fields if changed
     fieldsToUpdate.forEach(field => {
       if (req.body[field] !== undefined && req.body[field] !== existingDog[field]) {
