@@ -11,6 +11,7 @@ function Filter({
   const [selectedColors, setSelectedColors] = useState([]);
   const [selectedGender, setSelectedGender] = useState([]);
   const [priceRange, setPriceRange] = useState({ min: '', max: '' });
+  
 
   console.log('data',dogsData)
 
@@ -35,11 +36,20 @@ function Filter({
   
   
 
-  console.log('gender',selectedGender)
+const hundleGenderChange = (e)=>{
+  const { value, checked } = e.target;
 
+              setSelectedGender((prev) =>
+                checked ? [...prev, value] : prev.filter((gender) => gender !== value)
+              );
+}
+const hundleColorChange = (e)=>{
+  const { value, checked } = e.target;
 
-
-  console.log('filtred',filterdData);
+              setSelectedColors((prev) =>
+                checked ? [...prev, value] : prev.filter((color) => color !== value)
+              );
+}
   
 
   
@@ -54,12 +64,7 @@ function Filter({
             type="checkbox"
             name="Male"
             value="Male"
-            onChange={(e) => {
-              const { value, checked } = e.target;
-              setSelectedGender((prev) =>
-                checked ? [...prev, value] : prev.filter((gender) => gender !== value)
-              );
-            }}
+            onChange={(e) => hundleGenderChange(e)}
             
           />
           Male
@@ -70,12 +75,7 @@ function Filter({
             type="checkbox"
             name="Female"
             value="Female"
-            onChange={(e) => {
-              const { value, checked } = e.target;
-              setSelectedGender((prev) =>
-                checked ? [...prev, value] : prev.filter((gender) => gender !== value)
-              );
-            }}
+            onChange={(e) => hundleGenderChange(e)}
 
           />
           Female
@@ -85,42 +85,42 @@ function Filter({
       <h3>Color</h3>
       <div className="color">
         <label>
-          <input type="checkbox" name="red" />
+          <input type="checkbox" name="red" value="Red" onChange={(e)=>hundleColorChange(e)} />
           <div className="red"></div>
           <p>Red</p>
         </label>
       </div>
       <div className="color">
         <label>
-          <input type="checkbox" name="apricot" />
+          <input type="checkbox" name="apricot" value="Red" onChange={(e)=>hundleColorChange(e)} />
           <div className="apricot"></div>
           <p>apricot</p>
         </label>
       </div>
       <div className="color">
         <label>
-          <input type="checkbox" name="black" />
+          <input type="checkbox" name="black" value="black" onChange={(e)=>hundleColorChange(e)} />
           <div className="black"></div>
           <p>Black</p>
         </label>
       </div>
       <div className="color">
         <label>
-          <input type="checkbox" name="black_white" />
+          <input type="checkbox" name="black_white" value="Black & white" onChange={(e)=>hundleColorChange(e)} />
           <div className="black_white"></div>
           <p>Black & white</p>
         </label>
       </div>
       <div className="color">
         <label>
-          <input type="checkbox" name="silver" />
+          <input type="checkbox" name="silver"  value="silver" onChange={(e)=>hundleColorChange(e)} />
           <div className="silver"></div>
           <p>Silver</p>
         </label>
       </div>
       <div className="color">
         <label>
-          <input type="checkbox" name="tan" />
+          <input type="checkbox" name="tan" value="tan" onChange={(e)=>hundleColorChange(e)} />
           <div className="tan"></div>
           <p>tan</p>
         </label>

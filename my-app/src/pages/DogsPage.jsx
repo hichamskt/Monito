@@ -129,7 +129,7 @@ function DogsPage() {
             <div className="categorypetsTitle">
               <span>
                 <h2>{breed}</h2>
-                <p> 22 puppies</p>
+                <p> {filterdData?.length} puppies</p>
               </span>
               <div className="categorypetsinput">
                 <select
