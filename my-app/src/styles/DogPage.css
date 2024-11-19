@@ -138,6 +138,10 @@ margin-top: 55px;
     border: 2px solid var(--color-primary-darkblue-80);
 }
 
+.dogPage .sprightside table{
+    width: 100%;
+}
+
 .dogPage .sprightside table td {
     text-align: left;
     border-bottom: 1px solid var(--color-swatch-40);

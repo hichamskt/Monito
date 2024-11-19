@@ -224,6 +224,7 @@ const { setShowCard ,showCard } = useAppContext();
           Title="Whats new?"
           Text="Take A Look At Some Of Our Pets"
           ButtonText="View more"
+          linktonavigate='/category'
         ></TitleSection>
         <div className="dogsSection">
           {dogData.map((item, index) => (
@@ -245,6 +246,7 @@ const { setShowCard ,showCard } = useAppContext();
           Title="Hard to choose right products for your pets?"
           Text="Our Products"
           ButtonText="View more"
+          linktonavigate='/Products'
         ></TitleSection>
 
         <div className="dogsSection">
@@ -272,6 +274,7 @@ const { setShowCard ,showCard } = useAppContext();
           Title="You Already Know?"
           Text="Useful Pet Knowledge"
           ButtonText="View more"
+          
         ></TitleSection>
 
         <div className="dogknowledgesection">

@@ -4,3 +4,121 @@
     flex-direction: column;
     margin-top: 20px;
 }
+.productspage .productspart{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+
+/* filtter products */
+
+.productspage .productFilter{
+    text-align: left;
+}
+.productspage .productFilter .filtertop{
+    display: flex;
+    justify-content: space-between;
+}
+.productspage .productFilter .filtertop svg{
+    display: none;
+}
+.productspage .productFilter .filter{
+    font-size: 2rem;
+    font-weight: bold;
+    color: var( --color-primary-darkblue-80);
+}
+.productspage .productFilter .filtesBox{
+    border: 1px solid #e5e7eb;
+    padding: 1rem;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+.productspage .productFilter .filtesBox p{
+    font-size: 1rem;
+    font-weight: bold;
+    color: var( --color-primary-darkblue-80);
+}
+.productspage .productFilter .filtertype{
+    display: flex;
+    flex-direction: column;
+    gap: .3rem;
+}
+.productspage .productFilter label{
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    cursor: pointer;
+    font-size: 1rem;
+}
+.productspage .productFilter .pricefilterinputs{
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    margin-top: 1rem;
+}
+
+.productspage .productFilter .pricefilterinputs input{
+    width: 100px;
+    padding: .5rem .5rem;
+    border-radius: .4rem;
+}
+.productspage .productsSide .ourproduct{
+    font-size: 2rem;
+    font-weight: bold;
+    color: var( --color-primary-darkblue-80);
+    text-align: left;
+}
+.productspage .AllProducts{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    align-items: center;
+    justify-items: center;
+}
+
+@media (max-width:850px) {
+    .productspage .productspart{
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+       padding: 2rem ;
+    }
+    .productspage .productFilter .filtesBox{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    .productspage .productFilter .filtertop svg{
+        display: block;
+        font-size: 2rem;
+        cursor: pointer;
+        color: var(--color-primary-darkblue-80);
+    }
+}
+
+
+.productspage .nodata-prd{
+    margin-top: 5rem;
+    font-weight: bold;
+    color: gray;
+}
+.productspage .nodata-prd img{
+    width: 200px;
+}
+
+@media (max-width:850px) {
+    .productspage .productspart{
+        
+       padding: 0rem ;
+    }
+    .productspage .productFilter .filtesBox {
+        
+        gap: 1rem;
+    }
+
+}
