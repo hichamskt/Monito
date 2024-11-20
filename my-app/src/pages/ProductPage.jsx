@@ -8,13 +8,18 @@ import Cart from '../components/Cart/Cart';
 import { useAppContext } from '../AppContex';
 
 function ProductPage() {
-  const { setShowCard ,showCard ,items , setItems } = useAppContext();
+  const { setShowCard ,showCard ,items , setItems , currency ,  rate } = useAppContext();
 
   const [quant,setquant]=useState(1);
   const [loading, setLoading] = useState(true);
   const [productData, setProductData] = useState();
   const { productid } = useParams();
 
+
+  const convertPrice = (price) => {
+
+    return (price * rate).toFixed(2); 
+  };
 
   useEffect(() => {
     const fetchData = async (id) => {
@@ -61,7 +66,7 @@ function ProductPage() {
         <div className='producttext'>
         <h4>{productData.productSku}</h4>
         <h2>{productData.porductName}</h2>
-        <h3>{productData.sellingPrice}DH</h3>
+        <h3>{convertPrice(productData.sellingPrice)}{currency}</h3>
         <div className='qntAddToCard'>
           <div className='quantt'>
           <button disabled={quant <= 1}  onClick={() => setquant(quant - 1)}>-</button>

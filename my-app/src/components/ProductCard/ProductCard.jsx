@@ -1,10 +1,19 @@
 import React from 'react'
 import "../ProductCard/ProductCard.css"
+import { useAppContext } from '../../AppContex';
 function ProductCard({ imag ,
     desc, 
     gene,
     age,
     prix}) {
+
+      const { currency ,  rate } = useAppContext();
+
+      const convertPrice = (price) => {
+    
+        return (price * rate).toFixed(2); 
+      };
+      
 
       
       const calculateAge = (birthDate) => {
@@ -44,7 +53,7 @@ function ProductCard({ imag ,
             <p>Gene:&nbsp; <span>{gene}</span></p>
             <p>Age:&nbsp; <span>{calculateAge(age)}</span> </p>
         </div>
-        <h3>{prix.toLocaleString('en-US')}<span>&nbsp;VND</span></h3>
+        <h3>{convertPrice(prix)}<span>&nbsp;{currency}</span></h3>
     </div>
   )
 }

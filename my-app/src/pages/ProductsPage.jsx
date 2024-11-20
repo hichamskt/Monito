@@ -16,9 +16,14 @@ function ProductsPage() {
 
   const { setShowCard ,showCard } = useAppContext();
 
+
+
   const [productData,setProductData]= useState([]);
   const [filtredData,setFiltredData]= useState([]);
   const [loading,setLoading]= useState(true);
+
+
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -147,7 +152,7 @@ function Products ({productData}){
       <p className='ourproduct'>Our Products</p>
       <div className='AllProducts'>
         {
-          productData?.length > 0 ? productData.map((item, index)=>(
+          productData?.length > 0 ?  productData.map((item, index)=>(
             <Link to={`/Products/product/${item.id}`} key={index} style={{ textDecoration: "none"}}>
             <DogProductCard
               imag={item.images}

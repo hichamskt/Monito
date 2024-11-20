@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../Header/headerStyle.css";
 import Logo from "../../assets/Frame.png";
 import { HiCurrencyYen } from "react-icons/hi";
@@ -7,12 +7,47 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { useMediaQuery } from 'react-responsive';
 import { IoIosExit } from "react-icons/io";
 import { NavLink } from "react-router-dom";
-
+import { useAppContext } from "../../AppContex";
 function Header() {
 const [showSearch,setShowSearch]=useState(false);
 const [showSideBar,setShowSideBar]=useState(false);
   const isSmallScreen = useMediaQuery({ query: '(max-width: 846px)' });
+  const [selectedCurrency, setSelectedCurrency] = useState("USD");
+  const [exchangeRates, setExchangeRates] = useState({});
+  const { setcurrency ,  setRate } = useAppContext();
+  
+  useEffect(() => {
+    const fetchExchangeRates = async () => {
+      try {
+        const response = await fetch(
+          "https://api.exchangerate-api.com/v4/latest/USD"
+        );
+        const data = await response.json();
+        setExchangeRates(data.rates);
+      } catch (error) {
+        console.error("Error fetching exchange rates:", error);
+      }
+    };
 
+    fetchExchangeRates();
+  }, []);
+
+  
+
+  const convertPrice = (price) => {
+    const rate = exchangeRates[selectedCurrency] || 1;
+    return (price * rate).toFixed(2); 
+  };
+
+  const hundleSelectedCurrency =(e)=>{
+    setcurrency(e.target.value);
+    setSelectedCurrency(e.target.value)
+    const rate = exchangeRates[e.target.value] || 1;
+    setRate(rate);
+    localStorage.setItem("rate", rate);
+    localStorage.setItem("currency", e.target.value);
+  }
+  
 
   return (
     <div className="header">
@@ -23,7 +58,7 @@ const [showSideBar,setShowSideBar]=useState(false);
           
           <NavLink to="/"><li>Home</li></NavLink>
           <NavLink to="/category"><li>Category</li></NavLink>
-          <li>About</li>
+          <NavLink to="/about"><li>About</li></NavLink>
           <li>Contact</li>
         </ul>
       </div>
@@ -38,9 +73,13 @@ const [showSideBar,setShowSideBar]=useState(false);
 
       <div className="selc">
         
-      <select id="fruit" name="fruit" className="opt">
-        <option value="apple">  VND</option>
-        <option value="banana">    Banana</option>
+      <select  name="currency" className="opt" id="currency"
+        value={selectedCurrency}
+        onChange={(e) => hundleSelectedCurrency(e)}>
+        <option value="VND">  VND</option>
+        <option value="MAD">  MAD</option>
+        <option value="CAD">  CAD</option>
+        <option value="CNY">  CNY</option>
       </select>
       </div>
       <div className="sidebar" style={{left: showSideBar? '0' : ''}}>

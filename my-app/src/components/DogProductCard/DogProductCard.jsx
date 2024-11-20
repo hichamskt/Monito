@@ -1,8 +1,18 @@
 import React from "react";
 import "../DogProductCard/DogProductCard.css";
 import gift from "../../assets/gift.png";
+import { useAppContext } from "../../AppContex";
 
 function DogProductCard({ imag, desc, prix, product, size ,sizeUnit }) {
+  
+  const { currency ,  rate } = useAppContext();
+
+  const convertPrice = (price) => {
+
+    return (price * rate).toFixed(2); 
+  };
+
+
   return (
     <div className="ProductCard">
       <img src={`http://localhost:5000/${imag[0]?.url}`} alt="dogprd"></img>
@@ -20,8 +30,8 @@ function DogProductCard({ imag, desc, prix, product, size ,sizeUnit }) {
         )}
       </div>
       <h3>
-        {prix.toLocaleString("en-US")}
-        <span>&nbsp;VND</span>
+        {convertPrice(prix)}
+        <span>&nbsp;{currency}</span>
       </h3>
       <div className="giftbox">
         <div>

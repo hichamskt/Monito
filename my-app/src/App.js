@@ -8,6 +8,7 @@ import ProductsPage from './pages/ProductsPage';
 import DogPage from './pages/DogPage';
 import ProductPage from './pages/ProductPage';
 import { AppProvider } from './AppContex';
+import AboutPage from './pages/AboutPage';
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
     <Route path="/Products" element={<ProductsPage/>}></Route>
     <Route path="/Products/product/:productid" element={<ProductPage></ProductPage>}></Route>
     <Route path="/dog/:id" element={<DogPage/>}></Route>
+    <Route path="/about" element={<AboutPage />}></Route>
     </Routes>
 
     </BrowserRouter>

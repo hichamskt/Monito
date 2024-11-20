@@ -5,9 +5,11 @@ const AppContext = createContext();
 export const AppProvider = ({ children }) => {
   const [showCard, setShowCard] = useState(false);
   const [items , setItems ] = useState([]);
+  const [currency , setcurrency ] = useState(localStorage.getItem('currency') || "MAD");
+  const [rate , setRate ] = useState(localStorage.getItem('rate') || 1);
 
   return (
-    <AppContext.Provider value={{ showCard, setShowCard, items , setItems }}>
+    <AppContext.Provider value={{ showCard, setShowCard, items , setItems , currency , setcurrency , rate , setRate }}>
       {children}
     </AppContext.Provider>
   );
