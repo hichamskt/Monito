@@ -1,12 +1,6 @@
 import React, { useState } from "react";
 import "../styles/DogPage.css";
 import Header from "../components/Header/Header";
-
-import img1 from "../assets/prddog1.png";
-import img2 from "../assets/prddog2.png";
-import img3 from "../assets/prddog3.png";
-import img4 from "../assets/prddog4.png";
-import img5 from "../assets/prddog5.png";
 import rarrow from "../assets/Caret_Left_SM.png";
 import larrow from "../assets/arrowleft.png";
 import sharei from "../assets/shareicon.png";
@@ -20,17 +14,20 @@ import chat from "../assets/chat.png";
 import BreadCrumb from "../UI/BreadCrumb/BreadCrumb";
 import axiosInstance from "../axios/axiosInstance";
 
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useEffect } from "react";
 import ShopIcone from "../UI/ShopIcone/ShopIcone";
 import Cart from "../components/Cart/Cart";
 import { useAppContext } from "../AppContex";
+import TitleSection from "../components/TitleSection/TitleSection";
+import ProductCard from "../components/ProductCard/ProductCard";
 
 
 
 
 function DogPage() {
   const [dogData, setDogData] = useState([]);
+  const [dogsData, setDogsData] = useState([]);
   const [selectedImg, setSelectedImg] = useState(()=>{
     return dogData?.images && dogData.images[0]
     ? { index: 0, url: dogData.images[0].url }
@@ -41,6 +38,20 @@ function DogPage() {
   const { setShowCard ,showCard } = useAppContext();
 
 
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axiosInstance.get("/dog/getdogs");
+        setDogsData(response.data);
+      } catch (err) {
+        console.log(err)
+      } 
+    };
+
+    fetchData();
+
+  }, []);
 
   useEffect(() => {
     const fetchData = async (id) => {
@@ -273,6 +284,28 @@ function DogPage() {
           </div>
         </div>
       </div>}
+      <TitleSection
+          Title="Hard to choose right products for your pets?"
+          Text="Our Products"
+          ButtonText="View more"
+          linktonavigate='/Products'
+        ></TitleSection>
+        
+        <div className="dogsSection">
+          {dogsData?.map((item, index) => (
+            <Link to={`/dog/${item.id}`} key={index} style={{ textDecoration: "none"}}>
+            <ProductCard
+              imag={item.images}
+              desc={item.name}
+              gene={item.gender}
+              age={item.birthDate}
+              prix={item.price}
+              key={index}
+            ></ProductCard>
+            </Link>
+            
+          ))}
+        </div>
     </div>
   );
 }

@@ -1,11 +1,14 @@
 import React, { useState , useEffect} from 'react'
 import Header from '../components/Header/Header'
 import '../styles/ProductPage.css'
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import axiosInstance from "../axios/axiosInstance";
 import ShopIcone from '../UI/ShopIcone/ShopIcone';
 import Cart from '../components/Cart/Cart';
 import { useAppContext } from '../AppContex';
+import TitleSection from '../components/TitleSection/TitleSection';
+import DogProductCard from '../components/DogProductCard/DogProductCard';
+import Footer from '../components/Footer/Footer';
 
 function ProductPage() {
   const { setShowCard ,showCard ,items , setItems , currency ,  rate } = useAppContext();
@@ -13,6 +16,7 @@ function ProductPage() {
   const [quant,setquant]=useState(1);
   const [loading, setLoading] = useState(true);
   const [productData, setProductData] = useState();
+  const [moreProductData, setMoreProductData] = useState();
   const { productid } = useParams();
 
 
@@ -36,6 +40,20 @@ function ProductPage() {
     fetchData(productid);
 
   }, [productid]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axiosInstance.get("/product/getallproducts");
+        setMoreProductData(response.data);
+      } catch (err) {
+        console.log(err)
+      }
+    };
+    
+    fetchData();
+
+  }, []);
 
   const hundleAddToCard = (newItem) => {
     setItems((prevItems) => {
@@ -106,6 +124,32 @@ function ProductPage() {
         </table>
         </div>
         </div>}
+
+        <TitleSection
+          Title="Hard to choose right products for your pets?"
+          Text="Our Products"
+          ButtonText="View more"
+          linktonavigate='/Products'
+        ></TitleSection>
+        
+
+        <div className="dogsSection">
+          {moreProductData?.map((item, index) => (
+          <Link to={`/Products/product/${item.id}`} key={index} style={{ textDecoration: "none"}}>
+            <DogProductCard
+              imag={item.images}
+              desc={item.porductName}
+              prix={item.sellingPrice}
+              product={item.productCategory}
+              size={item.size}
+              sizeUnit={item.sizeUnit}
+              key={index}
+            ></DogProductCard>
+            </Link>
+          ))}
+        </div>
+        <Footer/>
+        
     </div>
   )
 }

@@ -11,10 +11,19 @@ import { useAppContext } from "../../AppContex";
 
 
 function Cart() {
-  const { setShowCard ,items , setItems } = useAppContext();
+  const { setShowCard ,items , setItems , currency ,  rate  } = useAppContext();
   const [total,setTotal] = useState(items.reduce((total, item) => {
     return total + item.price * item.qnt;
   }, 0))
+
+
+  
+
+  const convertPrice = (price) => {
+
+    return (price * rate).toFixed(2); 
+  };
+  
 
   useEffect(() => {
     const newTotal = items.reduce((total, item) => {
@@ -36,21 +45,21 @@ function Cart() {
       </div>} 
       {items.length>0 && <div className="cart-mid">
         {items.map((item, index) => (
-          <CardItem key={index} product={item}  setItems={ setItems} />
+          <CardItem key={index} product={item}  setItems={ setItems} currency={currency} convertPrice={convertPrice} />
         ))}
       </div>}
       {items.length>0 && <div className="cart-btm">
         <div className="ttl-line">
             <p>Subtotal:</p>
-            <p>{total} DH</p>
+            <p>{convertPrice(total)} {currency} </p>
         </div>
         <div className="ttl-line">
             <p>Shipping :</p>
-            <p>20 DH</p>
+            <p>{convertPrice(20)} {currency}</p>
         </div>
         <div className="ttl-card">
             <p>Total :</p>
-            <p>{total+20} DH</p>
+            <p>{convertPrice(total+20)} {currency}</p>
         </div>
       </div>}
       {items.length>0 && <button className="checkout">Checkout</button>}
@@ -60,7 +69,7 @@ function Cart() {
 
 export default Cart;
 
-function CardItem({product, setItems}) {
+function CardItem({product, setItems,currency ,convertPrice}) {
 const [ttl,setTtl]=useState(product.qnt * product.price)
   const handleDeleteFromCart = (id) => {
     setItems((prevItems) => prevItems.filter((item) => item.productSku !== id));
@@ -109,7 +118,7 @@ const [ttl,setTtl]=useState(product.qnt * product.price)
             <span>{product.qnt}</span>
             <button onClick={()=>hundleAddQnt(product.productSku)}>+</button>
         </div>
-        <p>{ttl}Dh</p>
+        <p>{convertPrice(ttl)}{currency}</p>
     </div>
     </div>
   );

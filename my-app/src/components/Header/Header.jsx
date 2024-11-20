@@ -8,11 +8,12 @@ import { useMediaQuery } from 'react-responsive';
 import { IoIosExit } from "react-icons/io";
 import { NavLink } from "react-router-dom";
 import { useAppContext } from "../../AppContex";
+
 function Header() {
 const [showSearch,setShowSearch]=useState(false);
 const [showSideBar,setShowSideBar]=useState(false);
   const isSmallScreen = useMediaQuery({ query: '(max-width: 846px)' });
-  const [selectedCurrency, setSelectedCurrency] = useState("USD");
+  const [selectedCurrency, setSelectedCurrency] = useState("MAD");
   const [exchangeRates, setExchangeRates] = useState({});
   const { setcurrency ,  setRate } = useAppContext();
   
