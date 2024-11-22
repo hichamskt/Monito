@@ -34,6 +34,11 @@ function Cart() {
   }, [items]);
   
 
+  function hundleCheckout (){
+    Navigate('/checkout');
+    setShowCard(false);
+  }
+
   return (
     <div className="Cart">
       <div className="cart-top">
@@ -63,7 +68,7 @@ function Cart() {
             <p>{convertPrice(total+20)} {currency}</p>
         </div>
       </div>}
-      {items.length>0 && <button className="checkout" onClick={()=>Navigate('/checkout')} style={{cursor:"pointer"}}>Checkout</button>}
+      {items.length>0 && <button className="checkoutbtn" onClick={()=>hundleCheckout()} style={{cursor:"pointer"}}>Checkout</button>}
     </div>
   );
 }
