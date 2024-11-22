@@ -1,7 +1,7 @@
 .checkout{
     margin-top: 5rem;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    grid-template-columns: 3fr 2fr;
 }
 
 .checkout .checkoutcards{
@@ -113,4 +113,72 @@ margin-top: 1rem;
 .checkout .contshoping p{
    cursor: pointer;
    font-size: 1.3rem;
+}
+
+
+/* form */
+
+.checkout form{
+    width: 100%;
+    text-align: left;
+    padding: 1rem 2rem ;
+    background-color: rgba(240, 248, 255, 0.37);
+}
+.checkout form h1{
+    text-align: left;
+    color: var(--color-primary-darkblue-80);
+    margin-bottom: 2rem;
+}
+.checkout form p{
+    font-size: 1.2rem;
+    color: var(--color-primary-darkblue-80);
+}
+
+.checkout form input{
+    width: 100%;
+    height: 40px;
+    border: 2px solid var(--color-primary-darkblue-80);
+    padding: 1rem;
+    margin-top: 5px;
+    outline: none;
+}
+.checkout form input:focus{
+    border: 2px solid var( --color-orange-shine);
+}
+
+
+.checkout form div{
+    margin-bottom: 1rem;
+}
+
+.checkout form button{
+    cursor: pointer;
+    width: 100%;
+    color: white;
+    background-color: var(--color-primary-darkblue-80);
+    padding: .8rem ;
+    font-weight: bolder;
+    border-radius: .4rem;
+    margin-bottom: 2rem;
+    margin-top: 1rem;
+}
+
+
+ .noprdctsselcted{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100dvh;
+}
+.noprdctsselcted img{
+    width: 100px;
+}
+
+
+@media (max-width:950px) {
+    .checkout{
+        grid-template-columns: 1fr;
+    }
 }
