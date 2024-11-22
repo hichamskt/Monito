@@ -5,6 +5,7 @@ import { LuTrash } from "react-icons/lu";
 
 import emptyCard from "../../assets/shopping-cart.png";
 import { useAppContext } from "../../AppContex";
+import { useNavigate } from "react-router-dom";
 
   
 
@@ -17,7 +18,7 @@ function Cart() {
   }, 0))
 
 
-  
+  const Navigate = useNavigate();
 
   const convertPrice = (price) => {
 
@@ -62,7 +63,7 @@ function Cart() {
             <p>{convertPrice(total+20)} {currency}</p>
         </div>
       </div>}
-      {items.length>0 && <button className="checkout">Checkout</button>}
+      {items.length>0 && <button className="checkout" onClick={()=>Navigate('/checkout')} style={{cursor:"pointer"}}>Checkout</button>}
     </div>
   );
 }

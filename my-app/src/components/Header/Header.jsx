@@ -13,7 +13,7 @@ function Header() {
 const [showSearch,setShowSearch]=useState(false);
 const [showSideBar,setShowSideBar]=useState(false);
   const isSmallScreen = useMediaQuery({ query: '(max-width: 846px)' });
-  const [selectedCurrency, setSelectedCurrency] = useState("MAD");
+  const [selectedCurrency, setSelectedCurrency] = useState(localStorage.getItem("currency") || "MAD");
   const [exchangeRates, setExchangeRates] = useState({});
   const { setcurrency ,  setRate } = useAppContext();
   
@@ -87,15 +87,20 @@ const [showSideBar,setShowSideBar]=useState(false);
       <IoIosExit  onClick={()=>setShowSideBar(false)}/>
 
       <ul>
-          <li>Home</li>
-          <li>Category</li>
-          <li>About</li>
+      <NavLink to="/"><li>Home</li></NavLink>
+          <NavLink to="/category"><li>Category</li></NavLink>
+          <NavLink to="/about"><li>About</li></NavLink>
           <li>Contact</li>
         </ul>
         <button className="sidejoinbtn">Join the community</button>
-        <select id="fruit" name="fruit" className="sideopt">
-        <option value="apple">  VND</option>
-        <option value="banana">    Banana</option>
+
+      <select  name="currency" className="sideopt" id="currency"
+        value={selectedCurrency}
+        onChange={(e) => hundleSelectedCurrency(e)}>
+        <option value="VND">  VND</option>
+        <option value="MAD">  MAD</option>
+        <option value="CAD">  CAD</option>
+        <option value="CNY">  CNY</option>
       </select>
       </div>
     </div>

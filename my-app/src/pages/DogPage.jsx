@@ -35,8 +35,15 @@ function DogPage() {
   });
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
-  const { setShowCard ,showCard } = useAppContext();
+  const { setShowCard ,showCard , currency ,  rate} = useAppContext();
 
+
+  
+
+  const convertPrice = (price) => {
+
+    return (price * rate).toFixed(2); 
+  };
 
 
   useEffect(() => {
@@ -174,7 +181,7 @@ function DogPage() {
             <BreadCrumb tring="Home category Dog ShibaInuSepia"></BreadCrumb>
             <p>SKU{dogData.sku}</p>
             <h3>{dogData.name}</h3>
-            <h3>{dogData.price}VND</h3>
+            <h3>{convertPrice(dogData.price)}{currency}</h3>
             <div className="btnsgpp">
               <button>Contact us</button>
               <button>
