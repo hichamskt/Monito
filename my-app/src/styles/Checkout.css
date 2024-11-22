@@ -1,4 +1,116 @@
 .checkout{
     margin-top: 5rem;
     display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.checkout .checkoutcards{
+    padding: 1rem;
+}
+.checkout .checkoutcards h1{
+    text-align: left;
+    color: var(--color-primary-darkblue-80);
+    margin-bottom: 2rem;
+}
+
+.checkout .shopingtop {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+   padding-bottom: 1rem;
+   margin-bottom: 1rem;
+   border-bottom: 1px solid rgba(128, 128, 128, 0.591);
+}
+.checkout .shopingtop p{
+    font-weight: bold;
+    color: gray;
+    font-size: .8rem;
+}
+
+
+.checkout .checkoutProductcard{
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 30px;
+    align-items: center;
+
+}
+.checkout .shopingproductsCard{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.checkout .checkoutProductcard .checkouimgbox{
+   display: flex;
+   align-items: center;
+   font-weight: bold;
+   font-size: .6rem;
+   text-align: left;
+   gap: 2rem;
+}
+.checkout .checkoutProductcard img{
+    height: 50px;
+    width: 50px;
+    object-fit: cover;
+}
+.checkout .checkoutProductcard .checkoutqnt{
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.checkout .checkoutProductcard .checkoutqnt button {
+    padding: .4rem 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.checkout .checkoutProductcard .checkoutqnt button:hover {
+    color: white;
+    background-color: var(--color-primary-darkblue-80);
+}
+.checkout .checkoutProductcard  svg:hover {
+    color: var(--color-primary-darkblue-80);
+    cursor: pointer;
+}
+
+.checkout .pricetotle{
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    align-items: flex-end;
+    padding-top: 10px;
+    border-top: 1px solid rgba(128, 128, 128, 0.591);
+margin-top: 1rem;
+}
+.checkout .calcttl{
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+    
+}
+.checkout .calcttl .calcttlline{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    text-align: left;
+    
+}
+.checkout .calcttl .calcttlline p:first-of-type{
+    color: rgba(128, 128, 128, 0.868);
+    
+}
+
+.checkout .calcttl .calcttotale{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    text-align: left;
+    font-weight: bold;
+    font-size: 1rem;  
+}
+.checkout .contshoping{
+    text-align: left;
+    font-weight: bold;
+}
+.checkout .contshoping p{
+   cursor: pointer;
+   font-size: 1.3rem;
 }
