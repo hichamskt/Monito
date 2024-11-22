@@ -119,7 +119,7 @@ function CheckoutCard({ item, setItems }) {
   return (
     <div className="checkoutProductcard">
       <div className="checkouimgbox">
-        <img src={`http://localhost:5000/${item.url}`} alt="productimage"></img>
+        <img src={`${process.env.REACT_APP_BACKEND_URL}${item.url}`} alt="productimage"></img>
         <p>{item.porductName}</p>
       </div>
       <div className="checkoutqnt">

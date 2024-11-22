@@ -11,11 +11,11 @@ function DogProductCard({ imag, desc, prix, product, size ,sizeUnit }) {
 
     return (price * rate).toFixed(2); 
   };
-
+  
 
   return (
     <div className="ProductCard">
-      <img src={`http://localhost:5000/${imag[0]?.url}`} alt="dogprd"></img>
+      <img src={`${process.env.REACT_APP_BACKEND_URL}${imag[0]?.url}`} alt="dogprd"></img>
       <h3>{desc}</h3>
       <div className="productageInfo">
         <p>

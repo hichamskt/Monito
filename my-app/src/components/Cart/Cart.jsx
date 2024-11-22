@@ -106,12 +106,14 @@ const [ttl,setTtl]=useState(product.qnt * product.price)
     
 
   }
+
+  console.log(process.env.REACT_APP_BACKEND_URL)
   
   return (
     <div className="carditem">
 
     <div className="carditem-top">
-      <img  src={`http://localhost:5000/${product.url}`} alt="carditem"></img>
+      <img  src={`${process.env.REACT_APP_BACKEND_URL}${product.url}`} alt="carditem"></img>
       <div className="card-item-info">
         <p>{product.productSku}</p>
         <p>{product.porductName}</p>

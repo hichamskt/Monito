@@ -150,14 +150,14 @@ function DogPage() {
               <div className="arleft">
                 <img src={larrow} alt="larrarow" onClick={leftArrowHundler}></img>
               </div>
-              <img  src={`http://localhost:5000/${selectedImg?.url}`}  alt="dog" className="maini"></img>
+              <img  src={`${process.env.REACT_APP_BACKEND_URL}${selectedImg?.url}`}  alt="dog" className="maini"></img>
               <div className="arright">
                 <img src={rarrow} alt="raraow" onClick={rightArrowHundler}></img>
               </div>
             </div>
             <div className="aimgs">
               {dogData.images.map((item, index) => (
-                <img  src={`http://localhost:5000/${item?.url}`} key={index} alt="dog" onClick={()=>setSelectedImg({index,url:item.url})} className={selectedImg.img===item?"active":""}></img>
+                <img  src={`${process.env.REACT_APP_BACKEND_URL}${item?.url}`} key={index} alt="dog" onClick={()=>setSelectedImg({index,url:item.url})} className={selectedImg.img===item?"active":""}></img>
               ))}
             </div>
             <div className="healthsec">

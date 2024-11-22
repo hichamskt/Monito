@@ -80,7 +80,7 @@ function ProductPage() {
         <Header></Header>
         <ShopIcone />
        { !loading && <div className='productitem'>
-         <img src={`http://localhost:5000/${productData.images[0]?.url}`}alt='produit' className='prdctimage'></img>   
+         <img src={`${process.env.REACT_APP_BACKEND_URL}${productData.images[0]?.url}`}alt='produit' className='prdctimage'></img>   
         <div className='producttext'>
         <h4>{productData.productSku}</h4>
         <h2>{productData.porductName}</h2>
